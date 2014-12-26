@@ -147,14 +147,13 @@ public class Habitat extends javax.swing.JFrame {
         jScrollPane18 = new javax.swing.JScrollPane();
         jTextPane12 = new javax.swing.JTextPane();
         jLabel26 = new javax.swing.JLabel();
-        jScrollPane19 = new javax.swing.JScrollPane();
-        jTextPane13 = new javax.swing.JTextPane();
         jLabel27 = new javax.swing.JLabel();
         jScrollPane20 = new javax.swing.JScrollPane();
         jTextPane14 = new javax.swing.JTextPane();
         jLabel28 = new javax.swing.JLabel();
         jScrollPane21 = new javax.swing.JScrollPane();
         jTextPane15 = new javax.swing.JTextPane();
+        jComboBox13 = new javax.swing.JComboBox();
         jButton12 = new javax.swing.JButton();
         jLabel29 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
@@ -966,8 +965,6 @@ public class Habitat extends javax.swing.JFrame {
         jLabel26.setForeground(new java.awt.Color(0, 0, 0));
         jLabel26.setText("Tipo");
 
-        jScrollPane19.setViewportView(jTextPane13);
-
         jLabel27.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(0, 0, 0));
         jLabel27.setText("BI");
@@ -979,6 +976,8 @@ public class Habitat extends javax.swing.JFrame {
         jLabel28.setText("NIF");
 
         jScrollPane21.setViewportView(jTextPane15);
+
+        jComboBox13.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Individual", "Instituição" }));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1013,7 +1012,7 @@ public class Habitat extends javax.swing.JFrame {
                                 .addComponent(jLabel25)
                                 .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                                 .addComponent(jLabel26)
-                                .addComponent(jScrollPane19)))
+                                .addComponent(jComboBox13, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(36, 36, 36))))
         );
         jPanel10Layout.setVerticalGroup(
@@ -1038,7 +1037,7 @@ public class Habitat extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel22)
@@ -1415,6 +1414,7 @@ public class Habitat extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox10;
     private javax.swing.JComboBox jComboBox11;
     private javax.swing.JComboBox jComboBox12;
+    private javax.swing.JComboBox jComboBox13;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
@@ -1492,7 +1492,6 @@ public class Habitat extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JScrollPane jScrollPane18;
-    private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane20;
     private javax.swing.JScrollPane jScrollPane21;
@@ -1520,7 +1519,6 @@ public class Habitat extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPane10;
     private javax.swing.JTextPane jTextPane11;
     private javax.swing.JTextPane jTextPane12;
-    private javax.swing.JTextPane jTextPane13;
     private javax.swing.JTextPane jTextPane14;
     private javax.swing.JTextPane jTextPane15;
     private javax.swing.JTextPane jTextPane16;
