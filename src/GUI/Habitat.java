@@ -211,24 +211,28 @@ public class Habitat extends javax.swing.JFrame {
 
         jButton1.setText("Adicionar");
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBackground(new java.awt.Color(0, 85, 150));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Nome da Família");
 
         jScrollPane2.setViewportView(jTextPane1);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Id");
 
         jScrollPane3.setViewportView(jTextPane2);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Estado");
 
         jScrollPane4.setViewportView(jTextPane3);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Data de Início");
 
         jComboBox1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -246,6 +250,7 @@ public class Habitat extends javax.swing.JFrame {
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", " " }));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Data de Fim");
 
         jComboBox4.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -263,9 +268,11 @@ public class Habitat extends javax.swing.JFrame {
         jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", " " }));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Progresso");
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Observações");
 
         jTextArea1.setColumns(20);
@@ -273,6 +280,7 @@ public class Habitat extends javax.swing.JFrame {
         jScrollPane5.setViewportView(jTextArea1);
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Voluntários");
 
         jScrollPane6.setViewportView(jList2);
@@ -396,13 +404,13 @@ public class Habitat extends javax.swing.JFrame {
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Resources/logo.png.jpg"))); // NOI18N
 
-        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setBackground(new java.awt.Color(84, 184, 72));
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 643, Short.MAX_VALUE)
+            .addGap(0, 631, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,10 +423,10 @@ public class Habitat extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -431,9 +439,9 @@ public class Habitat extends javax.swing.JFrame {
                                     .addComponent(jCheckBox2)
                                     .addComponent(jCheckBox3)
                                     .addComponent(jCheckBox4))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                        .addGap(6, 6, 6)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,7 +450,7 @@ public class Habitat extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jCheckBox1)
@@ -458,31 +466,35 @@ public class Habitat extends javax.swing.JFrame {
                             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jButton1.getAccessibleContext().setAccessibleName("b_adiciona_projeto");
 
         jTabbedPane1.addTab("Projetos", jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Resources/logo.png.jpg"))); // NOI18N
 
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBackground(new java.awt.Color(84, 184, 72));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 643, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jCheckBox5.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBox5.setText("Disponíveis");
 
+        jCheckBox6.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox6.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBox6.setText("Não Disponíveis");
 
@@ -490,16 +502,19 @@ public class Habitat extends javax.swing.JFrame {
 
         jButton7.setText("Remover");
 
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setBackground(new java.awt.Color(0, 85, 150));
 
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Informação Geral");
 
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Nome");
 
         jScrollPane8.setViewportView(jTextPane4);
 
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Data de Nascimento");
 
         jComboBox7.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -517,26 +532,31 @@ public class Habitat extends javax.swing.JFrame {
         jComboBox9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", " " }));
 
         jLabel14.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Localidade");
 
         jScrollPane9.setViewportView(jTextPane5);
 
         jLabel15.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Rua");
 
         jScrollPane10.setViewportView(jTextPane6);
 
         jLabel16.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Código Postal");
 
         jScrollPane11.setViewportView(jTextPane7);
 
         jLabel17.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setText("Equipa");
 
         jScrollPane12.setViewportView(jTextPane8);
 
         jLabel18.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("Profissão");
 
         jScrollPane13.setViewportView(jTextPane9);
@@ -583,7 +603,7 @@ public class Habitat extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -636,10 +656,10 @@ public class Habitat extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -653,7 +673,7 @@ public class Habitat extends javax.swing.JFrame {
                             .addComponent(jCheckBox5)
                             .addComponent(jCheckBox6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -675,20 +695,22 @@ public class Habitat extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton6)
                     .addComponent(jButton7))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Voluntários", jPanel2);
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Resources/logo.png.jpg"))); // NOI18N
 
-        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.setBackground(new java.awt.Color(84, 184, 72));
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 643, Short.MAX_VALUE)
+            .addGap(0, 631, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -698,9 +720,11 @@ public class Habitat extends javax.swing.JFrame {
         jList6.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jScrollPane22.setViewportView(jList6);
 
+        jCheckBox10.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox10.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBox10.setText("Já Realizados");
 
+        jCheckBox11.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox11.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBox11.setText("A Realizar");
 
@@ -710,9 +734,10 @@ public class Habitat extends javax.swing.JFrame {
         jButton14.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton14.setText("Remover");
 
-        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel13.setBackground(new java.awt.Color(0, 85, 150));
 
         jLabel31.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(0, 0, 0));
         jLabel31.setText("Data");
 
         jComboBox10.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -730,6 +755,7 @@ public class Habitat extends javax.swing.JFrame {
         jComboBox12.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035", "2036", "2037", "2038", "2039", "2040", " " }));
 
         jLabel32.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(0, 0, 0));
         jLabel32.setText("Donativos");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -773,36 +799,42 @@ public class Habitat extends javax.swing.JFrame {
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel31)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel32)
-                    .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton15))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel31)
+                            .addComponent(jLabel32)))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton15)
+                            .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel31)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jLabel32)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(32, 32, 32)
                 .addComponent(jButton15)
-                .addGap(0, 52, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -811,10 +843,10 @@ public class Habitat extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -840,13 +872,13 @@ public class Habitat extends javax.swing.JFrame {
                     .addComponent(jLabel30))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane22, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jCheckBox10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox11))
-                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane22, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(86, 86, 86)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton13)
                     .addComponent(jButton14))
@@ -854,6 +886,8 @@ public class Habitat extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Eventos", jPanel5);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jList5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jScrollPane15.setViewportView(jList5);
@@ -864,6 +898,7 @@ public class Habitat extends javax.swing.JFrame {
         jButton11.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton11.setText("Remover");
 
+        jCheckBox7.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox7.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBox7.setText("Material");
         jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
@@ -872,6 +907,7 @@ public class Habitat extends javax.swing.JFrame {
             }
         });
 
+        jCheckBox8.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox8.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBox8.setText("Monetário");
         jCheckBox8.addActionListener(new java.awt.event.ActionListener() {
@@ -880,6 +916,7 @@ public class Habitat extends javax.swing.JFrame {
             }
         });
 
+        jCheckBox9.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox9.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBox9.setText("Mão-de-Obra");
 
@@ -892,12 +929,14 @@ public class Habitat extends javax.swing.JFrame {
             }
         });
 
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel10.setBackground(new java.awt.Color(0, 85, 150));
 
         jLabel20.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
         jLabel20.setText("Quantidade");
 
         jLabel21.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
         jLabel21.setText("Valor");
 
         jScrollPane7.setViewportView(jTextPane10);
@@ -905,32 +944,39 @@ public class Habitat extends javax.swing.JFrame {
         jScrollPane16.setViewportView(jTextPane11);
 
         jLabel22.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(0, 0, 0));
         jLabel22.setText("Descrição");
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane17.setViewportView(jTextArea2);
 
+        jLabel23.setForeground(new java.awt.Color(0, 0, 0));
         jLabel23.setText("Donativo");
 
+        jLabel24.setForeground(new java.awt.Color(0, 0, 0));
         jLabel24.setText("Doador");
 
         jLabel25.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(0, 0, 0));
         jLabel25.setText("Nome");
 
         jScrollPane18.setViewportView(jTextPane12);
 
         jLabel26.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(0, 0, 0));
         jLabel26.setText("Tipo");
 
         jScrollPane19.setViewportView(jTextPane13);
 
         jLabel27.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(0, 0, 0));
         jLabel27.setText("BI");
 
         jScrollPane20.setViewportView(jTextPane14);
 
         jLabel28.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(0, 0, 0));
         jLabel28.setText("NIF");
 
         jScrollPane21.setViewportView(jTextPane15);
@@ -950,7 +996,7 @@ public class Habitat extends javax.swing.JFrame {
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                         .addComponent(jLabel21)
                         .addComponent(jScrollPane16)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel24)
@@ -1015,13 +1061,13 @@ public class Habitat extends javax.swing.JFrame {
 
         jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Resources/logo.png.jpg"))); // NOI18N
 
-        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel11.setBackground(new java.awt.Color(84, 184, 72));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 643, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1034,13 +1080,13 @@ public class Habitat extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jButton10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(38, 38, 38)
                                 .addComponent(jButton11)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1060,12 +1106,12 @@ public class Habitat extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton12)))
                         .addGap(62, 62, 62)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1094,18 +1140,18 @@ public class Habitat extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton10)
                     .addComponent(jButton11))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Donativos", jPanel3);
 
-        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel14.setBackground(new java.awt.Color(84, 184, 72));
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 643, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1120,9 +1166,10 @@ public class Habitat extends javax.swing.JFrame {
         jButton16.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton16.setText("Adicionar Material");
 
-        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel15.setBackground(new java.awt.Color(0, 85, 150));
 
         jLabel34.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(0, 0, 0));
         jLabel34.setText("Quantidade Disponível");
 
         jScrollPane25.setViewportView(jTextPane16);
@@ -1134,6 +1181,7 @@ public class Habitat extends javax.swing.JFrame {
         jButton18.setText("+");
 
         jLabel35.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(0, 0, 0));
         jLabel35.setText("Descrição");
 
         jTextArea3.setColumns(20);
@@ -1141,11 +1189,13 @@ public class Habitat extends javax.swing.JFrame {
         jScrollPane26.setViewportView(jTextArea3);
 
         jLabel36.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(0, 0, 0));
         jLabel36.setText("Doador");
 
         jScrollPane27.setViewportView(jTextPane17);
 
         jLabel37.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(0, 0, 0));
         jLabel37.setText("Projeto");
 
         jScrollPane28.setViewportView(jTextPane18);
@@ -1171,7 +1221,7 @@ public class Habitat extends javax.swing.JFrame {
                         .addComponent(jButton17))
                     .addComponent(jScrollPane27)
                     .addComponent(jScrollPane28))
-                .addContainerGap(354, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1196,7 +1246,7 @@ public class Habitat extends javax.swing.JFrame {
                 .addComponent(jLabel37)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -1205,14 +1255,14 @@ public class Habitat extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jScrollPane24, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(179, 179, 179)
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton16))
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -1224,17 +1274,15 @@ public class Habitat extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel33))
+                .addGap(23, 23, 23)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane24)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGap(0, 43, Short.MAX_VALUE))
+                    .addComponent(jScrollPane24))
+                .addGap(18, 18, 18)
                 .addComponent(jButton16)
-                .addGap(35, 35, 35))
+                .addGap(23, 23, 23))
         );
 
         jTabbedPane1.addTab("Stock", jPanel4);
@@ -1250,7 +1298,9 @@ public class Habitat extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 68, Short.MAX_VALUE))
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("Projetos");
