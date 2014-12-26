@@ -182,12 +182,17 @@ public class Habitat extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 255), new java.awt.Color(102, 102, 255), null, null));
+
         jList1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jScrollPane1.setViewportView(jList1);
 
+        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBox1.setText("Em curso");
 
+        jCheckBox2.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBox2.setText("Pendentes");
         jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
@@ -196,9 +201,11 @@ public class Habitat extends javax.swing.JFrame {
             }
         });
 
+        jCheckBox3.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBox3.setText("Rejeitados");
 
+        jCheckBox4.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBox4.setText("Terminados");
 
@@ -426,7 +433,7 @@ public class Habitat extends javax.swing.JFrame {
                                     .addComponent(jCheckBox4))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,7 +458,7 @@ public class Habitat extends javax.swing.JFrame {
                             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)))
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         jButton1.getAccessibleContext().setAccessibleName("b_adiciona_projeto");
