@@ -5,7 +5,10 @@
  */
 package GUI;
 
+import Classes.Familia;
 import Classes.HabitatClass;
+import Classes.Membro;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,6 +23,13 @@ public class AdicionarFamilia extends javax.swing.JFrame {
     public AdicionarFamilia(HabitatClass h) {
         initComponents();
         this.habitat = h;
+        Familia f;
+        
+        //povoa a combobox
+        for(Membro m : f.getMembros()){
+            jComboBox1.addItem(m.getNome().toString());
+        }
+        
     }
 
     /**
@@ -266,6 +276,7 @@ public class AdicionarFamilia extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
