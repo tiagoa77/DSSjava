@@ -16,6 +16,7 @@ public class Habitat extends javax.swing.JFrame {
      */
     public Habitat() {
         initComponents();
+         this.setLocationRelativeTo(null);
         
         //Ptojetos
         this.jButton20.setVisible(true);
