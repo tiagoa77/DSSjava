@@ -16,6 +16,19 @@ public class Habitat extends javax.swing.JFrame {
      */
     public Habitat() {
         initComponents();
+        
+        this.jButton21.setVisible(false);
+        this.jButton2.setVisible(false);
+        this.jButton3.setVisible(false);
+        jTextPane1.setEditable(false);
+        jTextArea1.setEditable(false);
+        jComboBox14.disable();
+        jComboBox1.disable();
+        jComboBox2.disable();
+        jComboBox3.disable();
+        jComboBox4.disable();
+        jComboBox5.disable();
+        jComboBox6.disable();
     }
 
     /**
@@ -284,6 +297,11 @@ public class Habitat extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton2.setText("Remover");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton3.setText("Adicionar");
@@ -1461,10 +1479,38 @@ public class Habitat extends javax.swing.JFrame {
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         // TODO add your handling code here:
+        jButton21.setVisible(true);
+        jButton20.setVisible(false);
+        jButton2.setVisible(true);
+        jButton3.setVisible(true);
+        jTextPane1.setEditable(true);
+        jTextArea1.setEditable(true);
+        jComboBox14.enable();
+        jComboBox1.enable();
+        jComboBox2.enable();
+        jComboBox3.enable();
+        jComboBox4.enable();
+        jComboBox5.enable();
+        jComboBox6.enable();
+        
+  
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         // TODO add your handling code here:
+      jButton21.setVisible(false);
+      jButton20.setVisible(true); 
+      jButton2.setVisible(false);
+      jButton3.setVisible(false);
+      jTextPane1.setEditable(false);
+      jTextArea1.setEditable(false);
+      jComboBox14.disable();
+      jComboBox1.disable();
+      jComboBox2.disable();
+      jComboBox3.disable();
+      jComboBox4.disable();
+      jComboBox5.disable();
+      jComboBox6.disable();
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
@@ -1513,6 +1559,10 @@ public class Habitat extends javax.swing.JFrame {
         // TODO add your handling code here:
         new AdicionarMaterial().setVisible(true);
     }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
    
    
