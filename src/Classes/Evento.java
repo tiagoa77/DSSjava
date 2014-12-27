@@ -19,22 +19,22 @@ public class Evento {
     String local;
     String descricao;
     
-    Evento(Evento e){
+    public Evento(Evento e){
         this.data = e.getData();
         this.descricao=e.getDescricao();
         this.id=e.getId();
         this.local=e.getLocal();
     }
-    Evento(){
+    public Evento(){
         this.data = new GregorianCalendar();
         this.descricao="";
         this.id=this.id+1;
         this.local="";
     }
-    Evento(int i, GregorianCalendar d, String l, String de){
+    public Evento(GregorianCalendar d, String l, String de){
         this.data = d;
         this.descricao=de;
-        this.id=i;
+        this.id=id+1;
         this.local=l;
     }
     
