@@ -5,18 +5,23 @@
  */
 package GUI;
 
+import Classes.HabitatClass;
+
 /**
  *
  * @author Tiago
  */
 public class Inicio extends javax.swing.JFrame {
 
+    HabitatClass habitat;
+    
     /**
      * Creates new form Inicio
      */
     public Inicio() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.habitat = new HabitatClass();
     }
 
     /**
@@ -90,7 +95,8 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new Login().setVisible(true);
+        new Login(habitat
+        ).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

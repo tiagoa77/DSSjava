@@ -13,7 +13,7 @@ import java.util.HashMap;
  *
  * @author Sandra
  */
-public class Habitat {
+public class HabitatClass {
 private HashMap<Integer,Projeto> projetos;
 private HashMap<Integer,Voluntario> voluntarios;
 private HashMap<Integer,Funcionario> funcionarios;
@@ -23,9 +23,10 @@ private HashMap<Integer,Familia>familias;
 private HashMap<Integer,Donativo> donativos;
 private HashMap<Integer,Doador> doadores;
 private HashMap<Integer,Evento> eventos;
+private Funcionario utilizadorLigado;
 
 
-Habitat () {
+public HabitatClass () {
 this.projetos = new HashMap<Integer,Projeto> () ;
 this.voluntarios = new HashMap <Integer,Voluntario> () ;
 this.funcionarios= new HashMap <Integer,Funcionario> () ;
@@ -35,9 +36,10 @@ this.familias= new HashMap <Integer,Familia> () ;
 this.donativos= new HashMap <Integer,Donativo> () ;
 this.doadores= new HashMap <Integer,Doador> () ;
 this.eventos= new HashMap <Integer,Evento> () ;
+this.utilizadorLigado = new Funcionario();
 }
 
-Habitat (HashMap<Integer,Projeto> p ,HashMap<Integer,Voluntario> v, HashMap<Integer,Funcionario> f, HashMap<Integer,Candidatura> c, HashMap<Integer,Equipa> e, HashMap<Integer,Familia> fam, HashMap<Integer,Donativo> dona, HashMap<Integer,Doador> doa, HashMap<Integer,Evento> event ) {
+public HabitatClass (HashMap<Integer,Projeto> p ,HashMap<Integer,Voluntario> v, HashMap<Integer,Funcionario> f, HashMap<Integer,Candidatura> c, HashMap<Integer,Equipa> e, HashMap<Integer,Familia> fam, HashMap<Integer,Donativo> dona, HashMap<Integer,Doador> doa, HashMap<Integer,Evento> event, Funcionario fun ) {
 for(Integer i :p.keySet()){
     projetos.put(i,p.get(i).clone());
 }
@@ -67,9 +69,11 @@ for(Integer i :doa.keySet()){
 for(Integer i :event.keySet()){
     eventos.put(i,event.get(i).clone());
 }
+
+this.utilizadorLigado = fun;
 }
 
-Habitat (Habitat h) {
+ public HabitatClass (HabitatClass h) {
 this.projetos=h.getProjetos();
 this.voluntarios=h.getVoluntarios();
 this.funcionarios=h.getFuncionarios();
@@ -79,6 +83,11 @@ this.familias=h.getFamilias();
 this.donativos=h.getDonativos();
 this.doadores=h.getDoadores();
 this.eventos=h.getEventos();
+this.utilizadorLigado = h.getUtilizadorLigado();
+}
+
+public Funcionario getUtilizadorLigado(){
+    return this.utilizadorLigado;
 }
 
 public HashMap<Integer,Projeto> getProjetos(){
@@ -117,6 +126,9 @@ public HashMap<Integer,Evento> getEventos () {
     return this.eventos;
 }
 
+public void setUtilizadorLigado(Funcionario f){
+    this.utilizadorLigado = f;
+}
 public void setProjetos(HashMap<Integer,Projeto> proj) {
     for (Integer i: proj.keySet()){
         projetos.put(i, proj.get(i).clone());
@@ -354,10 +366,18 @@ public int remEvento(Evento e) {
     return -1;
 }
 
+public Funcionario ligaFuncionario(String login, String pass){
+    for(Integer i : funcionarios.keySet()){
+        if(funcionarios.get(i).getLogin().equals(login)&& funcionarios.get(i).getPassword().equals(pass))
+            return funcionarios.get(i);
+    }
+    return null;    
+}
 
 
-public Habitat clone () {
-    return new Habitat(this);
+
+public HabitatClass clone () {
+    return new HabitatClass(this);
 }
 
 public String toString () {
@@ -405,7 +425,7 @@ return sb.toString();
 public boolean equals(Object obj) {
     if(this == obj) return true; 
     if((obj == null) || (this.getClass() != obj.getClass())) return false;
-    Habitat h = (Habitat) obj;
+    HabitatClass h = (HabitatClass) obj;
     return this.projetos.equals(h.getProjetos()) && (this.voluntarios ==h.getVoluntarios() && this.familias.equals(h.getFamilias()) && this.funcionarios.equals(h.getFuncionarios()) && this.candidaturas.equals(h.getCandidaturas()) && this.equipas.equals(h.getEquipas()) && this.donativos.equals(h.getDonativos()) && this.doadores.equals(h.getDoadores()) && this.eventos.equals(h.getEventos()));
    }
 

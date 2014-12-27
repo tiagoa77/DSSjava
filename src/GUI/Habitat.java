@@ -4,19 +4,24 @@
  * and open the template in the editor.
  */
 package GUI;
+import Classes.HabitatClass;
 
 /**
  *
  * @author Tiago
  */
 public class Habitat extends javax.swing.JFrame {
+    
+    HabitatClass habitat;
 
     /**
      * Creates new form Projectos
+     * @param h
      */
-    public Habitat() {
+    public Habitat(HabitatClass h) {
         initComponents();
          this.setLocationRelativeTo(null);
+         this.habitat = h;
         
         //Ptojetos
         this.jButton20.setVisible(true);

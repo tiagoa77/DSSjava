@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import Classes.Funcionario;
+import Classes.HabitatClass;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Tiago
@@ -14,9 +18,13 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    public Login() {
+    
+    HabitatClass habitat;
+    
+    public Login(HabitatClass h) {
         initComponents();
          this.setLocationRelativeTo(null);
+         this.habitat = h;
     }
 
     /**
@@ -120,8 +128,18 @@ public class Login extends javax.swing.JFrame {
 
     private void IniciarSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarSessaoActionPerformed
         // TODO add your handling code here:
-        new Habitat().setVisible(true);
-        this.setVisible(false);
+        String login = User.getText();
+        String pass = Password.getText();
+        Funcionario ligado = habitat.ligaFuncionario(login,pass);
+        
+        if(ligado!=null){
+            JOptionPane.showMessageDialog(null, "Bem vindo " + ligado.getNome() + " !");
+            new Habitat(habitat).setVisible(true);
+            this.setVisible(false);
+        }
+        else
+            JOptionPane.showMessageDialog(null, "Dados incorrectos");
+        
     }//GEN-LAST:event_IniciarSessaoActionPerformed
 
     private void UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserActionPerformed

@@ -128,19 +128,19 @@ public class Funcionario {
     Método para aceitar uma candidatura passada como argumento
     */
     public void aceitaCandidatura(Candidatura c){
-     Habitat.getCandidaturas().get(c.getId()).setEstado("Aceite");   
+     HabitatClass.getCandidaturas().get(c.getId()).setEstado("Aceite");   
     }
     /*
     Método para rejeitar uma candidatura passada como argumento
     */
     public void rejeitaCandidatura(Candidatura c){
-     Habitat.getCandidaturas().get(c.getId()).setEstado("Rejeitada");   
+     HabitatClass.getCandidaturas().get(c.getId()).setEstado("Rejeitada");   
     }
     /*
     Método para analisar uma candidatura passada como argumento
     */
     public void analisaCandidatura(Candidatura c){
-     Habitat.getCandidaturas().get(c.getId()).setEstado("A analisar");   
+     HabitatClass.getCandidaturas().get(c.getId()).setEstado("A analisar");   
     }
     
     
