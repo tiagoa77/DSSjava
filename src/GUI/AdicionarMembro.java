@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Classes.HabitatClass;
+
 /**
  *
  * @author Patrícia
@@ -14,8 +16,10 @@ public class AdicionarMembro extends javax.swing.JFrame {
     /**
      * Creates new form AdicionarMembro1
      */
-    public AdicionarMembro() {
+    HabitatClass habitat;
+    public AdicionarMembro(HabitatClass h) {
         initComponents();
+        this.habitat = h;
     }
 
     /**

@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Classes.HabitatClass;
+
 /**
  *
  * @author Patrícia
@@ -14,8 +16,10 @@ public class AdicionarFamilia extends javax.swing.JFrame {
     /**
      * Creates new form AdicionarFamilia1
      */
-    public AdicionarFamilia() {
+    HabitatClass habitat;
+    public AdicionarFamilia(HabitatClass h) {
         initComponents();
+        this.habitat = h;
     }
 
     /**
@@ -266,7 +270,7 @@ public class AdicionarFamilia extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new AdicionarMembro().setVisible(true);
+        new AdicionarMembro(habitat).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

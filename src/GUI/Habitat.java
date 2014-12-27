@@ -1638,28 +1638,28 @@ public class Habitat extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new AdicionarProjeto().setVisible(true);
+        new AdicionarProjeto(habitat).setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        new AdicionarVoluntario().setVisible(true);
+        new AdicionarVoluntario(habitat).setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
-        new AdicionarEvento().setVisible(true);
+        new AdicionarEvento(habitat).setVisible(true);
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-        new AdicionarDonativo().setVisible(true);
+        new AdicionarDonativo(habitat).setVisible(true);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
-        new AdicionarMaterial().setVisible(true);
+        new AdicionarMaterial(habitat).setVisible(true);
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
