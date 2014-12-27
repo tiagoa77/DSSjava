@@ -268,7 +268,7 @@ public int remCandidatura (Candidatura c) {
 
 public int addEquipa (Equipa e, int id) {
     for (Integer i: equipas.keySet()){
-        if (equipas.get(i).equals(e)){
+        if (equipas.get(i).getNome().equals(e.getNome())){
             return -1;
         }
     }
@@ -380,6 +380,14 @@ public Doador getDoador(String nome){
             return doadores.get(i);
     }
     return null;
+}
+
+public Voluntario getVoluntario(String nome){
+   for(Integer i : voluntarios.keySet()){
+        if(voluntarios.get(i).getNomeVoluntario().equals(nome))
+            return voluntarios.get(i);
+    }
+    return null; 
 }
 
 

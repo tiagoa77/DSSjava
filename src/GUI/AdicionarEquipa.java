@@ -5,17 +5,34 @@
  */
 package GUI;
 
+import Classes.Equipa;
+import Classes.Funcionario;
+import Classes.HabitatClass;
+import Classes.Voluntario;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Patrícia
  */
-public class AdicionarEquipa extends javax.swing.JFrame {
 
+  
+public class AdicionarEquipa extends javax.swing.JFrame {
+    HabitatClass habitat;
+    ArrayList<String> membros = new ArrayList<>();
+    ArrayList<String> voluntarios = new ArrayList<>();
+    
     /**
      * Creates new form AdicionarEquipa1
      */
-    public AdicionarEquipa() {
+    public AdicionarEquipa(HabitatClass h) {
         initComponents();
+        this.habitat = h;
+        
+        //Continuar -- falta preencher a lista com da esqueda com todos os voluntarios da habitat
+        
+        
     }
 
     /**
@@ -197,15 +214,35 @@ public class AdicionarEquipa extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
+        
+        this.membros.add(jList2.getSelectedValue().toString());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        this.membros.remove(jList1.getSelectedValue().toString());
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        
+        String nome = jTextField1.getText();
+        ArrayList<Voluntario> membross = new ArrayList<>();
+        Equipa nova = new Equipa(nome,membross);
+        
+        for(String s : this.membros){
+            membross.add(habitat.getVoluntario(s));
+        }
+        
+        if(habitat.addEquipa(nova,nova.getId())==1){
+            JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
+            this.setVisible(false);
+        }
+        else
+             JOptionPane.showMessageDialog(null, "Já existe uma equipa com esse nome");
+            
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

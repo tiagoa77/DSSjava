@@ -17,20 +17,20 @@ private String nome;
 private int id;
 private ArrayList <Voluntario> voluntarios;
 
-Equipa (){
+public Equipa (){
 this.nome=null;
 this.voluntarios= new ArrayList <Voluntario> ();
 }
 
-Equipa (String n, int i, ArrayList <Voluntario> v){
+public Equipa (String n, ArrayList <Voluntario> v){
 this.nome=n;
-this.id=i;
+this.id=id+1;
 for (Voluntario v1 : v) {
   voluntarios.add(v1.clone());  
     }
 }
 
-Equipa (Equipa e) {
+public Equipa (Equipa e) {
 this.nome=e.getNome();
 this.id=e.getId();
 this.voluntarios=e.getVoluntarios();
