@@ -374,6 +374,14 @@ public Funcionario ligaFuncionario(String login, String pass){
     return null;    
 }
 
+public Doador getDoador(String nome){
+    for(Integer i : doadores.keySet()){
+        if(doadores.get(i).getNome().equals(nome))
+            return doadores.get(i);
+    }
+    return null;
+}
+
 
 
 public HabitatClass clone () {

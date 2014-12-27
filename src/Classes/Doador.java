@@ -17,21 +17,21 @@ public class Doador {
     private String nif;
     private String bi;
     
-    Doador(Doador d){
+    public Doador(Doador d){
         this.id = d.getId();
         this.tipo = d.getTipo();
         this.nome = d.getNome();
         this.nif= d.getNif();
         this.bi = d.getBi();
     }
-    Doador(){
+    public Doador(){
         this.id = this.id +1;
         this.tipo = "";
         this.nome = "";
         this.nif= "";
         this.bi = "";
     }
-    Doador(int i, String t, String n, String nif, String b){
+    public Doador(String t, String n, String nif, String b){
         this.id = this.id +1;
         this.tipo = t;
         this.nome = n;

@@ -16,29 +16,36 @@ public class Donativo {
     private String descricao;
     private double quantidade;
     private float valor;
+    private Doador doador;
     
-    Donativo(Donativo d){
+    public Donativo(Donativo d){
         this.tipo = d.getTipo();
         this.id = d.getId();
         this.descricao = d.getDescricao();
         this.valor = d.getValor();
         this.quantidade = d.getQuantidade();
+        this.doador = d.getDoador();
     }
     
-    Donativo(){
+    public Donativo(){
        this.tipo = "";
        this.id = this.id +1;
        this.descricao = "";
        this.valor = 0;
        this.quantidade = 0.00; 
+       this.doador = new Doador();
     }
     
-    Donativo(String t, int i, String d, float v, double q){
+    public Donativo(String t, String d, float v, double q, Doador doa){
        this.tipo = t;
-       this.id = i;
+       this.id = id+1;
        this.descricao = d;
        this.valor = v;
        this.quantidade = q; 
+       this.doador = doa;
+    }
+    public void setDoador(Doador d){
+        this.doador = d;
     }
     
     public void setTipo(String t){
@@ -70,6 +77,10 @@ public class Donativo {
     }
     public double getQuantidade(){
         return this.quantidade;
+    }
+    
+    public Doador getDoador(){
+        return this.doador;
     }
     
     public boolean Equals(Object o){

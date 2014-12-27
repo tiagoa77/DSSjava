@@ -5,17 +5,23 @@
  */
 package GUI;
 
+import Classes.Doador;
+import Classes.Donativo;
+import Classes.HabitatClass;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Patrícia
  */
 public class AdicionarDonativo extends javax.swing.JFrame {
-
+    HabitatClass habitat;
     /**
      * Creates new form AdicionarDonativo1
      */
-    public AdicionarDonativo() {
+    public AdicionarDonativo(HabitatClass h) {
         initComponents();
+        this.habitat = h;
     }
 
     /**
@@ -228,12 +234,24 @@ public class AdicionarDonativo extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        String tipo = jComboBox4.getSelectedItem().toString();
+        Doador doador = habitat.getDoador(jComboBox5.getSelectedItem().toString());
+        String quantidade = jTextField2.getText();
+        String valor = jTextField3.getText();
+        String desc = jTextField1.getText();
+        Donativo novo = new Donativo(tipo,desc,Float.parseFloat(valor),Double.parseDouble(quantidade),doador);
+        
+            if(habitat.addDonativo(novo,novo.getId())==1){
+                 JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
+                 this.setVisible(false);
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Erro");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new AdicionarDoador().setVisible(true);
+        new AdicionarDoador(habitat).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

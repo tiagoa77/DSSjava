@@ -5,17 +5,23 @@
  */
 package GUI;
 
+import Classes.Doador;
+import Classes.HabitatClass;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Patrícia
  */
 public class AdicionarDoador extends javax.swing.JFrame {
 
+    HabitatClass habitat;
     /**
      * Creates new form AdicionarDoador1
      */
-    public AdicionarDoador() {
+    public AdicionarDoador(HabitatClass h) {
         initComponents();
+        this.habitat = h;
     }
 
     /**
@@ -206,7 +212,25 @@ public class AdicionarDoador extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        String nome = jTextField4.getText();
+        String tipo = jComboBox6.getSelectedItem().toString();
+        String bi = jTextField8.getText();
+        String nif = jTextField7.getText();
+        Doador d = new Doador(tipo,nome,nif,bi);
+        int id = d.getId();
+        
+        if(nome == null)
+            JOptionPane.showMessageDialog(null, "Por favor insira o nome do doador.");
+        if(bi == null)
+            JOptionPane.showMessageDialog(null, "Por favor insira o número do BI do doador.");
+        if(nif == null)
+            JOptionPane.showMessageDialog(null, "Por favor insira o NIF do doador.");
+        
+        if (habitat.addDoador(d,id) == 1){
+            JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
+            this.setVisible(false);}
+        else
+            JOptionPane.showMessageDialog(null, "Doador já existe!");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
