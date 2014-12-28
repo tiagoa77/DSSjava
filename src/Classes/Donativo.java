@@ -1,5 +1,8 @@
 package Classes;
 
+import ClassesDAO.DoadorDAO;
+import java.util.Map;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,7 +19,7 @@ public class Donativo {
     private String descricao;
     private double quantidade;
     private float valor;
-    private Doador doador;
+    private Map<Integer,Doador> doadores;
     
     public Donativo(Donativo d){
         this.tipo = d.getTipo();
@@ -24,7 +27,7 @@ public class Donativo {
         this.descricao = d.getDescricao();
         this.valor = d.getValor();
         this.quantidade = d.getQuantidade();
-        this.doador = d.getDoador();
+        this.doadores = new DoadorDAO(this.id);
     }
     
     public Donativo(){
@@ -33,19 +36,16 @@ public class Donativo {
        this.descricao = "";
        this.valor = 0;
        this.quantidade = 0.00; 
-       this.doador = new Doador();
+       this.doadores = new DoadorDAO(this.id);
     }
     
-    public Donativo(String t, String d, float v, double q, Doador doa){
+    public Donativo(String t, String d, float v, double q){
        this.tipo = t;
        this.id = id+1;
        this.descricao = d;
        this.valor = v;
        this.quantidade = q; 
-       this.doador = doa;
-    }
-    public void setDoador(Doador d){
-        this.doador = d;
+       this.doadores = new DoadorDAO(this.id);
     }
     
     public void setTipo(String t){
@@ -77,10 +77,6 @@ public class Donativo {
     }
     public double getQuantidade(){
         return this.quantidade;
-    }
-    
-    public Doador getDoador(){
-        return this.doador;
     }
     
     public boolean Equals(Object o){

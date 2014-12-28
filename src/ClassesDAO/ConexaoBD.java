@@ -12,23 +12,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * É preciso mudar isto para o sql server
+ * sql server
  * @author Tiago
  */
 public class ConexaoBD {
-    public static final String ip = "192.168.1.84";
-    public static final String porta = "1521";
-    public static final String sid = "orcl";
-    public static final String user = "APEF";
-    public static final String pw = "APEF";
-    public static final String url = "jdbc:oracle:thin:@" + ip + ":" + porta + ":" + sid;
+    public static final String url = "jdbc:sqlserver://diguest-pc:3306;" + "databaseName=MySQL56;user=tiago;password=tiago;";;
 	
     public static Connection conexao;
 	
     public static void iniciarConexao() {
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            conexao = DriverManager.getConnection(url, user, pw);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            conexao = DriverManager.getConnection(url);
             conexao.setAutoCommit(true);
 	} catch (Exception e) {
             throw new NullPointerException(e.getMessage());
