@@ -47,7 +47,7 @@ Projeto (Projeto p){
 }
 
 public String getNome() {
-    return this. nome;
+    return this.nome;
 }
 
 public int getId() {
@@ -90,6 +90,18 @@ public void setVoluntarios(ArrayList <Voluntario> v) {
         voluntarios.add(t.clone());
 }
 }
+    
+public int addTarefa(Tarefa tar){
+    for(Tarefa t : this.tarefas){
+        if(tar.getNomeTarefa().equals(t.getNomeTarefa())){
+           return -1; 
+        }
+    }
+      tarefas.add(tar);
+      return 1;
+}
+    
+
 public Projeto clone() {
    return new Projeto(this); 
 }

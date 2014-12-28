@@ -15,16 +15,16 @@ public class Tarefa {
 private String nome;
 private int id;
 
-Tarefa(){
+public Tarefa(){
     this.nome=null;
 }
 
-Tarefa (String n, int i) {
+public Tarefa (String n) {
     this.nome=n;
-    this.id=i;
+    this.id=id+1;
 }
 
-Tarefa (Tarefa t){
+public Tarefa (Tarefa t){
     this.nome=t.getNomeTarefa();
     this.id= t.getId();
 }

@@ -16,7 +16,7 @@ import java.util.GregorianCalendar;
 public class Funcionario {
     private int id = 0;
     private String nome;
-    private GregorianCalendar dataNascimento;
+    private String dataNascimento;
     private String telemovel;
     private String localidade;
     private String codPostal;
@@ -38,7 +38,7 @@ public class Funcionario {
         this.telemovel = f.getTelemovel();
     }
     
-    Funcionario(String c,GregorianCalendar d,String e, int i,String l,String lg, String n, String p, String r, String t){
+    Funcionario(String c,String d,String e, int i,String l,String lg, String n, String p, String r, String t){
         this.codPostal = c;
         this.dataNascimento = d;
         this.eMail = e;
@@ -53,7 +53,7 @@ public class Funcionario {
     
     Funcionario(){
         this.codPostal = "";
-        this.dataNascimento = new GregorianCalendar();
+        this.dataNascimento = "";
         this.eMail = "";
         this.id = this.id + 1;
         this.localidade = "";
@@ -67,7 +67,7 @@ public class Funcionario {
     public void setCodPostal(String c){
         this.codPostal = c;
     }
-    public void setDataNascimento(GregorianCalendar d){
+    public void setDataNascimento(String d){
         this.dataNascimento = d;
     }
     public void setEmail(String e){
@@ -118,7 +118,7 @@ public class Funcionario {
     public String getTelemovel(){
         return this.telemovel;
     }
-    public GregorianCalendar getDataNascimento(){
+    public String getDataNascimento(){
         return this.dataNascimento;
     }
     public int getId(){

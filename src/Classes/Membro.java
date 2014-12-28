@@ -15,7 +15,7 @@ import java.util.GregorianCalendar;
  */
 public class Membro {
     private String nome;
-    private GregorianCalendar dataNascimento;
+    private String dataNascimento;
     private String profissao;
     private String nif;
     private String bi;
@@ -30,11 +30,11 @@ public class Membro {
     public Membro(){
         this.nome = "";
         this.bi = "";
-        this.dataNascimento = new GregorianCalendar();
+        this.dataNascimento = "";
         this.nif = "";
         this.profissao = "";
     }
-    public Membro(String n, String b, String nif, String p, GregorianCalendar d){
+    public Membro(String n, String b, String nif, String p, String d){
         this.nome = n;
         this.bi = b;
         this.dataNascimento = d;
@@ -53,7 +53,7 @@ public class Membro {
     public void setProfissao(String p){
         this.profissao = p;
     }
-    public void setDataNascimento(GregorianCalendar d){
+    public void setDataNascimento(String d){
         this.dataNascimento = d;
     }
     public String getNome(){
@@ -68,7 +68,7 @@ public class Membro {
     public String getProfissao(){
         return this.nome;
     }
-    public GregorianCalendar getDataNascimento(){
+    public String getDataNascimento(){
         return this.dataNascimento;
     }
     

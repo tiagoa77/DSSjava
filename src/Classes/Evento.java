@@ -15,7 +15,7 @@ import java.util.GregorianCalendar;
  */
 public class Evento {
     private int id = 0;
-    GregorianCalendar data;
+    String data;
     String local;
     String descricao;
     
@@ -26,12 +26,12 @@ public class Evento {
         this.local=e.getLocal();
     }
     public Evento(){
-        this.data = new GregorianCalendar();
+        this.data = "";
         this.descricao="";
         this.id=this.id+1;
         this.local="";
     }
-    public Evento(GregorianCalendar d, String l, String de){
+    public Evento(String d, String l, String de){
         this.data = d;
         this.descricao=de;
         this.id=id+1;
@@ -41,7 +41,7 @@ public class Evento {
     public void setId(int id){
         this.id = id;
     }
-    public void setData(GregorianCalendar d){
+    public void setData(String d){
         this.data = d;
     }
     public void setLocal(String l){
@@ -59,7 +59,7 @@ public class Evento {
     public String getDescricao(){
         return this.descricao;
     }
-    public GregorianCalendar getData(){
+    public String getData(){
         return this.data;
     }
     

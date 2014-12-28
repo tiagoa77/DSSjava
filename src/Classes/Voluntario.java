@@ -7,7 +7,6 @@ package Classes;
  */
 
 
-import java.util.GregorianCalendar;
 
 /**
  *
@@ -17,56 +16,56 @@ public class Voluntario {
 private String nome;
 private int id;
 private boolean disponibilidade = true;
-private GregorianCalendar dataNascimento;
+private String dataNascimento;
 private String telemovel;
 private String localidade;
 private String codPostal;
 private String eMail;
-private String login;
-private String password;
 private String rua;   
+private Equipa equipa;
 
-Voluntario (String c,GregorianCalendar d,String e,String l,String lg, String n, String p, String r, String t){
+public Voluntario (String c,String d,String e,String l,String n, String r, String t, Equipa eq){
     this.codPostal = c;
     this.dataNascimento = d;
     this.eMail = e;
     this.localidade = l;
-    this.login = lg;
     this.nome = n;
-    this.password =p;
     this.rua = r;
     this.telemovel = t;
     this.id = this.id+1;
     this.disponibilidade = true;
+    this.equipa = eq;
+    
     }
     
-Voluntario (){
+public Voluntario (){
     this.disponibilidade=true;
     this.codPostal = "";
-    this.dataNascimento = new GregorianCalendar();
+    this.dataNascimento = "";
     this.eMail = "";
     this.id = this.id + 1;
     this.localidade = "";
-    this.login = "";
     this.nome = "";
-    this.password ="";
     this.rua = "";
     this.telemovel = "";
+    this.equipa = new Equipa();
     }
-Voluntario (Voluntario v){
+public Voluntario (Voluntario v){
     this.disponibilidade=v.getDisponibildade();
     this.codPostal = v.getcodPostal();
     this.dataNascimento = v.getDataNascimento();
     this.eMail = v.getEmail();
     this.id = v. getId();
     this.localidade = v.getLocalidade();
-    this.login = v.getLogin();
     this.nome = v.getNomeVoluntario();
-    this.password =v.getPassword();
     this.rua = v.getRua();
     this.telemovel = v.getTelemovel();
+    this.equipa = v.getEquipa();
     }
     
+    public Equipa getEquipa(){
+        return this.equipa;
+    }
     
     public Boolean getDisponibildade(){
          return this.disponibilidade;
@@ -81,26 +80,26 @@ Voluntario (Voluntario v){
     public String getLocalidade(){
         return this.localidade;
     }
-    public String getLogin(){
-        return this.login;
-    }
+
     public String getNomeVoluntario(){
         return this.nome;
     }
-    public String getPassword(){
-        return this.password;
-    }
+
     public String getRua(){
         return this.rua;
     }
     public String getTelemovel(){
         return this.telemovel;
     }
-    public GregorianCalendar getDataNascimento(){
+    public String getDataNascimento(){
         return this.dataNascimento;
     }
     public int getId(){
         return this.id;
+    }
+    
+    public void setEquipa(Equipa e){
+        this.equipa = e;
     }
     
     public void setDisponilididade (Boolean b){
@@ -109,7 +108,7 @@ Voluntario (Voluntario v){
     public void setCodPostal(String c){
         this.codPostal = c;
     }
-    public void setDataNascimento(GregorianCalendar d){
+    public void setDataNascimento(String d){
         this.dataNascimento = d;
     }
     public void setEmail(String e){
@@ -121,15 +120,11 @@ Voluntario (Voluntario v){
    public void setLocalidade(String l){
         this.localidade = l;
     }
-   public void setLogin(String l){
-        this.login = l;
-    }
+
     public void setNome(String n){
         this.nome = n;
     }
-    public void setPassword(String p){
-        this.password = p;
-    }
+
     public void setRua(String r){
         this.rua = r;
     }
@@ -159,6 +154,7 @@ Voluntario (Voluntario v){
         s.append("Id: ").append(id).append("\n");
         s.append("Disponibilidade:").append(disponibilidade).append("/n");
         s.append("Nome: ").append(nome).append("\n");
+        s.append("Equipa : ").append(equipa.getNome()).append("\n");
         s.append("Data de Nascimento: ").append(dataNascimento).append("\n");
         s.append("Telemovel: ").append(telemovel).append("\n");
         s.append("Email: ").append(eMail).append("\n");

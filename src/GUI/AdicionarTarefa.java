@@ -6,6 +6,8 @@
 package GUI;
 
 import Classes.Projeto;
+import Classes.Tarefa;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -131,7 +133,11 @@ public class AdicionarTarefa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        String nome = jTextField1.getText();
+        Tarefa nova = new Tarefa(nome);
+        proj.addTarefa(nova);
+        JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
