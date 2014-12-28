@@ -14,21 +14,22 @@ import java.util.ArrayList;
  * @author Sandra
  */
 public class Projeto {
-private String nome;
-private int id;
+private String estado;
+private int id=0;
 private Familia familia;
 private ArrayList <Tarefa> tarefas;
 private ArrayList<Voluntario> voluntarios;
 
-Projeto () {
-    this.nome=null;
+
+public Projeto () {
+    this.estado="";
     this.tarefas= new ArrayList <Tarefa>();
     this.voluntarios= new ArrayList <Voluntario> ();
 }
 
-Projeto (String n, int id, Familia f,ArrayList <Tarefa> tarefa,ArrayList <Voluntario> v ) {
-    this.nome=n;
-    this.id=id;
+public Projeto (String n, Familia f,ArrayList <Tarefa> tarefa,ArrayList <Voluntario> v ) {
+    this.estado=n;
+    this.id=id+1;
     this.familia=f.clone();
     for(Tarefa t :tarefa){
         tarefas.add(t.clone());
@@ -38,16 +39,16 @@ Projeto (String n, int id, Familia f,ArrayList <Tarefa> tarefa,ArrayList <Volunt
         }
 }
 
-Projeto (Projeto p){
-    this.nome= p.getNome();
+public Projeto (Projeto p){
+    this.estado= p.getestado();
     this.id=p.getId();
     this.familia=p.getFamilia();
     this.tarefas=p.getTarefas();
     this.voluntarios=p.getVoluntarios();
 }
 
-public String getNome() {
-    return this.nome;
+public String getestado() {
+    return this.estado;
 }
 
 public int getId() {
@@ -67,8 +68,8 @@ public ArrayList <Voluntario> getVoluntarios() {
     return this.voluntarios;
 }
     
-public void setNome(String nome){
-    this.nome=nome;
+public void setestado(String estado){
+    this.estado=estado;
 }
 
 public void setId(int id){
@@ -107,7 +108,7 @@ public Projeto clone() {
 }
 public String toString() {
 StringBuilder sb= new StringBuilder();
-    sb.append("Nome").append(nome).append("\n");
+    sb.append("estado").append(estado).append("\n");
     sb.append("Id").append(id).append("\n");
     sb.append("Familia: ").append(familia).append("\n");
     sb.append("Tarefas");
@@ -125,7 +126,7 @@ public boolean equals(Object obj) {
     if(this == obj) return true; 
     if((obj == null) || (this.getClass() != obj.getClass())) return false;
     Projeto p = (Projeto) obj;
-    return this.nome.equals(p.getNome()) && (this.id ==p.getId() && this.familia.equals(p.getFamilia()) && this.voluntarios.equals(p.getVoluntarios()) && this.tarefas.equals(p.getTarefas()));
+    return this.estado.equals(p.getestado()) && (this.id ==p.getId() && this.familia.equals(p.getFamilia()) && this.voluntarios.equals(p.getVoluntarios()) && this.tarefas.equals(p.getTarefas()));
    }
 
 }

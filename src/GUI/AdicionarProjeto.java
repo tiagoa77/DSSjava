@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Classes.Familia;
 import Classes.HabitatClass;
 import Classes.Projeto;
 
@@ -238,12 +239,21 @@ public class AdicionarProjeto extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Projeto novo = new Projeto();
+        Familia f = new Familia();
+        
+        for(Familia fam : habitat.getFamilias().values()){
+            if(fam.getNome().equals(jComboBox1.getSelectedItem().toString()))
+                f = fam.clone();
+        }
+        
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         new AdicionarTarefa(projeto).setVisible(true);
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

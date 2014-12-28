@@ -428,7 +428,7 @@ public String toString () {
 StringBuilder sb= new StringBuilder ();
 sb.append("Projetos: \n");
     for (Integer i: projetos.keySet()){
-        sb.append("Id: ").append(i).append("Nome :").append(projetos.get(i).getNome()).append("\n");
+        sb.append("Id: ").append(i).append("Nome :").append(projetos.get(i).getFamilia().getNome()).append("\n");
     }
     sb.append("Voluntários: \n");
     for (Integer i: voluntarios.keySet()){
