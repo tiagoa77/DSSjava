@@ -9,6 +9,9 @@ import Classes.Familia;
 import Classes.HabitatClass;
 import Classes.Membro;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,16 +22,23 @@ public class AdicionarFamilia extends javax.swing.JFrame {
     /**
      * Creates new form AdicionarFamilia1
      */
+    Familia f = new Familia();
+    DefaultListModel listModel = new DefaultListModel();
     HabitatClass habitat;
+    
     public AdicionarFamilia(HabitatClass h) {
         initComponents();
         this.habitat = h;
-        Familia f;
         
         //povoa a combobox
         for(Membro m : f.getMembros()){
             jComboBox1.addItem(m.getNome().toString());
         }
+        //povoa a lista
+        for(Membro m : f.getMembros()){
+            listModel.addElement(m.getNome().toString());
+        }
+        jList1 = new JList(listModel);
         
     }
 
@@ -276,17 +286,46 @@ public class AdicionarFamilia extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        Membro remover = new Membro();
+        
+            for(Membro m : f.getMembros()){
+                if(m.getNome().equals(jList1.getSelectedValue().toString()))
+                    remover = m;
+            }
+        if(f.remMembro(remover)==1)
+            JOptionPane.showMessageDialog(null, "Removido com Sucesso");
+        else
+            JOptionPane.showMessageDialog(null, "Erro");
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new AdicionarMembro(habitat).setVisible(true);
+        new AdicionarMembro(habitat,f).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        Membro representante = new Membro();
+        String nomeRepresentante = jComboBox1.getSelectedItem().toString();
+        String nome = jTextField1.getText();
+        String localidade = jTextField2.getText();
+        String rua = jTextField3.getText();
+        String codPostal = jTextField4.getText();
+        Familia nova = new Familia(nome,f.getMembros(),representante,codPostal,localidade,rua);
+        
+        
+            for(Membro m : f.getMembros()){
+                if(nomeRepresentante.equals(m.getNome()))
+                    representante = m;
+            }
+        
+            if(habitat.addFamilia(nova)==1){
+                JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
+                this.setVisible(false);
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Erro");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

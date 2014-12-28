@@ -20,21 +20,21 @@ public class Membro {
     private String nif;
     private String bi;
     
-    Membro(Membro m){
+    public Membro(Membro m){
         this.nome = m.getNome();
         this.bi = m.getBi();
         this.dataNascimento = m.getDataNascimento();
         this.nif = m.getNif();
         this.profissao = m.getProfissao();
     }
-    Membro(){
+    public Membro(){
         this.nome = "";
         this.bi = "";
         this.dataNascimento = new GregorianCalendar();
         this.nif = "";
         this.profissao = "";
     }
-    Membro(String n, String b, String nif, String p, GregorianCalendar d){
+    public Membro(String n, String b, String nif, String p, GregorianCalendar d){
         this.nome = n;
         this.bi = b;
         this.dataNascimento = d;

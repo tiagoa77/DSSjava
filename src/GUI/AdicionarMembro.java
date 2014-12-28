@@ -5,7 +5,11 @@
  */
 package GUI;
 
+import Classes.Familia;
 import Classes.HabitatClass;
+import Classes.Membro;
+import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,9 +21,11 @@ public class AdicionarMembro extends javax.swing.JFrame {
      * Creates new form AdicionarMembro1
      */
     HabitatClass habitat;
-    public AdicionarMembro(HabitatClass h) {
+    Familia familia;
+    public AdicionarMembro(HabitatClass h, Familia f) {
         initComponents();
         this.habitat = h;
+        this.familia = f;
     }
 
     /**
@@ -214,7 +220,22 @@ public class AdicionarMembro extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        String nome = jTextField1.getText();
+        String profissao = jTextField5.getText();
+        String bi = jTextField7.getText();
+        String nif = jTextField6.getText();
+        GregorianCalendar data;
+        Membro novo = new Membro(nome,bi,nif,profissao,data);
+        
+            if(this.familia.addMembro(novo)==1){
+                JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
+                this.setVisible(false);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Erro");
+            }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

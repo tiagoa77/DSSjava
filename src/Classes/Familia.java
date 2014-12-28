@@ -20,8 +20,9 @@ public class Familia {
     private String codPostal;
     private String localidade;
     private String rua;
+   
     
-    Familia(Familia f){
+    public Familia(Familia f){
         this.nome = f.getNome();
         this.membros = f.getMembros();
         this.representante = f.getRepresentante();
@@ -29,7 +30,7 @@ public class Familia {
         this.localidade = f.getLocalidade();
         this.rua = f.getRua();
     }
-    Familia(){
+    public Familia(){
         this.nome = "";
         this.membros = new ArrayList<Membro>();
         this.representante = new Membro();
@@ -37,7 +38,7 @@ public class Familia {
         this.localidade = "";
         this.rua = "";
     }
-    Familia(String n, ArrayList<Membro> ms, Membro m, String c, String l, String r){
+    public Familia(String n, ArrayList<Membro> ms, Membro m, String c, String l, String r){
         this.nome = n;
         this.membros = ms;
         this.representante = m;
@@ -83,6 +84,29 @@ public class Familia {
     }
     public ArrayList<Membro> getMembros(){
         return this.membros;
+    }
+    
+    public int addMembro (Membro mem){
+        for(Membro m: membros){
+            if (m.getNif().equals(mem.getNif()))
+                return -1;
+        }
+            
+        membros.add(mem);
+        return 1;
+           
+    }
+    
+    public int remMembro (Membro mem){
+        for(Membro m: membros){
+            if (m.getNif().equals(mem.getNif())){
+                membros.remove(mem);
+                return 1;
+            }
+        }
+            
+        return -1;
+           
     }
     public boolean Equals(Object o){
         if (this == o)

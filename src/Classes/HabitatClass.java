@@ -19,10 +19,11 @@ private HashMap<Integer,Voluntario> voluntarios;
 private HashMap<Integer,Funcionario> funcionarios;
 private static HashMap<Integer,Candidatura> candidaturas;
 private HashMap<Integer,Equipa> equipas;
-private HashMap<Integer,Familia>familias;
+private HashMap<String,Familia>familias;
 private HashMap<Integer,Donativo> donativos;
 private HashMap<Integer,Doador> doadores;
 private HashMap<Integer,Evento> eventos;
+private HashMap<Integer,Material> materiais;
 private Funcionario utilizadorLigado;
 
 
@@ -32,14 +33,15 @@ this.voluntarios = new HashMap <Integer,Voluntario> () ;
 this.funcionarios= new HashMap <Integer,Funcionario> () ;
 this.candidaturas= new HashMap <Integer,Candidatura> () ;
 this.equipas= new HashMap <Integer,Equipa> () ;
-this.familias= new HashMap <Integer,Familia> () ;
+this.familias= new HashMap <String,Familia> () ;
 this.donativos= new HashMap <Integer,Donativo> () ;
 this.doadores= new HashMap <Integer,Doador> () ;
 this.eventos= new HashMap <Integer,Evento> () ;
+this.materiais = new HashMap<Integer,Material>();
 this.utilizadorLigado = new Funcionario();
 }
 
-public HabitatClass (HashMap<Integer,Projeto> p ,HashMap<Integer,Voluntario> v, HashMap<Integer,Funcionario> f, HashMap<Integer,Candidatura> c, HashMap<Integer,Equipa> e, HashMap<Integer,Familia> fam, HashMap<Integer,Donativo> dona, HashMap<Integer,Doador> doa, HashMap<Integer,Evento> event, Funcionario fun ) {
+public HabitatClass (HashMap<Integer,Projeto> p ,HashMap<Integer,Voluntario> v, HashMap<Integer,Funcionario> f, HashMap<Integer,Candidatura> c, HashMap<Integer,Equipa> e, HashMap<String,Familia> fam, HashMap<Integer,Donativo> dona, HashMap<Integer,Doador> doa, HashMap<Integer,Evento> event, HashMap<Integer,Material> mat,Funcionario fun ) {
 for(Integer i :p.keySet()){
     projetos.put(i,p.get(i).clone());
 }
@@ -56,7 +58,7 @@ for(Integer i :e.keySet()){
     equipas.put(i,e.get(i).clone());
 }
 
-for(Integer i :fam.keySet()){
+for(String i :fam.keySet()){
     familias.put(i,fam.get(i).clone());
 }
 for(Integer i :dona.keySet()){
@@ -64,6 +66,10 @@ for(Integer i :dona.keySet()){
 }
 for(Integer i :doa.keySet()){
     doadores.put(i,doa.get(i).clone());
+}
+
+for(Integer i : mat.keySet()){
+    materiais.put(i,mat.get(i).clone());
 }
 
 for(Integer i :event.keySet()){
@@ -83,11 +89,17 @@ this.familias=h.getFamilias();
 this.donativos=h.getDonativos();
 this.doadores=h.getDoadores();
 this.eventos=h.getEventos();
+this.materiais = h.getMateriais();
 this.utilizadorLigado = h.getUtilizadorLigado();
 }
 
 public Funcionario getUtilizadorLigado(){
     return this.utilizadorLigado;
+}
+
+public HashMap<Integer,Material> getMateriais(){
+
+    return this.materiais;
 }
 
 public HashMap<Integer,Projeto> getProjetos(){
@@ -110,7 +122,7 @@ public HashMap<Integer,Equipa> getEquipas () {
     return this.equipas;
 }
 
-public HashMap<Integer,Familia> getFamilias () {
+public HashMap<String,Familia> getFamilias () {
     return this.familias;
 }
 
@@ -124,6 +136,12 @@ public HashMap<Integer,Doador> getDoadores () {
 
 public HashMap<Integer,Evento> getEventos () {
     return this.eventos;
+}
+
+public void setMateriais(HashMap<Integer,Material> mat){
+    for(Integer i : mat.keySet()){
+        materiais.put(i,mat.get(i).clone());
+    }
 }
 
 public void setUtilizadorLigado(Funcionario f){
@@ -159,8 +177,8 @@ public void setEquipas(HashMap<Integer,Equipa> eqp) {
     }
 }
 
-public void setFamilias(HashMap<Integer,Familia> fams) {
-    for (Integer i:fams.keySet()){
+public void setFamilias(HashMap<String,Familia> fams) {
+    for (String i:fams.keySet()){
         familias.put(i, fams.get(i).clone());
     }
 }
@@ -286,18 +304,18 @@ public int remEquipa (Equipa e) {
     return -1;
 }
 
-public int addFamilia(Familia f, int id) {
-    for (Integer i: familias.keySet()){
+public int addFamilia(Familia f) {
+    for (String i: familias.keySet()){
         if (familias.get(i).equals(f)){
             return -1;
         }
     }
-    familias.put(id,f.clone());
+    familias.put(f.getNome(),f.clone());
     return 1;
 }
 
 public int remFamilia(Familia f) {
-    for (Integer i: familias.keySet()){
+    for (String i: familias.keySet()){
         if (familias.get(i).equals(f)){
             familias.remove(i);
             return 1;
@@ -366,6 +384,16 @@ public int remEvento(Evento e) {
     return -1;
 }
 
+public void addMaterial(Material m, int id){
+    for(Integer i : materiais.keySet()){
+        if(materiais.get(i).getId()==id){
+            materiais.get(i).setQuantidade(m.getQuantidade()+materiais.get(i).getQuantidade());
+        }
+    }
+    materiais.put(id,m);
+    
+}
+
 public Funcionario ligaFuncionario(String login, String pass){
     for(Integer i : funcionarios.keySet()){
         if(funcionarios.get(i).getLogin().equals(login)&& funcionarios.get(i).getPassword().equals(pass))
@@ -415,7 +443,7 @@ sb.append("Projetos: \n");
         sb.append("Id: ").append(i).append("Nome da equipa :").append(equipas.get(i).getNome()).append("\n");
     }
     sb.append("Famílias: \n");
-    for (Integer i: familias.keySet()){
+    for (String i: familias.keySet()){
         sb.append("Id: ").append(i).append("Nome da familia :").append(familias.get(i).getNome()).append("\n");
     }
     sb.append("Candidaturas: \n");

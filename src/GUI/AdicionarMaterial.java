@@ -6,6 +6,8 @@
 package GUI;
 
 import Classes.HabitatClass;
+import Classes.Material;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -159,6 +161,11 @@ public class AdicionarMaterial extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String desc = jTextField1.getText();
+        Double quant = Double.parseDouble(jTextField2.getText());
+        Material novo = new Material(desc,quant);
+        habitat.addMaterial(novo,novo.getId());
+        JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

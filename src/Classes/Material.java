@@ -14,54 +14,52 @@ import java.util.HashMap;
  * @author Sandra
  */
 public class Material {
-private HashMap <String,Integer> materiais;
+int id = 0;
+private String desc;
+private double quantidade;
 
-Material() {
-this.materiais= new HashMap <String, Integer> ();
+public Material() {
+    this.desc = "";
+    this.quantidade = 0.0;
+    id = id +1;
 }
 
-Material(HashMap <String, Integer> m) {
-for (String s : m.keySet()){
-    materiais.put(s,m.get(s));
-}
-}
-
-Material (Material m){
-this.materiais=m.getMateriais();
+public Material(String desc, Double quant) {
+    this.desc = desc;
+    this.quantidade = quant;
+    this.id = id+1;
 }
 
-public HashMap <String,Integer> getMateriais(){
-    return this.materiais;
+
+public Material (Material m){
+    this.desc = m.getDescricao();
+    this.quantidade = m.getQuantidade();
+    this.id = m.getId();
 }
 
-public void setMateriais(HashMap <String,Integer> m){
-    this.materiais=m;
+public String getDescricao(){
+    return this.desc;
 }
 
-public int addMaterial (String s, int quant){
-    for (String s1: materiais.keySet()){
-       if (s1.equals(s)){
-           int a=materiais.get(s1);
-           a=a+quant;
-           materiais.replace(s1,a);
-           return 1;
-       } 
-    }
-    materiais.put(s,quant);
-    return 1;
-
+public Double getQuantidade(){
+    return this.quantidade;
 }
 
-public int remMaterial (String s, int quant){
-    for (String s1: materiais.keySet()){
-       if (s1.equals(s)){
-           materiais.remove(s1);
-       } 
-    }
-    
-    return -1;
-
+public int getId(){
+    return this.id;
 }
+
+public void setDesc(String desc){
+    this.desc = desc;
+}
+public void setQuantidade(Double quant){
+    this.quantidade = quant;
+}
+public void setId(int id){
+    this.id = id;
+}
+
+
 
 
 public Material clone() {
@@ -70,9 +68,8 @@ public Material clone() {
 
 public String toString () {
 StringBuilder sb = new StringBuilder();
-    for(String s : materiais.keySet()){
-        sb.append("Nome: ").append(s).append("Quantidade ").append(materiais.get(s)).append ("\n");
-    }
+        sb.append("Descrição: ").append(desc).append("Quantidade :").append(quantidade).append ("\n");
+    
     return sb.toString();
 }
 
@@ -80,7 +77,7 @@ public boolean equals(Object obj) {
     if(this == obj) return true; 
     if((obj == null) || (this.getClass() != obj.getClass())) return false;
     Material t = (Material) obj;
-    return this.materiais.equals(t.getMateriais()) ; 
+    return this.desc.equals(t.getDescricao()) ; 
 }
 
 
