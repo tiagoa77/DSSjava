@@ -5,6 +5,8 @@
  */
 package GUI;
 import Classes.HabitatClass;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  *
@@ -20,10 +22,20 @@ public class Habitat extends javax.swing.JFrame {
      */
     public Habitat(HabitatClass h) {
         initComponents();
-         this.setLocationRelativeTo(null);
-         this.habitat = h;
+        this.setLocationRelativeTo(null);
+        this.habitat = h;
+        DefaultListModel model4 = new DefaultListModel();
         
-        //Ptojetos
+        
+            for(Classes.Voluntario v : habitat.getVoluntarios().values()){
+                model4.addElement(v.getNomeVoluntario());
+            }
+            
+        jList1 = new JList(model4);  
+        
+            
+        
+        //Projetos
         this.jButton20.setVisible(true);
         this.jButton21.setVisible(false);
         this.jButton2.setVisible(false);
@@ -226,6 +238,11 @@ public class Habitat extends javax.swing.JFrame {
         jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBox1.setText("Em curso");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         jCheckBox2.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -1514,6 +1531,10 @@ public class Habitat extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
    
    

@@ -7,6 +7,7 @@ package Classes;
  */
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -416,6 +417,14 @@ public Voluntario getVoluntario(String nome){
             return voluntarios.get(i);
     }
     return null; 
+}
+
+public ArrayList<Voluntario> getVoluntariosEstado(Boolean disp){
+    ArrayList<Voluntario> res = new ArrayList<Voluntario>();
+    for(Voluntario v : this.voluntarios.values())
+        if(v.getDisponibilidade().equals(disp))
+            res.add(v);
+    return res;      
 }
 
 

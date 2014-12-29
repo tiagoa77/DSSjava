@@ -51,7 +51,7 @@ public Voluntario (){
     this.equipa = new Equipa();
     }
 public Voluntario (Voluntario v){
-    this.disponibilidade=v.getDisponibildade();
+    this.disponibilidade=v.getDisponibilidade();
     this.codPostal = v.getcodPostal();
     this.dataNascimento = v.getDataNascimento();
     this.eMail = v.getEmail();
@@ -67,7 +67,7 @@ public Voluntario (Voluntario v){
         return this.equipa;
     }
     
-    public Boolean getDisponibildade(){
+    public Boolean getDisponibilidade(){
          return this.disponibilidade;
     }
         
