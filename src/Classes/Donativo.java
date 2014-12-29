@@ -19,7 +19,7 @@ public class Donativo {
     private String descricao;
     private double quantidade;
     private float valor;
-    //private Map<Integer,Doador> doadores;
+    private int id_doador;
     
     public Donativo(Donativo d){
         this.tipo = d.getTipo();
@@ -27,26 +27,36 @@ public class Donativo {
         this.descricao = d.getDescricao();
         this.valor = d.getValor();
         this.quantidade = d.getQuantidade();
-        //this.doadores = new DoadorDAO(this.id);
+        this.id_doador=d.getId_doador();
     }
-    
+
+
     public Donativo(){
        this.tipo = "";
        this.id = this.id +1;
        this.descricao = "";
        this.valor = 0;
        this.quantidade = 0.00; 
-       //this.doadores = new DoadorDAO(this.id);
+       this.id_doador=0;
     }
     
-    public Donativo(String t, String d, float v, double q){
+    public Donativo(String t, String d, float v, double q,int id_doador){
        this.tipo = t;
        this.id = id+1;
        this.descricao = d;
        this.valor = v;
        this.quantidade = q; 
-       //this.doadores = new DoadorDAO(this.id);
+       this.id_doador=id_doador;
     }
+    
+    public int getId_doador() {
+        return id_doador;
+    }
+
+    public void setId_doador(int id_doador) {
+        this.id_doador = id_doador;
+    }
+    
     
     public void setTipo(String t){
         this.tipo = t;

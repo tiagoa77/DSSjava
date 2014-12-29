@@ -6,6 +6,7 @@
 package ClassesDAO;
 
 import Classes.Donativo;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,9 +19,10 @@ import java.util.Set;
  * @author Tiago
  */
 public class DonativoDAO implements Map<Integer,Donativo> {
+    private int id;
     
-    public DonativoDAO() {
-    
+    public DonativoDAO(int id) {
+        this.id=id;
     }
     
     @Override
@@ -28,7 +30,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
         int res = 0;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM DONATIVO";
+            String sql = "SELECT * FROM DONATIVO where doador="+this.id;
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
@@ -41,44 +43,101 @@ public class DonativoDAO implements Map<Integer,Donativo> {
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean res = false;
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "SELECT * FROM Donativo where doador=" + this.id;
+            ResultSet rs = stm.executeQuery(sql);
+            if(!rs.next())
+                res=true;
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override
     public boolean containsKey(Object key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean res = false;
+        try {
+            int id = (Integer) key;
+            String sql = "SELECT * FROM Doador WHERE doador="+ this.id;
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            res = rs.next();
+            
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
-    @Override
-    public boolean containsValue(Object value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public Donativo get(Object key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Donativo v = null;
+        try {
+            int id = (Integer) key;
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "SELECT * FROM Donativo WHERE doador= "+this.id+" and idDonativo=" +id;
+            ResultSet rs = stm.executeQuery(sql);
+            
+            if(rs.next()) {
+                String Descricao = rs.getString(2);
+                double Quantidade = rs.getInt(3);
+                float Valor = rs.getInt(4);
+                String Tipo = rs.getString(5);
+                int Doador = rs.getInt(6);
+                                
+                v = new Donativo(Tipo,Descricao,Valor,Quantidade,Doador);
+            }            
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return v;
     }
 
     @Override
     public Donativo put(Integer key, Donativo value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Donativo d = null;
+        PreparedStatement pst = null;
+        
+        try{
+            int id_donativo=0;
+            id_donativo=this.size()+1;
+            String sql;
+            sql = "INSERT INTO donativo(idDonativo,Descricao,Quantidade,Valor,Tipo,Doador) VALUES (?,?,?,?,?,?)";
+            pst = ConexaoBD.getConexao().prepareCall(sql);
+            pst.setInt(1,id_donativo);
+            pst.setString(2, value.getDescricao());
+            pst.setDouble(3, value.getQuantidade());
+            pst.setFloat(4, value.getValor());
+            pst.setString(5, value.getTipo());
+            pst.setInt(6, value.getId_doador());
+            pst.execute();
+            
+        }catch(SQLException e){ }
+        d=value;
+        return d;       
     }
 
     @Override
     public Donativo remove(Object key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Donativo don = null;
+        try {
+            int id = (Integer) key;
+            String sql = "delete from donativo where idDonativo="+id+" and Doador= "+this.id;
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return don;
     }
 
-    @Override
-    public void putAll(Map<? extends Integer, ? extends Donativo> m) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public Set<Integer> keySet() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -94,4 +153,19 @@ public class DonativoDAO implements Map<Integer,Donativo> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
+    public boolean containsValue(Object value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public void putAll(Map<? extends Integer, ? extends Donativo> m) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void clear() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

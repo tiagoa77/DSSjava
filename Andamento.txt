@@ -1,0 +1,16 @@
+------------Coisas feitas--------------
+
+Classes:
+- Doador
+- Donativo
+- 
+
+ClassesDAO:
+- ConexaoBD --> acho que funciona em sql server
+- DoadorDAO
+- DonativoDAO
+- 
+
+
+GUI:
+- 

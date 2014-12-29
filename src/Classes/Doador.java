@@ -1,5 +1,8 @@
 package Classes;
 
+import ClassesDAO.DonativoDAO;
+import java.util.Map;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,6 +19,7 @@ public class Doador {
     private String nome;
     private String nif;
     private String bi;
+    private Map<Integer,Donativo> doadores;
     
     public Doador(Doador d){
         this.id = d.getId();
@@ -23,6 +27,7 @@ public class Doador {
         this.nome = d.getNome();
         this.nif= d.getNif();
         this.bi = d.getBi();
+        this.doadores=new DonativoDAO(this.id);
     }
     public Doador(){
         this.id = this.id +1;
