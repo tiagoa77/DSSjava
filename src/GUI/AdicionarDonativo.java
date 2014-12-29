@@ -239,7 +239,7 @@ public class AdicionarDonativo extends javax.swing.JFrame {
         String quantidade = jTextField2.getText();
         String valor = jTextField3.getText();
         String desc = jTextField1.getText();
-        Donativo novo = new Donativo(tipo,desc,Float.parseFloat(valor),Double.parseDouble(quantidade),doador);
+        Donativo novo = new Donativo(tipo,desc,Float.parseFloat(valor),Double.parseDouble(quantidade));
         
             if(habitat.addDonativo(novo,novo.getId())==1){
                  JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
