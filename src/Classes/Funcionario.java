@@ -16,7 +16,7 @@ import java.util.Map;
 public class Funcionario {
     private int id = 0;
     private String nome;
-    private String dataNascimento;
+    //private String dataNascimento;
     private String telemovel;
     private String localidade;
     private String codPostal;
@@ -24,11 +24,11 @@ public class Funcionario {
     private String login;
     private String password;
     private String rua;
-    private int id_funcionario;
+    private int id_evento;
     
     Funcionario(Funcionario f){
         this.codPostal = f.getcodPostal();
-        this.dataNascimento = f.getDataNascimento();
+        //this.dataNascimento = f.getDataNascimento();
         this.eMail = f.getEmail();
         this.id = f. getId();
         this.localidade = f.getLocalidade();
@@ -37,12 +37,12 @@ public class Funcionario {
         this.password =f.getPassword();
         this.rua = f.getRua();
         this.telemovel = f.getTelemovel();
-        this.id_funcionario=f.getId_funcionario();
+        this.id_evento=f.getId_evento();
     }
     
-    Funcionario(String c,String d,String e, int i,String l,String lg, String n, String p, String r, String t, int id){
+    Funcionario(String c,String e, int i,String l,String lg, String n, String p, String r, String t, int id){
         this.codPostal = c;
-        this.dataNascimento = d;
+        //this.dataNascimento = d;
         this.eMail = e;
         this.id = i;
         this.localidade = l;
@@ -51,12 +51,12 @@ public class Funcionario {
         this.password =p;
         this.rua = r;
         this.telemovel = t;
-        this.id_funcionario=id;
+        this.id_evento=id;
     }
     
     Funcionario(){
         this.codPostal = "";
-        this.dataNascimento = "";
+        //this.dataNascimento = "";
         this.eMail = "";
         this.id = this.id + 1;
         this.localidade = "";
@@ -65,19 +65,17 @@ public class Funcionario {
         this.password ="";
         this.rua = "";
         this.telemovel = "";
-        this.id_funcionario=0;
+        this.id_evento=0;
     }
 
-    public int getId_funcionario() {
-        return id_funcionario;
+    public int getId_evento() {
+        return id_evento;
     }
         
     public void setCodPostal(String c){
         this.codPostal = c;
     }
-    public void setDataNascimento(String d){
-        this.dataNascimento = d;
-    }
+    
     public void setEmail(String e){
         this.eMail = e;
     }
@@ -126,12 +124,17 @@ public class Funcionario {
     public String getTelemovel(){
         return this.telemovel;
     }
-    public String getDataNascimento(){
-        return this.dataNascimento;
-    }
+    
     public int getId(){
         return this.id;
     }
+
+    public void setId_evento(int id_evento) {
+        this.id_evento = id_evento;
+    }
+    
+    
+    
     /*
     Método para aceitar uma candidatura passada como argumento
     */
@@ -158,7 +161,7 @@ public class Funcionario {
         if ((o!=null) || (o.getClass()!=this.getClass()))
             return false;
         Funcionario f = (Funcionario) o;
-        return this.nome.equals(f.getNome())&&this.id==f.getId()&&this.dataNascimento.equals(f.getDataNascimento());
+        return this.nome.equals(f.getNome())&&this.id==f.getId();//&&this.dataNascimento.equals(f.getDataNascimento()*/)
     }
     
     public Funcionario clone() { 
@@ -168,7 +171,7 @@ public class Funcionario {
         StringBuilder s = new StringBuilder("------ Funcionário ---------\n");
         s.append("Id: ").append(id).append("\n");
         s.append("Nome: ").append(nome).append("\n");
-        s.append("Data de Nascimento: ").append(dataNascimento).append("\n");
+        //s.append("Data de Nascimento: ").append(dataNascimento).append("\n");
         s.append("Telemovel: ").append(telemovel).append("\n");
         s.append("Email: ").append(eMail).append("\n");
         s.append("Localidade: ").append(localidade).append("\n");
