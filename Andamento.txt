@@ -3,13 +3,16 @@
 Classes:
 - Doador
 - Donativo
-- 
+- Material
+- Evento
 
 ClassesDAO:
 - ConexaoBD --> acho que funciona em sql server
 - DoadorDAO
 - DonativoDAO
-- 
+- MaterialDAO
+- EventoDAO
+
 
 
 GUI:

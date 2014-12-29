@@ -388,7 +388,7 @@ public int remEvento(Evento e) {
 public void addMaterial(Material m, int id){
     for(Integer i : materiais.keySet()){
         if(materiais.get(i).getId()==id){
-            materiais.get(i).setQuantidade(m.getQuantidade()+materiais.get(i).getQuantidade());
+            materiais.get(i).setStock(m.getStock()+materiais.get(i).getStock());
         }
     }
     materiais.put(id,m);

@@ -1,7 +1,10 @@
 package Classes;
 
 
+import ClassesDAO.FuncionarioDAO;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Map;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,33 +18,50 @@ import java.util.GregorianCalendar;
  */
 public class Evento {
     private int id = 0;
-    String data;
+    Date data;
     String local;
     String descricao;
+    private int id_evento;
+    private Map<Integer,Funcionario> funcionarios;
+    
     
     public Evento(Evento e){
         this.data = e.getData();
         this.descricao=e.getDescricao();
         this.id=e.getId();
         this.local=e.getLocal();
+        this.id_evento=e.getId_evento();
+        this.funcionarios=new FuncionarioDAO(this.id);
     }
     public Evento(){
-        this.data = "";
+        this.data = new Date();
         this.descricao="";
         this.id=this.id+1;
         this.local="";
+        this.id_evento=0;
+        this.funcionarios=new FuncionarioDAO(this.id);
     }
-    public Evento(String d, String l, String de){
+    public Evento(Date d, String l, String de,int id_evento){
         this.data = d;
         this.descricao=de;
         this.id=id+1;
         this.local=l;
+        this.id_evento=id_evento;
+        this.funcionarios=new FuncionarioDAO(this.id);
+    }
+
+    public int getId_evento() {
+        return id_evento;
+    }
+
+    public void setId_evento(int id_evento) {
+        this.id_evento = id_evento;
     }
     
     public void setId(int id){
         this.id = id;
     }
-    public void setData(String d){
+    public void setData(Date d){
         this.data = d;
     }
     public void setLocal(String l){
@@ -59,7 +79,7 @@ public class Evento {
     public String getDescricao(){
         return this.descricao;
     }
-    public String getData(){
+    public Date getData(){
         return this.data;
     }
     

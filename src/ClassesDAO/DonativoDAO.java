@@ -11,8 +11,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
@@ -61,7 +63,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
         boolean res = false;
         try {
             int id = (Integer) key;
-            String sql = "SELECT * FROM Doador WHERE doador="+ this.id;
+            String sql = "SELECT * FROM Donativo WHERE doador="+ this.id;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -71,8 +73,6 @@ public class DonativoDAO implements Map<Integer,Donativo> {
         }
         return res;
     }
-
-    
 
     @Override
     public Donativo get(Object key) {
@@ -140,12 +140,36 @@ public class DonativoDAO implements Map<Integer,Donativo> {
     
     @Override
     public Set<Integer> keySet() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Integer> res = new TreeSet<>();
+        try {
+            String sql = "SELECT idDonativo from donativo";
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next())
+                res.add(rs.getInt(1));
+            
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override
     public Collection<Donativo> values() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Collection<Donativo> res = new HashSet<>();
+        try {
+            String sql = "SELECT idDonativo,Tipo FROM Donativo";
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next())
+                res.add(this.get(rs.getString(2)));
+            
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override

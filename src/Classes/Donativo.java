@@ -1,6 +1,8 @@
 package Classes;
 
 import ClassesDAO.DoadorDAO;
+import ClassesDAO.EventoDAO;
+import ClassesDAO.MaterialDAO;
 import java.util.Map;
 
 /*
@@ -20,6 +22,9 @@ public class Donativo {
     private double quantidade;
     private float valor;
     private int id_doador;
+    private Map<Integer,Material> materiais;
+    private Map<Integer,Evento> eventos;
+    
     
     public Donativo(Donativo d){
         this.tipo = d.getTipo();
@@ -28,6 +33,8 @@ public class Donativo {
         this.valor = d.getValor();
         this.quantidade = d.getQuantidade();
         this.id_doador=d.getId_doador();
+        this.materiais= new MaterialDAO(this.id,this.id); //verifar o construtor
+        this.eventos=new EventoDAO(this.id);
     }
 
 
@@ -38,6 +45,8 @@ public class Donativo {
        this.valor = 0;
        this.quantidade = 0.00; 
        this.id_doador=0;
+       this.materiais= new MaterialDAO(this.id,this.id);//verifar o construtor
+       this.eventos=new EventoDAO(this.id);
     }
     
     public Donativo(String t, String d, float v, double q,int id_doador){
@@ -47,6 +56,8 @@ public class Donativo {
        this.valor = v;
        this.quantidade = q; 
        this.id_doador=id_doador;
+       this.materiais= new MaterialDAO(this.id,this.id);//verifar o construtor
+       this.eventos=new EventoDAO(this.id);
     }
     
     public int getId_doador() {

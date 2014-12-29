@@ -1,7 +1,7 @@
 package Classes;
 
-
 import java.util.GregorianCalendar;
+import java.util.Map;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,6 +24,7 @@ public class Funcionario {
     private String login;
     private String password;
     private String rua;
+    private int id_funcionario;
     
     Funcionario(Funcionario f){
         this.codPostal = f.getcodPostal();
@@ -36,9 +37,10 @@ public class Funcionario {
         this.password =f.getPassword();
         this.rua = f.getRua();
         this.telemovel = f.getTelemovel();
+        this.id_funcionario=f.getId_funcionario();
     }
     
-    Funcionario(String c,String d,String e, int i,String l,String lg, String n, String p, String r, String t){
+    Funcionario(String c,String d,String e, int i,String l,String lg, String n, String p, String r, String t, int id){
         this.codPostal = c;
         this.dataNascimento = d;
         this.eMail = e;
@@ -49,6 +51,7 @@ public class Funcionario {
         this.password =p;
         this.rua = r;
         this.telemovel = t;
+        this.id_funcionario=id;
     }
     
     Funcionario(){
@@ -62,8 +65,13 @@ public class Funcionario {
         this.password ="";
         this.rua = "";
         this.telemovel = "";
+        this.id_funcionario=0;
     }
-    
+
+    public int getId_funcionario() {
+        return id_funcionario;
+    }
+        
     public void setCodPostal(String c){
         this.codPostal = c;
     }

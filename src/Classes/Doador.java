@@ -19,7 +19,7 @@ public class Doador {
     private String nome;
     private String nif;
     private String bi;
-    private Map<Integer,Donativo> doadores;
+    private Map<Integer,Donativo> donativos;
     
     public Doador(Doador d){
         this.id = d.getId();
@@ -27,7 +27,7 @@ public class Doador {
         this.nome = d.getNome();
         this.nif= d.getNif();
         this.bi = d.getBi();
-        this.doadores=new DonativoDAO(this.id);
+        this.donativos=new DonativoDAO(this.id);
     }
     public Doador(){
         this.id = this.id +1;
@@ -35,6 +35,7 @@ public class Doador {
         this.nome = "";
         this.nif= "";
         this.bi = "";
+        this.donativos=new DonativoDAO(this.id);
     }
     public Doador(String t, String n, String nif, String b){
         this.id = this.id +1;
@@ -42,6 +43,7 @@ public class Doador {
         this.nome = n;
         this.nif= nif;
         this.bi = b;
+        this.donativos=new DonativoDAO(this.id);
     }
     
     public void setId(int i){

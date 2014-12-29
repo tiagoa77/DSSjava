@@ -8,6 +8,7 @@ package Classes;
 
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -16,33 +17,57 @@ import java.util.HashMap;
 public class Material {
 int id = 0;
 private String desc;
-private double quantidade;
+private double stock;
+private int id_projecto;
+private int id_donativo;
+
+
 
 public Material() {
     this.desc = "";
-    this.quantidade = 0.0;
-    id = id +1;
+    this.stock = 0.0;
+    this.id = id +1;
+    this.id_projecto=0;
+    this.id_donativo=0;
 }
 
-public Material(String desc, Double quant) {
+public Material(String desc, Double quant,int id_donativo,int id_projecto) {
     this.desc = desc;
-    this.quantidade = quant;
+    this.stock = quant;
     this.id = id+1;
+    this.id_donativo=id_donativo;
+    this.id_projecto=id_projecto;
 }
 
 
 public Material (Material m){
     this.desc = m.getDescricao();
-    this.quantidade = m.getQuantidade();
+    this.stock = m.getStock();
     this.id = m.getId();
+    this.id_donativo=m.getId_donativo();
+    this.id_projecto=m.getId_projecto();
 }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public double getStock() {
+        return stock;
+    }
+
+    public int getId_projecto() {
+        return id_projecto;
+    }
+
+    public int getId_donativo() {
+        return id_donativo;
+    }
+
+
 
 public String getDescricao(){
     return this.desc;
-}
-
-public Double getQuantidade(){
-    return this.quantidade;
 }
 
 public int getId(){
@@ -52,8 +77,8 @@ public int getId(){
 public void setDesc(String desc){
     this.desc = desc;
 }
-public void setQuantidade(Double quant){
-    this.quantidade = quant;
+public void setStock(Double quant){
+    this.stock = quant;
 }
 public void setId(int id){
     this.id = id;
@@ -68,7 +93,7 @@ public Material clone() {
 
 public String toString () {
 StringBuilder sb = new StringBuilder();
-        sb.append("Descrição: ").append(desc).append("Quantidade :").append(quantidade).append ("\n");
+        sb.append("Descrição: ").append(desc).append("Stock :").append(stock).append ("\n");
     
     return sb.toString();
 }
