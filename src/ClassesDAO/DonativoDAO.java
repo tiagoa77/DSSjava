@@ -22,6 +22,10 @@ import java.util.TreeSet;
  */
 public class DonativoDAO implements Map<Integer,Donativo> {
     private int id;
+
+    public DonativoDAO() {
+    }
+    
     
     public DonativoDAO(int id) {
         this.id=id;

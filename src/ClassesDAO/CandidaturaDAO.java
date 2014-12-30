@@ -23,7 +23,10 @@ import java.util.TreeSet;
 public class CandidaturaDAO implements Map<Integer,Candidatura>{
     private int idfamilia;
     private int idprojecto;
-
+    
+    public CandidaturaDAO() {
+    }   
+    
     public CandidaturaDAO(int idfamilia, int idprojecto) {
         this.idfamilia = idfamilia;
         this.idprojecto = idprojecto;

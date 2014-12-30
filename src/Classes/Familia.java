@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * @author Patrícia
  */
 public class Familia {
+    private int idFamilia;
     private String nome;
     private ArrayList<Membro> membros;
     private Membro representante;
@@ -23,6 +24,7 @@ public class Familia {
    
     
     public Familia(Familia f){
+        this.idFamilia=f.getIdFamilia();
         this.nome = f.getNome();
         this.membros = f.getMembros();
         this.representante = f.getRepresentante();
@@ -31,6 +33,7 @@ public class Familia {
         this.rua = f.getRua();
     }
     public Familia(){
+        this.idFamilia=0;
         this.nome = "";
         this.membros = new ArrayList<Membro>();
         this.representante = new Membro();
@@ -38,7 +41,8 @@ public class Familia {
         this.localidade = "";
         this.rua = "";
     }
-    public Familia(String n, ArrayList<Membro> ms, Membro m, String c, String l, String r){
+    public Familia(int id, String n, ArrayList<Membro> ms, Membro m, String c, String l, String r){
+        this.idFamilia=id;
         this.nome = n;
         this.membros = ms;
         this.representante = m;
@@ -50,6 +54,14 @@ public class Familia {
         this.codPostal = c;
     }
 
+    public int getIdFamilia() {
+        return idFamilia;
+    }
+
+    public void setIdFamilia(int idFamilia) {
+        this.idFamilia = idFamilia;
+    }
+    
     public void setLocalidade(String l){
         this.localidade = l;
     }

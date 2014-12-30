@@ -11,18 +11,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 /**
- * sql server
+ * mysql server
  * @author Tiago
  */
 public class ConexaoBD {
-    public static final String url = "jdbc:sqlserver://diguest-pc:3306;" + "databaseName=MySQL56;user=tiago;password=tiago;";;
-	
+    public static final String url = "jdbc:mysql://diguest-pc/MySQL?" + "user=tiago&password=tiago" ;
+    public static final String userName="tiago";
+    public static final String password="tiago";
     public static Connection conexao;
 	
     public static void iniciarConexao() {
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexao = DriverManager.getConnection(url);
             conexao.setAutoCommit(true);
 	} catch (Exception e) {

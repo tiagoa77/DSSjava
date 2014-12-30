@@ -24,6 +24,11 @@ import java.util.TreeSet;
  */
 public class EventoDAO implements Map<Integer,Evento> {
     private int id;
+
+    public EventoDAO() {
+    }
+    
+    
     public EventoDAO(int id){
         this.id=id;
     }
@@ -114,7 +119,7 @@ public class EventoDAO implements Map<Integer,Evento> {
             pst.setString(2, value.getDescricao());
             pst.setString(3, value.getLocal());
             pst.setDate(4, (java.sql.Date) value.getData()); //Verificar
-            pst.setInt(5, value.getId_evento());
+            pst.setInt(5, value.getId_donativo());
             pst.execute();
             
         }catch(SQLException e){ }

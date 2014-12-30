@@ -23,6 +23,10 @@ import java.util.TreeSet;
  */
 public class FuncionarioDAO implements Map<Integer,Funcionario>{
     private int id;
+
+    public FuncionarioDAO() {
+    }
+    
     public FuncionarioDAO(int id) {
         this.id=id;
     }
@@ -57,13 +61,13 @@ public class FuncionarioDAO implements Map<Integer,Funcionario>{
         }
         return res;
     }
-
+/*
     @Override
     public boolean containsKey(Object key) {
         boolean res = false;
         try {
             int id = (Integer) key;
-            String sql = "SELECT * FROM Funcionario WHERE Evento="+ this.id;
+            String sql = "SELECT * FROM Funcionario";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -73,7 +77,21 @@ public class FuncionarioDAO implements Map<Integer,Funcionario>{
         }
         return res;
     }
-
+*/
+    public boolean containsKey(Object key) {
+        boolean res = false;
+        try {
+            String login = (String) key;
+            String sql = "SELECT * FROM Funcionario where Login='"+login+"'";
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            res = rs.next();
+            
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
+    }
    
 
     @Override
@@ -82,7 +100,7 @@ public class FuncionarioDAO implements Map<Integer,Funcionario>{
         try {
             int id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Funcionario WHERE Evento= "+this.id+" and idFuncionario=" +id;
+            String sql = "SELECT * FROM Funcionario WHERE idFuncionario=" +id;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {

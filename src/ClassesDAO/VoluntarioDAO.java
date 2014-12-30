@@ -24,6 +24,9 @@ import java.util.TreeSet;
 public class VoluntarioDAO implements Map<Integer,Voluntario>{
     private int id;
 
+    public VoluntarioDAO() {
+    }
+    
     public VoluntarioDAO(int id) {
         this.id = id;
     }

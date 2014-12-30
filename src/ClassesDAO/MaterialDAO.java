@@ -24,6 +24,9 @@ import java.util.TreeSet;
 public class MaterialDAO implements Map<Integer, Material>{
     private int idprojecto;
     private int iddonativo;
+
+    public MaterialDAO() {
+    }
     
     public MaterialDAO(int iddonativo,int idprojecto){
         this.iddonativo=iddonativo;
