@@ -5,6 +5,10 @@ Classes:
 - Donativo
 - Material
 - Evento
+- Funcionario
+- Equipa
+- Candidatura
+- Voluntario
 
 ClassesDAO:
 - ConexaoBD --> acho que funciona em sql server
@@ -12,7 +16,10 @@ ClassesDAO:
 - DonativoDAO
 - MaterialDAO
 - EventoDAO
-
+- FuncionarioDAO
+- EquipaDAO
+- CandidaturaDAO
+- VoluntarioDAO
 
 
 GUI:
