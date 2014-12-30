@@ -24,6 +24,11 @@ public class Inicio extends javax.swing.JFrame {
         this.habitat = new HabitatClass();
     }
 
+    public HabitatClass getHabitat() {
+        return this.habitat;
+    }
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

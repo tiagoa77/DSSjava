@@ -21,7 +21,7 @@ public class Evento {
     Date data;
     String local;
     String descricao;
-    private int id_evento;
+    private int id_donativo;
     private Map<Integer,Funcionario> funcionarios;
     
     
@@ -30,7 +30,7 @@ public class Evento {
         this.descricao=e.getDescricao();
         this.id=e.getId();
         this.local=e.getLocal();
-        this.id_evento=e.getId_evento();
+        this.id_donativo=e.getId_donativo();
         this.funcionarios=new FuncionarioDAO(this.id);
     }
     public Evento(){
@@ -38,24 +38,24 @@ public class Evento {
         this.descricao="";
         this.id=this.id+1;
         this.local="";
-        this.id_evento=0;
+        this.id_donativo=0;
         this.funcionarios=new FuncionarioDAO(this.id);
     }
-    public Evento(Date d, String l, String de,int id_evento){
+    public Evento(Date d, String l, String de,int id_donativo){
         this.data = d;
         this.descricao=de;
         this.id=id+1;
         this.local=l;
-        this.id_evento=id_evento;
+        this.id_donativo=id_donativo;
         this.funcionarios=new FuncionarioDAO(this.id);
     }
 
-    public int getId_evento() {
-        return id_evento;
+    public int getId_donativo() {
+        return id_donativo;
     }
 
-    public void setId_evento(int id_evento) {
-        this.id_evento = id_evento;
+    public void setId_donativo(int id_donativo) {
+        this.id_donativo = id_donativo;
     }
     
     public void setId(int id){

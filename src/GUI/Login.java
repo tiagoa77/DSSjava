@@ -128,12 +128,13 @@ public class Login extends javax.swing.JFrame {
 
     private void IniciarSessaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarSessaoActionPerformed
         // TODO add your handling code here:
-        String login = User.getText();
-        String pass = Password.getText();
-        Funcionario ligado = habitat.ligaFuncionario(login,pass);
         
-        if(ligado!=null){
-            JOptionPane.showMessageDialog(null, "Bem vindo " + ligado.getNome() + " !");
+        String login = User.getText();
+        String pass = Password.getPassword().toString();
+        Boolean ligado = habitat.ligaFuncionario(login,pass);
+        
+        if(!ligado){
+            JOptionPane.showMessageDialog(null, "Bem vindo ");
             new Habitat(habitat).setVisible(true);
             this.setVisible(false);
         }
