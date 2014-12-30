@@ -1,11 +1,7 @@
 package Classes;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+import ClassesDAO.EquipaDAO;
+import java.util.Date;
 
 
 /**
@@ -16,62 +12,70 @@ public class Voluntario {
 private String nome;
 private int id;
 private boolean disponibilidade = true;
-private String dataNascimento;
+private Date dataNascimento;
 private String telemovel;
 private String localidade;
 private String codPostal;
+private String profissao;
 private String eMail;
 private String rua;   
-private Equipa equipa;
+private int id_equipa;
 
-public Voluntario (String c,String d,String e,String l,String n, String r, String t, Equipa eq){
+public Voluntario (String c,Date d,String e,String p,String l,
+        String n, String r, String t, int id_equipa){
     this.codPostal = c;
     this.dataNascimento = d;
     this.eMail = e;
+    this.profissao=p;
     this.localidade = l;
     this.nome = n;
     this.rua = r;
     this.telemovel = t;
     this.id = this.id+1;
     this.disponibilidade = true;
-    this.equipa = eq;
     
     }
     
 public Voluntario (){
     this.disponibilidade=true;
     this.codPostal = "";
-    this.dataNascimento = "";
+    this.dataNascimento = new Date();
+    this.profissao="";
     this.eMail = "";
     this.id = this.id + 1;
     this.localidade = "";
     this.nome = "";
     this.rua = "";
     this.telemovel = "";
-    this.equipa = new Equipa();
+    this.id_equipa=0;
     }
 public Voluntario (Voluntario v){
     this.disponibilidade=v.getDisponibilidade();
-    this.codPostal = v.getcodPostal();
+    this.codPostal = v.getCodPostal();
     this.dataNascimento = v.getDataNascimento();
+    this.profissao=v.getProfissao();
     this.eMail = v.getEmail();
     this.id = v. getId();
     this.localidade = v.getLocalidade();
     this.nome = v.getNomeVoluntario();
     this.rua = v.getRua();
     this.telemovel = v.getTelemovel();
-    this.equipa = v.getEquipa();
+    this.id_equipa=v.getId_equipa();
     }
-    
-    public Equipa getEquipa(){
-        return this.equipa;
+
+    public String getProfissao() {
+        return profissao;
+    }
+
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
     }
     
     public Boolean getDisponibilidade(){
          return this.disponibilidade;
     }
         
-    public String getcodPostal(){
+    public String getCodPostal(){
         return this.codPostal;
     }
     public String getEmail(){
@@ -85,30 +89,34 @@ public Voluntario (Voluntario v){
         return this.nome;
     }
 
+    public int getId_equipa() {
+        return id_equipa;
+    }
+    
     public String getRua(){
         return this.rua;
     }
     public String getTelemovel(){
         return this.telemovel;
     }
-    public String getDataNascimento(){
+    public Date getDataNascimento(){
         return this.dataNascimento;
     }
     public int getId(){
         return this.id;
     }
-    
-    public void setEquipa(Equipa e){
-        this.equipa = e;
+
+    public void setId_equipa(int id_equipa) {
+        this.id_equipa = id_equipa;
     }
-    
+        
     public void setDisponilididade (Boolean b){
         this.disponibilidade=b;
     }
     public void setCodPostal(String c){
         this.codPostal = c;
     }
-    public void setDataNascimento(String d){
+    public void setDataNascimento(Date d){
         this.dataNascimento = d;
     }
     public void setEmail(String e){
@@ -154,7 +162,6 @@ public Voluntario (Voluntario v){
         s.append("Id: ").append(id).append("\n");
         s.append("Disponibilidade:").append(disponibilidade).append("/n");
         s.append("Nome: ").append(nome).append("\n");
-        s.append("Equipa : ").append(equipa.getNome()).append("\n");
         s.append("Data de Nascimento: ").append(dataNascimento).append("\n");
         s.append("Telemovel: ").append(telemovel).append("\n");
         s.append("Email: ").append(eMail).append("\n");

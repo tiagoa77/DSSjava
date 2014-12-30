@@ -159,7 +159,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
     public Collection<Donativo> values() {
         Collection<Donativo> res = new HashSet<>();
         try {
-            String sql = "SELECT idDonativo,Tipo FROM Donativo";
+            String sql = "SELECT idDonativo FROM Donativo";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
