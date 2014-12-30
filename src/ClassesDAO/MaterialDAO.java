@@ -128,7 +128,7 @@ public class MaterialDAO implements Map<Integer, Material>{
         Material m = null;
         try {
             int id = (Integer) key;
-            String sql = "delete from Material where idMaterial="+id+" and = "+this.iddonativo+" and projecto="+this.idprojecto;
+            String sql = "delete from Material where idMaterial="+id+" and Donativo= "+this.iddonativo+" and projecto="+this.idprojecto;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
@@ -142,7 +142,7 @@ public class MaterialDAO implements Map<Integer, Material>{
     public Set<Integer> keySet() {
         Set<Integer> res = new TreeSet<>();
         try {
-            String sql = "SELECT idMaterial from material";
+            String sql = "SELECT idMaterial from Material";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
