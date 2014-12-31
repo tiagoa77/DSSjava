@@ -131,7 +131,7 @@ public class Login extends javax.swing.JFrame {
         
         String login = User.getText();
         String pass = Password.getText();
-        System.out.println(pass);
+        //System.out.println(pass);
         Boolean ligado = habitat.ligaFuncionario(login,pass);
         
         if(ligado){
