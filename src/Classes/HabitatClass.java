@@ -28,12 +28,12 @@ public class HabitatClass {
     private Map<Integer, Voluntario> voluntarios;
     private Map<Integer, Funcionario> funcionarios;
     private Map<Integer, Candidatura> candidaturas;
-    private Map<Integer, Equipa> equipas;
-    private Map<Integer, Familia> familias;
-    private Map<Integer, Donativo> donativos;
+    //private Map<Integer, Equipa> equipas;
+    //private Map<Integer, Familia> familias;
+    //private Map<Integer, Donativo> donativos;
     private Map<Integer, Doador> doadores;
-    private Map<Integer, Evento> eventos;
-    private Map<Integer, Material> materiais;
+    //private Map<Integer, Evento> eventos;
+    //private Map<Integer, Material> materiais;
     private Funcionario utilizadorLigado;
 
     public HabitatClass() {
@@ -41,12 +41,12 @@ public class HabitatClass {
         this.voluntarios = new VoluntarioDAO();
         this.funcionarios = new FuncionarioDAO();
         this.candidaturas = new CandidaturaDAO();
-        this.equipas = new EquipaDAO();
-        this.familias = new FamiliaDAO();
-        this.donativos = new DonativoDAO();
+        //this.equipas = new EquipaDAO();
+        //this.familias = new FamiliaDAO();
+        //this.donativos = new DonativoDAO();
         this.doadores = new DoadorDAO();
-        this.eventos = new EventoDAO();
-        this.materiais = new MaterialDAO();
+        //this.eventos = new EventoDAO();
+        //this.materiais = new MaterialDAO();
         this.utilizadorLigado = new Funcionario();
         ConexaoBD.iniciarConexao();
     }
@@ -94,24 +94,24 @@ public class HabitatClass {
         this.voluntarios = h.getVoluntarios();
         this.funcionarios = h.getFuncionarios();
         this.candidaturas = h.getCandidaturas();
-        this.equipas = h.getEquipas();
-        this.familias = h.getFamilias();
-        this.donativos = h.getDonativos();
+        //this.equipas = h.getEquipas();
+        //this.familias = h.getFamilias();
+        //this.donativos = h.getDonativos();
         this.doadores = h.getDoadores();
-        this.eventos = h.getEventos();
-        this.materiais = h.getMateriais();
+        //this.eventos = h.getEventos();
+        //this.materiais = h.getMateriais();
         this.utilizadorLigado = h.getUtilizadorLigado();
     }
 
     public Funcionario getUtilizadorLigado() {
         return this.utilizadorLigado;
     }
-
+/*
     public Map<Integer, Material> getMateriais() {
 
         return this.materiais;
     }
-/*
+
     public Map<Integer, Projeto> getProjetos() {
         return this.projetos;
     }
@@ -127,7 +127,7 @@ public class HabitatClass {
     public Map<Integer, Candidatura> getCandidaturas() {
         return candidaturas;
     }
-
+/*
     public Map<Integer, Equipa> getEquipas() {
         return this.equipas;
     }
@@ -139,21 +139,22 @@ public class HabitatClass {
     public Map<Integer, Donativo> getDonativos() {
         return this.donativos;
     }
-
+*/
     public Map<Integer, Doador> getDoadores() {
         return this.doadores;
     }
-
+/*
     public Map<Integer, Evento> getEventos() {
         return this.eventos;
     }
-
+    */
+/*
     public void setMateriais(Map<Integer, Material> mat) {
         for (Integer i : mat.keySet()) {
             materiais.put(i, mat.get(i).clone());
         }
     }
-
+*/
     public void setUtilizadorLigado(Funcionario f) {
         this.utilizadorLigado = f;
     }
@@ -181,7 +182,7 @@ public class HabitatClass {
             candidaturas.put(i, cand.get(i).clone());
         }
     }
-
+/*
     public void setEquipas(Map<Integer, Equipa> eqp) {
         for (Integer i : eqp.keySet()) {
             equipas.put(i, eqp.get(i).clone());
@@ -199,19 +200,19 @@ public class HabitatClass {
             donativos.put(i, donats.get(i).clone());
         }
     }
-
+*/
     public void setDoadores(Map<Integer, Doador> doadors) {
         for (Integer i : doadors.keySet()) {
             doadores.put(i, doadors.get(i).clone());
         }
     }
-
+/*
     public void setEventos(Map<Integer, Evento> event) {
         for (Integer i : event.keySet()) {
             eventos.put(i, event.get(i).clone());
         }
     }
-/*
+
     public int addProjeto(Projeto p, int id) {
         for (Integer i : projetos.keySet()) {
             if (projetos.get(i).equals(p)) {
@@ -292,7 +293,7 @@ public class HabitatClass {
         }
         return -1;
     }
-
+/*
     public int addEquipa(Equipa e, int id) {
         for (Integer i : equipas.keySet()) {
             if (equipas.get(i).getNome().equals(e.getNome())) {
@@ -352,7 +353,7 @@ public class HabitatClass {
         }
         return -1;
     }
-
+*/
     public int addDoador(Doador d, int id) {
         for (Integer i : doadores.keySet()) {
             if (doadores.get(i).equals(d)) {
@@ -372,7 +373,7 @@ public class HabitatClass {
         }
         return -1;
     }
-
+/*
     public int addEvento(Evento e, int id) {
         for (Integer i : eventos.keySet()) {
             if (eventos.get(i).equals(e)) {
@@ -402,11 +403,15 @@ public class HabitatClass {
         materiais.put(id, m);
 
     }
+    */
     public boolean existeLogin(String login) {
         return (this.funcionarios.containsKey(login));
     }
     
     public boolean validaLogin(String login, String password) {
+        System.out.println("PasswordParametro: "+password);
+        System.out.println("PasswordBD: "+this.funcionarios.size());
+       // System.out.println(this.funcionarios.get(login).getPassword()==password);
         return (existeLogin(login) && this.funcionarios.get(login).getPassword().equals(password));
     }
     public boolean ligaFuncionario(String login, String pass) {
@@ -487,31 +492,33 @@ public class HabitatClass {
         for (Integer i : funcionarios.keySet()) {
             sb.append("Id: ").append(i).append("Nome :").append(funcionarios.get(i).getNome()).append("\n");
         }
-        sb.append("Equipas: \n");
+      /*  sb.append("Equipas: \n");
         for (Integer i : equipas.keySet()) {
             sb.append("Id: ").append(i).append("Nome da equipa :").append(equipas.get(i).getNome()).append("\n");
         }
         sb.append("Famílias: \n");
         for (Integer i : familias.keySet()) {
             sb.append("Id: ").append(i).append("Nome da familia :").append(familias.get(i).getNome()).append("\n");
-        }
+        }*/
         sb.append("Candidaturas: \n");
         for (Integer i : candidaturas.keySet()) {
             sb.append("Id: ").append(i).append("Descricao :").append(candidaturas.get(i).getDescricao()).append("\n");
         }
-        sb.append("Donativos: \n");
+     /*   sb.append("Donativos: \n");
         for (Integer i : donativos.keySet()) {
             sb.append("Id: ").append(i).append("\n");
         }
+             */
         sb.append("Doadores: \n");
         for (Integer i : doadores.keySet()) {
             sb.append("Id: ").append(i).append("Nome :").append(doadores.get(i).getNome()).append("\n");
         }
+        /*
         sb.append("Eventos: \n");
         for (Integer i : eventos.keySet()) {
             sb.append("Id: ").append(i).append("Descrição :").append(eventos.get(i).getDescricao()).append("\n");
         }
-
+*/
         return sb.toString();
     }
 
@@ -523,7 +530,7 @@ public class HabitatClass {
             return false;
         }
         HabitatClass h = (HabitatClass) obj;
-        return (this.voluntarios == h.getVoluntarios() && this.familias.equals(h.getFamilias()) && this.funcionarios.equals(h.getFuncionarios()) && this.candidaturas.equals(h.getCandidaturas()) && this.equipas.equals(h.getEquipas()) && this.donativos.equals(h.getDonativos()) && this.doadores.equals(h.getDoadores()) && this.eventos.equals(h.getEventos()));
+        return (this.voluntarios == h.getVoluntarios() && /*this.familias.equals(h.getFamilias()) &&*/ this.funcionarios.equals(h.getFuncionarios()) && this.candidaturas.equals(h.getCandidaturas()) /*&& this.equipas.equals(h.getEquipas()) && this.donativos.equals(h.getDonativos()) */&& this.doadores.equals(h.getDoadores()) /*&& this.eventos.equals(h.getEventos())*/);
     }
 
 }

@@ -36,7 +36,8 @@ public class FuncionarioDAO implements Map<Integer,Funcionario>{
         int res = 0;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Funcionario where Evento="+this.id;
+            //String sql = "SELECT * FROM Funcionario where Evento="+this.id;
+            String sql = "SELECT * FROM test.Funcionario";
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
@@ -52,7 +53,8 @@ public class FuncionarioDAO implements Map<Integer,Funcionario>{
         boolean res = false;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Funcionario where Evento=" + this.id;
+            //String sql = "SELECT * FROM Funcionario where Evento=" + this.id;
+            String sql = "SELECT * FROM test.Funcionario";
             ResultSet rs = stm.executeQuery(sql);
             if(!rs.next())
                 res=true;
@@ -82,7 +84,7 @@ public class FuncionarioDAO implements Map<Integer,Funcionario>{
         boolean res = false;
         try {
             String login = (String) key;
-            String sql = "SELECT * FROM Funcionario where Login='"+login+"'";
+            String sql = "SELECT * FROM test.Funcionario where Login='"+login+"'";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -98,33 +100,23 @@ public class FuncionarioDAO implements Map<Integer,Funcionario>{
     public Funcionario get(Object key) {
         Funcionario f = null;
         try {
-            int id = (Integer) key;
+            String login = (String) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Funcionario WHERE idFuncionario=" +id;
+            String sql = "SELECT * FROM test.Funcionario WHERE Login='" +login+"'";
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
+                int id = rs.getInt(1);
                 String N = rs.getString(2);
                 String T = rs.getString(3);
                 String E = rs.getString(4);
-                String Lg = rs.getString(5);
                 String P = rs.getString(6);
                 String R = rs.getString(7);
                 String L = rs.getString(8);
                 String C = rs.getString(9);
                 int Evt = rs.getInt(10);
                 
-                f.setNome(N);
-                f.setTelemovel(T);
-                f.setEmail(E);
-                f.setLogin(Lg);
-                f.setPassword(P);
-                f.setRua(R);
-                f.setLocalidade(L);
-                f.setCodPostal(C);
-                f.setId_evento(Evt);
-                f.setId(id);
-                
+                f = new Funcionario(C,E,id,L,login,N,P,R,T,Evt);
             }            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
@@ -141,7 +133,7 @@ public class FuncionarioDAO implements Map<Integer,Funcionario>{
             int id_funcionario=0;
             id_funcionario=this.size()+1;
             String sql;
-            sql = "INSERT INTO evento(idFuncionario,Nome,Telemovel,Email,Login,Password,Rua,Localidade,CodPostal,Evento) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO test.evento(idFuncionario,Nome,Telemovel,Email,Login,Password,Rua,Localidade,CodPostal,Evento) VALUES (?,?,?,?,?,?,?,?,?,?)";
             pst = ConexaoBD.getConexao().prepareCall(sql);
             pst.setInt(1,id_funcionario);
             pst.setString(2, value.getNome());
@@ -166,7 +158,7 @@ public class FuncionarioDAO implements Map<Integer,Funcionario>{
         Funcionario f = null;
         try {
             int id = (Integer) key;
-            String sql = "delete from Funcionario where idFuncionario="+id+" and Evento = "+this.id;
+            String sql = "delete from test.Funcionario where idFuncionario="+id+" and Evento = "+this.id;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             

@@ -29,7 +29,7 @@ public class Funcionario {
     private String rua;
     private int id_evento;
 
-    Funcionario(Funcionario f) {
+    public Funcionario(Funcionario f) {
         this.codPostal = f.getcodPostal();
         //this.dataNascimento = f.getDataNascimento();
         this.eMail = f.getEmail();
@@ -43,7 +43,7 @@ public class Funcionario {
         this.id_evento = f.getId_evento();
     }
 
-    Funcionario(String c, String e, int i, String l, String lg, String n, String p, String r, String t, int id) {
+    public Funcionario(String c, String e, int i, String l, String lg, String n, String p, String r, String t, int id) {
         this.codPostal = c;
         //this.dataNascimento = d;
         this.eMail = e;
@@ -57,7 +57,7 @@ public class Funcionario {
         this.id_evento = id;
     }
 
-    Funcionario() {
+    public Funcionario() {
         this.codPostal = "";
         //this.dataNascimento = "";
         this.eMail = "";

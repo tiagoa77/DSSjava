@@ -130,17 +130,19 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         String login = User.getText();
-        String pass = Password.getPassword().toString();
+        String pass = Password.getText();
+        System.out.println(pass);
         Boolean ligado = habitat.ligaFuncionario(login,pass);
         
-        if(!ligado){
+        if(ligado){
             JOptionPane.showMessageDialog(null, "Bem vindo ");
-            new Habitat(habitat).setVisible(true);
+            new Habitat().setVisible(true);
             this.setVisible(false);
         }
-        else
+        else{
             JOptionPane.showMessageDialog(null, "Dados incorrectos");
-        
+            
+        }
     }//GEN-LAST:event_IniciarSessaoActionPerformed
 
     private void UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserActionPerformed

@@ -20,10 +20,10 @@ public class Habitat extends javax.swing.JFrame {
      * Creates new form Projectos
      * @param h
      */
-    public Habitat(HabitatClass h) {
+    public Habitat() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.habitat = h;
+        this.habitat = new HabitatClass();
         DefaultListModel model4 = new DefaultListModel();
         
         
