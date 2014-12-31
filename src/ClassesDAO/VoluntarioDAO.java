@@ -36,7 +36,8 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
         int res = 0;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Voluntario where Equipa="+this.id;
+            //String sql = "SELECT * FROM test.Voluntario where Equipa="+this.id;
+            String sql = "SELECT * FROM test.Voluntário";
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
@@ -52,7 +53,8 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
         boolean res = false;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Voluntario where Equipa=" + this.id;
+            //String sql = "SELECT * FROM Voluntario where Equipa=" + this.id;
+            String sql = "SELECT * FROM test.Voluntário";
             ResultSet rs = stm.executeQuery(sql);
             if(!rs.next())
                 res=true;
@@ -67,7 +69,7 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
         boolean res = false;
         try {
             int id = (Integer) key;
-            String sql = "SELECT * FROM Voluntario WHERE Equipa="+ this.id;
+            String sql = "SELECT * FROM test.Voluntário WHERE idVoluntário="+ id;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -84,12 +86,14 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
         try {
             int id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Voluntario WHERE Equipa= "+this.id+" and idVoluntario=" +id;
+            //String sql = "SELECT * FROM Voluntário WHERE Equipa= "+this.id+" and idVoluntario=" +id;
+            String sql = "SELECT * FROM test.Voluntário where idVoluntário=" +id;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
+                int i = rs.getInt(1);
                 String Nome = rs.getString(2);
-                boolean Disp = rs.getBoolean(3);
+                int Disp = rs.getInt(3);
                 String Tlm = rs.getString(4);
                 String Prof = rs.getString(5);
                 Date Dtnas = rs.getDate(6);
@@ -99,16 +103,17 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
                 int Equipa = rs.getInt(10);
                 String Email = rs.getString(11);
                                 
-                v = new Voluntario(Cod,Dtnas,Email,Prof,Loc,Nome,Rua,Tlm,Equipa);
+                v = new Voluntario(i,Cod,Dtnas,Email,Prof,Loc,Nome,Rua,Tlm,Equipa);
             }            
             ConexaoBD.fecharCursor(rs, stm);
-        } catch (SQLException e) {
+        } catch (SQLException e) { 
+            System.out.println("-.-");
         }
         return v;
     }
 
     @Override
-    public Voluntario put(Integer key, Voluntario value) {
+    public Voluntario put(Integer id, Voluntario value) {
         Voluntario d = null;
         PreparedStatement pst = null;
         
@@ -116,7 +121,7 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
             int id_voluntario=0;
             id_voluntario=this.size()+1;
             String sql;
-            sql = "INSERT INTO voluntario(idVoluntario,Nome,Diponibilidade,Telemovel,Profissao,DataNascmento,CodPostal,Rua,Localidade,Equipa,Email) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO test.voluntário(idVoluntário,Nome,Diponibilidade,Telemovel,Profissao,DataNascmento,CodPostal,Rua,Localidade,Equipa,Email) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             pst = ConexaoBD.getConexao().prepareCall(sql);
             pst.setInt(1,id_voluntario);
             pst.setString(2, value.getNomeVoluntario());
@@ -141,7 +146,8 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
         Voluntario v = null;
         try {
             int id = (Integer) key;
-            String sql = "delete from Voluntario where idVoluntario="+id+" and Equipa= "+this.id;
+            //String sql = "delete from test.Voluntario where idVoluntario="+id+" and Equipa= "+this.id;
+            String sql = "delete from test.Voluntário where idVoluntário="+id;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
@@ -157,12 +163,13 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
     public Set<Integer> keySet() {
         Set<Integer> res = new TreeSet<>();
         try {
-            String sql = "SELECT idVoluntario from Voluntario";
+            String sql = "SELECT idVoluntário from test.Voluntário";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next())
                 res.add(rs.getInt(1));
+                System.out.println("keyset: "+rs.getInt(1));
             
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
@@ -174,12 +181,12 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
     public Collection<Voluntario> values() {
         Collection<Voluntario> res = new HashSet<>();
         try {
-            String sql = "SELECT idVoluntario FROM Voluntario";
+            String sql = "SELECT idVoluntario FROM Voluntário";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next())
-                res.add(this.get(rs.getString(2)));
+                res.add(this.get(rs.getInt(1)));
             
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
@@ -206,4 +213,6 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
     public void clear() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 }

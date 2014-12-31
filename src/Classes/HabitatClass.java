@@ -88,7 +88,7 @@ public class HabitatClass {
 
         this.utilizadorLigado = fun;
     }
-*/    
+    
     public HabitatClass(HabitatClass h) {
         //this.projetos = h.getProjetos();
         this.voluntarios = h.getVoluntarios();
@@ -102,7 +102,7 @@ public class HabitatClass {
         //this.materiais = h.getMateriais();
         this.utilizadorLigado = h.getUtilizadorLigado();
     }
-
+*/
     public Funcionario getUtilizadorLigado() {
         return this.utilizadorLigado;
     }
@@ -166,7 +166,7 @@ public class HabitatClass {
     }
 */
     public void setVoluntarios(Map<Integer, Voluntario> vol) {
-        for (Integer i : vol.keySet()) {
+        for (int i : vol.keySet()) {
             voluntarios.put(i, vol.get(i).clone());
         }
     }
@@ -235,7 +235,7 @@ public class HabitatClass {
     }
 */
     public int addVoluntario(Voluntario v, int id) {
-        for (Integer i : voluntarios.keySet()) {
+        for (int i : voluntarios.keySet()) {
             if (voluntarios.get(i).equals(v)) {
                 return -1;
             }
@@ -245,7 +245,7 @@ public class HabitatClass {
     }
 
     public int remVoluntario(Voluntario v) {
-        for (Integer i : voluntarios.keySet()) {
+        for (int i : voluntarios.keySet()) {
             if (voluntarios.get(i).equals(v)) {
                 voluntarios.remove(i);
                 return 1;
@@ -460,7 +460,7 @@ public class HabitatClass {
     }
 
     public Voluntario getVoluntario(String nome) {
-        for (Integer i : voluntarios.keySet()) {
+        for (int i : voluntarios.keySet()) {
             if (voluntarios.get(i).getNomeVoluntario().equals(nome)) {
                 return voluntarios.get(i);
             }
@@ -478,14 +478,12 @@ public class HabitatClass {
         return res;
     }
 */
-    public HabitatClass clone() {
-        return new HabitatClass(this);
-    }
+
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Voluntários: \n");
-        for (Integer i : voluntarios.keySet()) {
+        for (int i : voluntarios.keySet()) {
             sb.append("Id: ").append(i).append("Nome :").append(voluntarios.get(i).getNomeVoluntario()).append("\n");
         }
         sb.append("Funcionários: \n");
