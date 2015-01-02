@@ -28,7 +28,7 @@ public class HabitatClass {
     private Map<Integer, Voluntario> voluntarios;
     private Map<Integer, Funcionario> funcionarios;
     private Map<Integer, Candidatura> candidaturas;
-    //private Map<Integer, Equipa> equipas;
+    private Map<Integer, Equipa> equipas;
     //private Map<Integer, Familia> familias;
     //private Map<Integer, Donativo> donativos;
     private Map<Integer, Doador> doadores;
@@ -41,7 +41,7 @@ public class HabitatClass {
         this.voluntarios = new VoluntarioDAO();
         this.funcionarios = new FuncionarioDAO();
         this.candidaturas = new CandidaturaDAO();
-        //this.equipas = new EquipaDAO();
+        this.equipas = new EquipaDAO();
         //this.familias = new FamiliaDAO();
         //this.donativos = new DonativoDAO();
         this.doadores = new DoadorDAO();
@@ -127,11 +127,11 @@ public class HabitatClass {
     public Map<Integer, Candidatura> getCandidaturas() {
         return candidaturas;
     }
-/*
+
     public Map<Integer, Equipa> getEquipas() {
         return this.equipas;
     }
-
+/*
     public Map<Integer, Familia> getFamilias() {
         return this.familias;
     }

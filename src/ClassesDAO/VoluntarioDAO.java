@@ -37,7 +37,7 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
             //String sql = "SELECT * FROM test.Voluntario where Equipa="+this.id;
-            String sql = "SELECT * FROM test.Voluntário";
+            String sql = "SELECT * FROM test.voluntário";
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
@@ -103,7 +103,7 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
                 int Equipa = rs.getInt(10);
                 String Email = rs.getString(11);
                                 
-                v = new Voluntario(i,Cod,Dtnas,Email,Prof,Loc,Nome,Rua,Tlm,Equipa);
+                v = new Voluntario(Cod,Dtnas,Email,Prof,Loc,Nome,Rua,Tlm,Equipa);
             }            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) { 
@@ -121,10 +121,12 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
             int id_voluntario=0;
             id_voluntario=this.size()+1;
             String sql;
-            sql = "INSERT INTO test.voluntário(idVoluntário,Nome,Diponibilidade,Telemovel,Profissao,DataNascmento,CodPostal,Rua,Localidade,Equipa,Email) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO test.voluntário(idVoluntário,Nome,Diponibilidade,Telemovel,Profissao,DataNascmento,CodPostal,Rua,Localidade,Equipa,Email) VALUES ('?','?',?,'?','?','?','?','?','?',?,'?')";
             pst = ConexaoBD.getConexao().prepareCall(sql);
             pst.setInt(1,id_voluntario);
+            System.out.println(id_voluntario);
             pst.setString(2, value.getNomeVoluntario());
+            System.out.println(value.getNomeVoluntario());
             pst.setBoolean(3, value.getDisponibilidade());
             pst.setString(4, value.getTelemovel());
             pst.setString(5, value.getProfissao());
@@ -134,13 +136,39 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
             pst.setString(9, value.getLocalidade());
             pst.setInt(10, value.getId_equipa());
             pst.setString(11, value.getEmail());
-            pst.execute();
+            pst.executeUpdate();
+            
             
         }catch(SQLException e){ }
         d=value;
         return d;    
     }
-
+    public Voluntario update(Object key, Voluntario v){
+        Voluntario aux = null;
+        try {
+            int id = (Integer) key;
+            //String sql = "delete from test.Voluntario where idVoluntario="+id+" and Equipa= "+this.id;
+            String sql = "update test.Voluntário "
+                    + "where idVoluntário="+id+" "
+                    + "Set Nome='" + v.getNomeVoluntario()
+                    + "', Disponibilidade='"+v.getDisponibilidade()
+                    + "', Telemovel='" + v.getTelemovel()
+                    + "', Profissao='" + v.getProfissao()
+                    + "', DataNascimento='" + v.getDataNascimento()
+                    + "', CodPostal='" + v.getCodPostal()
+                    + "', Rua='" + v.getRua()
+                    + "', Localidade='" + v.getLocalidade()
+                    + "', Equipa='" + v.getId_equipa()
+                    + "', Email='" + v.getEmail();
+            PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+            ResultSet rs = stm.executeQuery(sql);
+            aux=v;
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        
+        return aux;
+    }
     @Override
     public Voluntario remove(Object key) {
         Voluntario v = null;

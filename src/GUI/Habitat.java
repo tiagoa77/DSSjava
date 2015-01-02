@@ -96,6 +96,7 @@ public class Habitat extends javax.swing.JFrame {
         return s;
     }
     
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -559,6 +560,11 @@ public class Habitat extends javax.swing.JFrame {
         });
 
         jButtonRemover.setText("Remover");
+        jButtonRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoverActionPerformed(evt);
+            }
+        });
 
         jPanelInformacao.setBackground(new java.awt.Color(0, 85, 150));
 
@@ -1385,7 +1391,13 @@ public class Habitat extends javax.swing.JFrame {
         jTextPaneCod.setEditable(true);
         jTextPaneEquipa.setEditable(true);
         jTextPaneProf.setEditable(true);
-        jTextPaneProf.setEditable(true);
+        
+        this.jTextPaneNome.setText(this.jTextPaneNome.getText());
+        this.jTextPaneLocalidade.setText(this.jTextPaneLocalidade.getText());
+        this.jTextPaneDatNasc.setText(this.jTextPaneDatNasc.getText());
+        this.jTextPaneProf.setText(this.jTextPaneProf.getText());
+        this.jTextPaneRua.setText(this.jTextPaneRua.getText());
+        this.jTextPaneCod.setText(this.jTextPaneCod.getText());
     }//GEN-LAST:event_jButtonEditarVoluntarioActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
@@ -1416,6 +1428,8 @@ public class Habitat extends javax.swing.JFrame {
         jTextPaneEquipa.setEditable(false);
         jTextPaneProf.setEditable(false);
         jTextPaneDatNasc.setEditable(false);
+        
+                
         
     }//GEN-LAST:event_jButtonConfirmarEditarActionPerformed
 
@@ -1551,6 +1565,17 @@ public class Habitat extends javax.swing.JFrame {
         this.jTextPaneEquipa.setText(Integer.toString(v.getId_equipa()));
         
     }//GEN-LAST:event_listaVoluntariosValueChanged
+
+    private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
+        // TODO add your handling code here:
+        String aux = seleccionaVoluntario();
+        System.out.println(aux);
+        for (int i : this.habitat.getVoluntarios().keySet())
+            for(Voluntario v : this.habitat.getVoluntarios().values())
+                if(v.getNomeVoluntario().equals(aux))
+                    this.habitat.getVoluntarios().remove(i);
+                    System.out.println("É o mesmo");
+    }//GEN-LAST:event_jButtonRemoverActionPerformed
 
    
    

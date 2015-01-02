@@ -8,6 +8,14 @@ package GUI;
 import Classes.Equipa;
 import Classes.HabitatClass;
 import Classes.Voluntario;
+import static com.sun.org.apache.xerces.internal.impl.dtd.XMLDTDLoader.LOCALE;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,8 +30,8 @@ public class AdicionarVoluntario extends javax.swing.JFrame {
     
     HabitatClass habitat;
     public AdicionarVoluntario(HabitatClass h) {
-        initComponents();
         this.habitat = h;
+        initComponents();
     }
 
     /**
@@ -90,7 +98,7 @@ public class AdicionarVoluntario extends javax.swing.JFrame {
         jLabel2.setText("Nome:");
 
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setText("Data de Nascimento:");
+        jLabel3.setText("Data de Nascimento (MM/dd/yyyy):");
 
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Rua:");
@@ -124,6 +132,11 @@ public class AdicionarVoluntario extends javax.swing.JFrame {
 
         jComboBox4.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Profissão:");
@@ -300,33 +313,47 @@ public class AdicionarVoluntario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String nome = jTextField1.getText();
-        String data = jTextField5.getText();
-        String localidade = jTextField2.getText();
-        String rua = jTextField3.getText();
-        String codPostal = jTextField4.getText();
-        String profissao = jTextField6.getText();
-        String email = jTextField7.getText();
-        String telefone = jTextField9.getText();
-        String nomeEquipa = jComboBox4.getSelectedItem().toString();
-        Equipa nova = new Equipa();
-        
-        for(Equipa e : habitat.getEquipas().values()){
-            if(e.getNome().equals(nomeEquipa))
-                nova = e.clone();
+        try {
+            // TODO add your handling code here:
+            for(int i : habitat.getEquipas().keySet()){
+                jComboBox4.addItem(habitat.getEquipas().get(i).getNome());
+            }
+            
+            String nome = jTextField1.getText();
+            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            String data = jTextField5.getText();
+            Date date = df.parse(data);
+            
+            String localidade = jTextField2.getText();
+            String rua = jTextField3.getText();
+            String codPostal = jTextField4.getText();
+            String profissao = jTextField6.getText();
+            String email = jTextField7.getText();
+            String telefone = jTextField9.getText();
+            String nomeEquipa = jComboBox4.getSelectedItem().toString();
+            Equipa nova = new Equipa();
+
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            Voluntario novo = new Voluntario(codPostal,sqlDate,email,profissao,localidade,nome,rua,telefone,nova.getId());
+            
+            if(habitat.addVoluntario(novo,novo.getId())==1){
+                JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
+                this.setVisible(false);
+                
+                
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Erro");
+        } catch (ParseException ex) {
+            Logger.getLogger(AdicionarVoluntario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Voluntario novo = new Voluntario(codPostal,data,email,localidade,nome,rua,telefone,nova);
-        
-        if(habitat.addVoluntario(novo,novo.getId())==1){
-            JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
-            this.setVisible(false);     
-        }
-        else
-            JOptionPane.showMessageDialog(null, "Erro");
         
        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox4ActionPerformed
 
     /**
      * @param args the command line arguments

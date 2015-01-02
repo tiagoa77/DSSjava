@@ -21,7 +21,7 @@ private String eMail;
 private String rua;   
 private int id_equipa;
 
-public Voluntario (int id,String c,Date d,String e,String p,String l,String n, String r, String t, int id_equipa){
+public Voluntario (String c,Date d,String e,String p,String l,String n, String r, String t, int id_equipa){
     this.codPostal = c;
     this.dataNascimento = d;
     this.eMail = e;
@@ -30,8 +30,8 @@ public Voluntario (int id,String c,Date d,String e,String p,String l,String n, S
     this.nome = n;
     this.rua = r;
     this.telemovel = t;
-    //this.id = this.id+1;
-    this.id=id;
+    this.id = this.id+1;
+    //this.id=id;
     this.disponibilidade = true;
     
     }
@@ -42,7 +42,7 @@ public Voluntario (){
     this.dataNascimento = new Date();
     this.profissao="";
     this.eMail = "";
-    this.id = this.id + 1;
+    //this.id = this.id + 1;
     this.localidade = "";
     this.nome = "";
     this.rua = "";
