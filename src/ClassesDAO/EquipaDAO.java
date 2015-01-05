@@ -134,7 +134,7 @@ public class EquipaDAO implements Map<Integer,Equipa>{
     public Set<Integer> keySet() {
         Set<Integer> res = new TreeSet<>();
         try {
-            String sql = "SELECT Nome FROM Equipa";
+            String sql = "SELECT Nome FROM test.Equipa";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             

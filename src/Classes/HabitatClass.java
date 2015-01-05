@@ -15,6 +15,7 @@ import ClassesDAO.EventoDAO;
 import ClassesDAO.FamiliaDAO;
 import ClassesDAO.FuncionarioDAO;
 import ClassesDAO.MaterialDAO;
+import ClassesDAO.ProjetoDAO;
 import ClassesDAO.VoluntarioDAO;
 import java.util.Map;
 
@@ -24,20 +25,20 @@ import java.util.Map;
  */
 public class HabitatClass {
     
-    //private Map<Integer, Projeto> projetos;
+    private Map<Integer, Projeto> projetos;
     private Map<Integer, Voluntario> voluntarios;
     private Map<Integer, Funcionario> funcionarios;
     private Map<Integer, Candidatura> candidaturas;
     private Map<Integer, Equipa> equipas;
-    //private Map<Integer, Familia> familias;
-    //private Map<Integer, Donativo> donativos;
+    private Map<Integer, Familia> familias;
+    private Map<Integer, Donativo> donativos;
     private Map<Integer, Doador> doadores;
-    //private Map<Integer, Evento> eventos;
-    //private Map<Integer, Material> materiais;
+    private Map<Integer, Evento> eventos;
+    private Map<Integer, Material> materiais;
     private Funcionario utilizadorLigado;
 
     public HabitatClass() {
-        //this.projetos = new ProjectoDAO();
+        this.projetos = new ProjetoDAO();
         this.voluntarios = new VoluntarioDAO();
         this.funcionarios = new FuncionarioDAO();
         this.candidaturas = new CandidaturaDAO();
@@ -106,7 +107,7 @@ public class HabitatClass {
     public Funcionario getUtilizadorLigado() {
         return this.utilizadorLigado;
     }
-/*
+
     public Map<Integer, Material> getMateriais() {
 
         return this.materiais;
@@ -115,7 +116,7 @@ public class HabitatClass {
     public Map<Integer, Projeto> getProjetos() {
         return this.projetos;
     }
-*/
+
     public Map<Integer, Voluntario> getVoluntarios() {
         return this.voluntarios;
     }
@@ -131,7 +132,7 @@ public class HabitatClass {
     public Map<Integer, Equipa> getEquipas() {
         return this.equipas;
     }
-/*
+
     public Map<Integer, Familia> getFamilias() {
         return this.familias;
     }
@@ -139,32 +140,32 @@ public class HabitatClass {
     public Map<Integer, Donativo> getDonativos() {
         return this.donativos;
     }
-*/
+
     public Map<Integer, Doador> getDoadores() {
         return this.doadores;
     }
-/*
+
     public Map<Integer, Evento> getEventos() {
         return this.eventos;
     }
-    */
-/*
+
+
     public void setMateriais(Map<Integer, Material> mat) {
         for (Integer i : mat.keySet()) {
             materiais.put(i, mat.get(i).clone());
         }
     }
-*/
+
     public void setUtilizadorLigado(Funcionario f) {
         this.utilizadorLigado = f;
     }
-/*
+
     public void setProjetos(Map<Integer, Projeto> proj) {
         for (Integer i : proj.keySet()) {
             projetos.put(i, proj.get(i).clone());
         }
     }
-*/
+
     public void setVoluntarios(Map<Integer, Voluntario> vol) {
         for (int i : vol.keySet()) {
             voluntarios.put(i, vol.get(i).clone());
@@ -182,7 +183,7 @@ public class HabitatClass {
             candidaturas.put(i, cand.get(i).clone());
         }
     }
-/*
+
     public void setEquipas(Map<Integer, Equipa> eqp) {
         for (Integer i : eqp.keySet()) {
             equipas.put(i, eqp.get(i).clone());
@@ -200,13 +201,13 @@ public class HabitatClass {
             donativos.put(i, donats.get(i).clone());
         }
     }
-*/
+
     public void setDoadores(Map<Integer, Doador> doadors) {
         for (Integer i : doadors.keySet()) {
             doadores.put(i, doadors.get(i).clone());
         }
     }
-/*
+
     public void setEventos(Map<Integer, Evento> event) {
         for (Integer i : event.keySet()) {
             eventos.put(i, event.get(i).clone());
@@ -233,7 +234,7 @@ public class HabitatClass {
 
         return -1;
     }
-*/
+
     public int addVoluntario(Voluntario v, int id) {
         for (int i : voluntarios.keySet()) {
             if (voluntarios.get(i).equals(v)) {
@@ -293,7 +294,7 @@ public class HabitatClass {
         }
         return -1;
     }
-/*
+
     public int addEquipa(Equipa e, int id) {
         for (Integer i : equipas.keySet()) {
             if (equipas.get(i).getNome().equals(e.getNome())) {
@@ -353,7 +354,7 @@ public class HabitatClass {
         }
         return -1;
     }
-*/
+
     public int addDoador(Doador d, int id) {
         for (Integer i : doadores.keySet()) {
             if (doadores.get(i).equals(d)) {
@@ -373,7 +374,7 @@ public class HabitatClass {
         }
         return -1;
     }
-/*
+
     public int addEvento(Evento e, int id) {
         for (Integer i : eventos.keySet()) {
             if (eventos.get(i).equals(e)) {
@@ -403,7 +404,7 @@ public class HabitatClass {
         materiais.put(id, m);
 
     }
-    */
+
     public boolean existeLogin(String login) {
         return (this.funcionarios.containsKey(login));
     }
@@ -490,33 +491,33 @@ public class HabitatClass {
         for (Integer i : funcionarios.keySet()) {
             sb.append("Id: ").append(i).append("Nome :").append(funcionarios.get(i).getNome()).append("\n");
         }
-      /*  sb.append("Equipas: \n");
+        sb.append("Equipas: \n");
         for (Integer i : equipas.keySet()) {
             sb.append("Id: ").append(i).append("Nome da equipa :").append(equipas.get(i).getNome()).append("\n");
         }
         sb.append("Famílias: \n");
         for (Integer i : familias.keySet()) {
             sb.append("Id: ").append(i).append("Nome da familia :").append(familias.get(i).getNome()).append("\n");
-        }*/
+        }
         sb.append("Candidaturas: \n");
         for (Integer i : candidaturas.keySet()) {
             sb.append("Id: ").append(i).append("Descricao :").append(candidaturas.get(i).getDescricao()).append("\n");
         }
-     /*   sb.append("Donativos: \n");
+        sb.append("Donativos: \n");
         for (Integer i : donativos.keySet()) {
             sb.append("Id: ").append(i).append("\n");
         }
-             */
+        
         sb.append("Doadores: \n");
         for (Integer i : doadores.keySet()) {
             sb.append("Id: ").append(i).append("Nome :").append(doadores.get(i).getNome()).append("\n");
         }
-        /*
+
         sb.append("Eventos: \n");
         for (Integer i : eventos.keySet()) {
             sb.append("Id: ").append(i).append("Descrição :").append(eventos.get(i).getDescricao()).append("\n");
         }
-*/
+
         return sb.toString();
     }
 

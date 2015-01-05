@@ -21,7 +21,7 @@ import javax.swing.plaf.basic.BasicListUI;
  *
  * @author Tiago
  */
-public class Habitat extends javax.swing.JFrame {
+public final class Habitat extends javax.swing.JFrame {
     
     private final HabitatClass habitat;
 
@@ -36,8 +36,10 @@ public class Habitat extends javax.swing.JFrame {
         
         
         listaVoluntarios();
-          
         
+        //listaProjectos();  
+        //listaEventos();
+        //listaDonativos();
             
         
         //Projetos
@@ -80,10 +82,34 @@ public class Habitat extends javax.swing.JFrame {
     }
     public void listaVoluntarios(){
         DefaultListModel<String> str = new DefaultListModel<>();
-        for(int i : this.habitat.getVoluntarios().keySet()){
-                str.addElement(this.habitat.getVoluntarios().get(i).getNomeVoluntario());
+        for(int i : this.habitat.getVoluntarios().keySet()){  
+            str.addElement(this.habitat.getVoluntarios().get(i).getNomeVoluntario());
             }
         listaVoluntarios.setModel(str);
+    }
+    
+    public void listaProjectos(){
+        DefaultListModel<Integer> str1 = new DefaultListModel<>();
+        for(int i : this.habitat.getProjetos().keySet()){
+            str1.addElement(this.habitat.getProjetos().get(i).getId());
+        }
+        listaProjectos.setModel(str1);
+    }
+    
+    public void listaEventos(){
+        DefaultListModel<Integer> str2 = new DefaultListModel<>();
+        for(int i : this.habitat.getEventos().keySet()){
+            str2.addElement(this.habitat.getEventos().get(i).getId());
+        }
+        listaVoluntarios.setModel(str2);
+    }
+    
+    public void listaDonativos(){
+        DefaultListModel<Integer> str3 = new DefaultListModel<>();
+        for(int i: this.habitat.getDonativos().keySet()){
+            str3.addElement(this.habitat.getDonativos().get(i).getId());
+            System.out.println(i);
+        }
     }
     
     public String seleccionaVoluntario() {
@@ -178,7 +204,7 @@ public class Habitat extends javax.swing.JFrame {
         jLabel30 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jScrollPane22 = new javax.swing.JScrollPane();
-        jList6 = new javax.swing.JList();
+        listaEventos = new javax.swing.JList();
         jCheckBox10 = new javax.swing.JCheckBox();
         jCheckBox11 = new javax.swing.JCheckBox();
         jButton13 = new javax.swing.JButton();
@@ -195,7 +221,7 @@ public class Habitat extends javax.swing.JFrame {
         jTextPane20 = new javax.swing.JTextPane();
         Donativos = new javax.swing.JPanel();
         jScrollPane15 = new javax.swing.JScrollPane();
-        jList5 = new javax.swing.JList();
+        listaDonativos = new javax.swing.JList();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jCheckBox7 = new javax.swing.JCheckBox();
@@ -769,8 +795,8 @@ public class Habitat extends javax.swing.JFrame {
             .addGap(0, 103, Short.MAX_VALUE)
         );
 
-        jList6.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jScrollPane22.setViewportView(jList6);
+        listaEventos.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jScrollPane22.setViewportView(listaEventos);
 
         jCheckBox10.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox10.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -949,8 +975,8 @@ public class Habitat extends javax.swing.JFrame {
 
         Donativos.setBackground(new java.awt.Color(255, 255, 255));
 
-        jList5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jScrollPane15.setViewportView(jList5);
+        listaDonativos.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jScrollPane15.setViewportView(listaDonativos);
 
         jButton10.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton10.setText("Adicionar");
@@ -1658,8 +1684,6 @@ public class Habitat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelProf;
     private javax.swing.JLabel jLabelRua;
     private javax.swing.JList jList2;
-    private javax.swing.JList jList5;
-    private javax.swing.JList jList6;
     private javax.swing.JList jList7;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1723,6 +1747,8 @@ public class Habitat extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPaneNome;
     private javax.swing.JTextPane jTextPaneProf;
     private javax.swing.JTextPane jTextPaneRua;
+    private javax.swing.JList listaDonativos;
+    private javax.swing.JList listaEventos;
     private javax.swing.JList listaProjectos;
     private javax.swing.JList listaVoluntarios;
     // End of variables declaration//GEN-END:variables

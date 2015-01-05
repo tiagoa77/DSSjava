@@ -27,11 +27,17 @@ public class AdicionarVoluntario extends javax.swing.JFrame {
     /**
      * Creates new form AdicionarVoluntario1
      */
-    
     HabitatClass habitat;
+
     public AdicionarVoluntario(HabitatClass h) {
         this.habitat = h;
+        for (int i : habitat.getEquipas().keySet()) {
+            jComboBox4.addItem(habitat.getEquipas().get(i).getNome());
+            System.out.println("KEYSET EUIPAS:" + i);
+        }
+
         initComponents();
+
     }
 
     /**
@@ -315,15 +321,12 @@ public class AdicionarVoluntario extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
-            for(int i : habitat.getEquipas().keySet()){
-                jComboBox4.addItem(habitat.getEquipas().get(i).getNome());
-            }
-            
+
             String nome = jTextField1.getText();
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
             String data = jTextField5.getText();
             Date date = df.parse(data);
-            
+
             String localidade = jTextField2.getText();
             String rua = jTextField3.getText();
             String codPostal = jTextField4.getText();
@@ -334,21 +337,20 @@ public class AdicionarVoluntario extends javax.swing.JFrame {
             Equipa nova = new Equipa();
 
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            Voluntario novo = new Voluntario(codPostal,sqlDate,email,profissao,localidade,nome,rua,telefone,nova.getId());
-            
-            if(habitat.addVoluntario(novo,novo.getId())==1){
+            Voluntario novo = new Voluntario(codPostal, sqlDate, email, profissao, localidade, nome, rua, telefone, nova.getId());
+
+            if (habitat.addVoluntario(novo, novo.getId()) == 1) {
                 JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
                 this.setVisible(false);
-                
-                
-            }
-            else
+
+            } else {
                 JOptionPane.showMessageDialog(null, "Erro");
+            }
         } catch (ParseException ex) {
             Logger.getLogger(AdicionarVoluntario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
@@ -358,7 +360,6 @@ public class AdicionarVoluntario extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

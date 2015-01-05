@@ -22,6 +22,7 @@ public class Donativo {
     private double quantidade;
     private float valor;
     private int id_doador;
+    private int id_evento;
     private Map<Integer,Material> materiais;
     private Map<Integer,Evento> eventos;
     
@@ -33,8 +34,8 @@ public class Donativo {
         this.valor = d.getValor();
         this.quantidade = d.getQuantidade();
         this.id_doador=d.getId_doador();
+        this.id_evento=d.getId_evento();
         this.materiais= new MaterialDAO(this.id,this.id); //verifar o construtor
-        this.eventos=new EventoDAO(this.id);
     }
 
 
@@ -45,19 +46,29 @@ public class Donativo {
        this.valor = 0;
        this.quantidade = 0.00; 
        this.id_doador=0;
+       this.id_evento=0;
        this.materiais= new MaterialDAO(this.id,this.id);//verifar o construtor
-       this.eventos=new EventoDAO(this.id);
+       
     }
     
-    public Donativo(String t, String d, float v, double q,int id_doador){
+    public Donativo(String t, String d, float v, double q,int id_doador,int id_evento){
        this.tipo = t;
        this.id = id+1;
        this.descricao = d;
        this.valor = v;
        this.quantidade = q; 
        this.id_doador=id_doador;
+       this.id_evento=id_evento;
        this.materiais= new MaterialDAO(this.id,this.id);//verifar o construtor
-       this.eventos=new EventoDAO(this.id);
+       
+    }
+
+    public int getId_evento() {
+        return id_evento;
+    }
+
+    public void setId_evento(int id_evento) {
+        this.id_evento = id_evento;
     }
     
     public int getId_doador() {

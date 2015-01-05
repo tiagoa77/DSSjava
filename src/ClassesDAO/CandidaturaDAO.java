@@ -37,7 +37,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
         int res = 0;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Candidatura where Familia="+this.idfamilia+" and projecto="+this.idprojecto;
+            String sql = "SELECT * FROM test.Candidatura where Familia="+this.idfamilia+" and projecto="+this.idprojecto;
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
@@ -53,7 +53,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
         boolean res = false;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Candidatura where Familia="+this.idfamilia+" and Projecto="+this.idprojecto;
+            String sql = "SELECT * FROM testCandidatura where Familia="+this.idfamilia+" and Projecto="+this.idprojecto;
             ResultSet rs = stm.executeQuery(sql);
             if(!rs.next())
                 res=true;
@@ -68,7 +68,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
         boolean res = false;
         try {
             int id = (Integer) key;
-            String sql = "SELECT * FROM Candidatura WHERE Familia="+ this.idfamilia+" and Projecto="+this.idprojecto;;
+            String sql = "SELECT * FROM test.Candidatura WHERE Familia="+ this.idfamilia+" and Projecto="+this.idprojecto;;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -87,7 +87,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
         try {
             int id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Candidatura WHERE Familia= "+this.idfamilia+" and Projecto="+this.idprojecto+" and id_material="+id;
+            String sql = "SELECT * FROM test.Candidatura WHERE Familia= "+this.idfamilia+" and Projecto="+this.idprojecto+" and id_material="+id;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
@@ -117,7 +117,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
             int id_candidatura=0;
             id_candidatura=this.size()+1;
             String sql;
-            sql = "INSERT INTO Candidatura(idCandidatura,Descricao,Estado,Familia,Projecto) VALUES (?,?,?,?,?)";
+            sql = "INSERT INTO test.Candidatura(idCandidatura,Descricao,Estado,Familia,Projecto) VALUES (?,?,?,?,?)";
             pst = ConexaoBD.getConexao().prepareCall(sql);
             pst.setInt(1,id_candidatura);
             pst.setString(2, value.getDescricao());
@@ -136,7 +136,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
         Candidatura c = null;
         try {
             int id = (Integer) key;
-            String sql = "delete from Candidatura where idCandidatura="+id+" and Familia= "+this.idfamilia+" and projecto="+this.idprojecto;
+            String sql = "delete from test.Candidatura where idCandidatura="+id+" and Familia= "+this.idfamilia+" and projecto="+this.idprojecto;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
@@ -151,7 +151,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
     public Set<Integer> keySet() {
         Set<Integer> res = new TreeSet<>();
         try {
-            String sql = "SELECT idCandidatura from Candidatura";
+            String sql = "SELECT idCandidatura from test.Candidatura";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
@@ -168,7 +168,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
     public Collection<Candidatura> values() {
         Collection<Candidatura> res = new HashSet<>();
         try {
-            String sql = "SELECT idCandidatura FROM Candidatura";
+            String sql = "SELECT idCandidatura FROM test.Candidatura";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             

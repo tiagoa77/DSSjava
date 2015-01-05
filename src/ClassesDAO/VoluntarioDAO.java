@@ -5,6 +5,7 @@
  */
 package ClassesDAO;
 
+import Classes.HabitatClass;
 import Classes.Voluntario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -107,7 +108,6 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
             }            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) { 
-            System.out.println("-.-");
         }
         return v;
     }
@@ -121,7 +121,7 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
             int id_voluntario=0;
             id_voluntario=this.size()+1;
             String sql;
-            sql = "INSERT INTO test.voluntário(idVoluntário,Nome,Diponibilidade,Telemovel,Profissao,DataNascmento,CodPostal,Rua,Localidade,Equipa,Email) VALUES ('?','?',?,'?','?','?','?','?','?',?,'?')";
+            sql = "INSERT INTO `test.voluntário`(`idVoluntário`,`Nome`,`Diponibilidade`,`Telemovel`,`Profissao`,`DataNascmento`,`CodPostal`,`Rua`,`Localidade`,`Equipa`,`Email`) VALUES (?,'?',?,'?','?','?','?','?','?',?,'?')";
             pst = ConexaoBD.getConexao().prepareCall(sql);
             pst.setInt(1,id_voluntario);
             System.out.println(id_voluntario);
@@ -136,39 +136,20 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
             pst.setString(9, value.getLocalidade());
             pst.setInt(10, value.getId_equipa());
             pst.setString(11, value.getEmail());
-            pst.executeUpdate();
             
+            int aux = pst.executeUpdate();
+            
+            System.out.println("FDS: " + aux);
             
         }catch(SQLException e){ }
         d=value;
+        //System.out.println(d.toString());
+        HabitatClass aux = new HabitatClass();
+        System.out.println(aux.getVoluntarios().get(10).toString());
+        
         return d;    
     }
-    public Voluntario update(Object key, Voluntario v){
-        Voluntario aux = null;
-        try {
-            int id = (Integer) key;
-            //String sql = "delete from test.Voluntario where idVoluntario="+id+" and Equipa= "+this.id;
-            String sql = "update test.Voluntário "
-                    + "where idVoluntário="+id+" "
-                    + "Set Nome='" + v.getNomeVoluntario()
-                    + "', Disponibilidade='"+v.getDisponibilidade()
-                    + "', Telemovel='" + v.getTelemovel()
-                    + "', Profissao='" + v.getProfissao()
-                    + "', DataNascimento='" + v.getDataNascimento()
-                    + "', CodPostal='" + v.getCodPostal()
-                    + "', Rua='" + v.getRua()
-                    + "', Localidade='" + v.getLocalidade()
-                    + "', Equipa='" + v.getId_equipa()
-                    + "', Email='" + v.getEmail();
-            PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
-            ResultSet rs = stm.executeQuery(sql);
-            aux=v;
-            ConexaoBD.fecharCursor(rs, stm);
-        } catch (SQLException e) {
-        }
-        
-        return aux;
-    }
+    
     @Override
     public Voluntario remove(Object key) {
         Voluntario v = null;
@@ -195,9 +176,10 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
-            while(rs.next())
+            while(rs.next()){
                 res.add(rs.getInt(1));
-                System.out.println("keyset: "+rs.getInt(1));
+            System.out.println("keysetVoluntarios: "+rs.getInt(1));
+            }
             
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
@@ -209,7 +191,7 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
     public Collection<Voluntario> values() {
         Collection<Voluntario> res = new HashSet<>();
         try {
-            String sql = "SELECT idVoluntario FROM Voluntário";
+            String sql = "SELECT idVoluntário FROM test.Voluntário";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             

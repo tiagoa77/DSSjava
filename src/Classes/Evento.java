@@ -1,6 +1,7 @@
 package Classes;
 
 
+import ClassesDAO.DonativoDAO;
 import ClassesDAO.FuncionarioDAO;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -21,7 +22,8 @@ public class Evento {
     Date data;
     String local;
     String descricao;
-    private int id_donativo;
+    //private int id_donativo;
+    private Map<Integer,Donativo> donativos;
     private Map<Integer,Funcionario> funcionarios;
     
     
@@ -30,7 +32,8 @@ public class Evento {
         this.descricao=e.getDescricao();
         this.id=e.getId();
         this.local=e.getLocal();
-        this.id_donativo=e.getId_donativo();
+        //this.id_donativo=e.getId_donativo();
+        this.donativos=new DonativoDAO(this.id);
         this.funcionarios=new FuncionarioDAO(this.id);
     }
     public Evento(){
@@ -38,26 +41,21 @@ public class Evento {
         this.descricao="";
         this.id=this.id+1;
         this.local="";
-        this.id_donativo=0;
+        //this.id_donativo=0;
+        this.donativos=new DonativoDAO(this.id);
         this.funcionarios=new FuncionarioDAO(this.id);
     }
-    public Evento(Date d, String l, String de,int id_donativo){
+    public Evento(Date d, String l, String de){
         this.data = d;
         this.descricao=de;
         this.id=id+1;
         this.local=l;
-        this.id_donativo=id_donativo;
+        //this.id_donativo=id_donativo;
+        this.donativos=new DonativoDAO(this.id);
         this.funcionarios=new FuncionarioDAO(this.id);
     }
 
-    public int getId_donativo() {
-        return id_donativo;
-    }
-
-    public void setId_donativo(int id_donativo) {
-        this.id_donativo = id_donativo;
-    }
-    
+  
     public void setId(int id){
         this.id = id;
     }

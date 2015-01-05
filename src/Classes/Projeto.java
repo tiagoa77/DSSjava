@@ -17,8 +17,8 @@ public class Projeto {
 private String estado;
 private int id=0;
 private Familia familia;
-private ArrayList <Tarefa> tarefas;
-private ArrayList<Voluntario> voluntarios;
+private ArrayList <Tarefa> tarefas; // MUDAR PARA MAPS
+private ArrayList<Voluntario> voluntarios; //MUDAR PARA MAPS
 
 
 public Projeto () {

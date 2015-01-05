@@ -28,17 +28,13 @@ public class EventoDAO implements Map<Integer,Evento> {
     public EventoDAO() {
     }
     
-    
-    public EventoDAO(int id){
-        this.id=id;
-    }
             
     @Override
     public int size() {
         int res = 0;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Evento where donativo="+this.id;
+            String sql = "SELECT * FROM test.Evento";// where donativo="+this.id;
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
@@ -54,7 +50,7 @@ public class EventoDAO implements Map<Integer,Evento> {
         boolean res = false;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Evento where donativo=" + this.id;
+            String sql = "SELECT * FROM Evento";// where donativo=" + this.id;
             ResultSet rs = stm.executeQuery(sql);
             if(!rs.next())
                 res=true;
@@ -69,7 +65,7 @@ public class EventoDAO implements Map<Integer,Evento> {
         boolean res = false;
         try {
             int id = (Integer) key;
-            String sql = "SELECT * FROM Evento WHERE donativo="+ this.id;
+            String sql = "SELECT * FROM Evento WHERE idEvento='"+ id+"'";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -87,16 +83,16 @@ public class EventoDAO implements Map<Integer,Evento> {
         try {
             int id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Evento WHERE Donativo= "+this.id+" and idEvento=" +id;
+            String sql = "SELECT * FROM test.Evento WHERE idEvento=" +id;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
+                int i = rs.getInt(1);
                 String Descricao = rs.getString(2);
                 String Local = rs.getString(3);
                 Date DataReal = rs.getDate(4);
-                int id_donativo = rs.getInt(5);
                                 
-                v = new Evento(DataReal,Local,Descricao,id_donativo);
+                v = new Evento(DataReal,Local,Descricao);
             }            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
@@ -113,13 +109,12 @@ public class EventoDAO implements Map<Integer,Evento> {
             int id_evento=0;
             id_evento=this.size()+1;
             String sql;
-            sql = "INSERT INTO evento(idEvento,Descricao,Local,DataRealizacao,Donativo) VALUES (?,?,?,?,?,?)";
+            sql = "INSERT INTO evento(idEvento,Descricao,Local,DataRealizacao,Donativo) VALUES ('?','?','?','?','?,'?')";
             pst = ConexaoBD.getConexao().prepareCall(sql);
             pst.setInt(1,id_evento);
             pst.setString(2, value.getDescricao());
             pst.setString(3, value.getLocal());
             pst.setDate(4, (java.sql.Date) value.getData()); //Verificar
-            pst.setInt(5, value.getId_donativo());
             pst.execute();
             
         }catch(SQLException e){ }
@@ -132,7 +127,7 @@ public class EventoDAO implements Map<Integer,Evento> {
         Evento evt = null;
         try {
             int id = (Integer) key;
-            String sql = "delete from Evento where idEvento="+id+" and Donativo= "+this.id;
+            String sql = "delete from test.Evento where idEvento='"+id+"'";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
@@ -146,12 +141,14 @@ public class EventoDAO implements Map<Integer,Evento> {
     public Set<Integer> keySet() {
         Set<Integer> res = new TreeSet<>();
         try {
-            String sql = "SELECT idEvento from Evento";
+            String sql = "SELECT idEvento from test.Evento";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
-            while(rs.next())
+            while(rs.next()){
                 res.add(rs.getInt(1));
+            System.out.println("keysetEventos: "+rs.getInt(1));
+            }
             
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
@@ -163,12 +160,12 @@ public class EventoDAO implements Map<Integer,Evento> {
     public Collection<Evento> values() {
         Collection<Evento> res = new HashSet<>();
         try {
-            String sql = "SELECT Descricao FROM Donativo";
+            String sql = "SELECT idEvento FROM test.Donativo";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next())
-                res.add(this.get(rs.getString(2)));
+                res.add(this.get(rs.getInt(1)));
             
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {

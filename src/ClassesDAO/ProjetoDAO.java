@@ -5,14 +5,13 @@
  */
 package ClassesDAO;
 
-import Classes.Doador;
-import java.sql.CallableStatement;
+import Classes.Projeto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -21,16 +20,23 @@ import java.util.TreeSet;
  *
  * @author Tiago
  */
-public class DoadorDAO implements Map<Integer,Doador>{
-    public DoadorDAO() {
+public class ProjetoDAO implements Map<Integer,Projeto>{
+    private int id;
+
+    public ProjetoDAO() {    
     }
-        
+    
+    
+    public ProjetoDAO(int id) {
+        this.id=id;
+    }
+    
     @Override
     public int size() {
         int res = 0;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * from doador";
+            String sql = "SELECT * from test.Projeto";
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
                 res++;
@@ -45,7 +51,7 @@ public class DoadorDAO implements Map<Integer,Doador>{
         boolean res = false;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Doador";
+            String sql = "SELECT * FROM test.Projeto";
             ResultSet rs = stm.executeQuery(sql);
             if(!rs.next())
                 res=true;
@@ -60,7 +66,7 @@ public class DoadorDAO implements Map<Integer,Doador>{
         boolean res = false;
         try {
             int id = (Integer) key;
-            String sql = "SELECT * FROM Doador WHERE idDoador="+id;
+            String sql = "SELECT * FROM Projeto WHERE idProjeto='"+id+"'";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -72,75 +78,60 @@ public class DoadorDAO implements Map<Integer,Doador>{
     }
 
     
-
     @Override
-    public Doador get(Object key) {
-        Doador d = null;
+    public Projeto get(Object key) {
+        Projeto p = null;
         
         try {
             Integer id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM doador WHERE idDador= "+id;
+            String sql = "SELECT * FROM Projeto WHERE idProjeto= '"+id+"'";
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
-                int idDoador = rs.getInt(1);
-                String tipo = rs.getString(2);
-                String nome = rs.getString(3);
-                String bi = rs.getString(4);
-                String nif = rs.getString(5);
+                int idProjeto = rs.getInt(1);
+                Date dataAprovacao = rs.getDate(2);
             }           
             
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
         }
-        return d;    
+        return p;    
     }
 
     @Override
-    public Doador put(Integer key, Doador value) {
-        Doador d = null;
+    public Projeto put(Integer key, Projeto value) {
+        Projeto p = null;
         PreparedStatement pst = null;
         
         try{
-            int id_doador=0;
-            id_doador=this.size()+1;
+            int id_projeto=0;
+            id_projeto=this.size()+1;
             String sql;
-            sql = "INSERT INTO doador(idDoador,Tipo,Nome,BI,NIF) VALUES (?,?,?,?,?)";                
+            sql = "INSERT INTO Projeto(idProjeto,DataAprovacao) VALUES ('?','?')";                
                                                           
             pst = ConexaoBD.getConexao().prepareCall(sql);
-            pst.setInt(1,id_doador);
-            pst.setString(2, value.getTipo());
-            pst.setString(3, value.getNome());
-            pst.setString(4, value.getBi());
-            pst.setString(4, value.getNif());
+            pst.setInt(1,id_projeto);
+            //pst.setString(2, value.get);
             pst.execute();
             
         }catch(SQLException e){ }
-        d=value;
-        return d;
+        p=value;
+        return p;
     }
 
     @Override
-    public Doador remove(Object key) {
-        Doador doa = null;
-        try {
-            int id = (Integer) key;
-            String sql = "delete from doador where idDoador="+id;
-            Statement stm = ConexaoBD.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            
-            ConexaoBD.fecharCursor(rs, stm);
-        } catch (SQLException e) {
-        }
-        return doa;
+    public Projeto remove(Object key) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 
     @Override
     public Set<Integer> keySet() {
         Set<Integer> res = new TreeSet<>();
         try {
-            String sql = "SELECT idDpador FROM test.doador";
+            String sql = "SELECT idProjeto FROM test.Projeto";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
@@ -154,34 +145,20 @@ public class DoadorDAO implements Map<Integer,Doador>{
     }
 
     @Override
-    public Collection<Doador> values() {
-        Collection<Doador> res = new HashSet<>();
-        try {
-            String sql = "SELECT nome FROM doador";
-            Statement stm = ConexaoBD.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            
-            while(rs.next())
-                res.add(this.get(rs.getString(3)));
-            
-            ConexaoBD.fecharCursor(rs, stm);
-        } catch (SQLException e) {
-        }
-        return res;
+    public Collection<Projeto> values() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Set<Entry<Integer, Doador>> entrySet() {
+    public Set<Entry<Integer, Projeto>> entrySet() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
     @Override
     public boolean containsValue(Object value) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
     @Override
-    public void putAll(Map<? extends Integer, ? extends Doador> m) {
+    public void putAll(Map<? extends Integer, ? extends Projeto> m) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -189,4 +166,5 @@ public class DoadorDAO implements Map<Integer,Doador>{
     public void clear() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

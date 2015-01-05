@@ -84,7 +84,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
         try {
             int id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Donativo WHERE doador= "+this.id+" and idDonativo=" +id;
+            String sql = "SELECT * FROM test.Donativo WHERE idDonativo=" +id;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
@@ -93,8 +93,9 @@ public class DonativoDAO implements Map<Integer,Donativo> {
                 float Valor = rs.getInt(4);
                 String Tipo = rs.getString(5);
                 int Doador = rs.getInt(6);
+                int Evento = rs.getInt(7);
                                 
-                v = new Donativo(Tipo,Descricao,Valor,Quantidade,Doador);
+                v = new Donativo(Tipo,Descricao,Valor,Quantidade,Doador,Evento);
             }            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
@@ -146,7 +147,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
     public Set<Integer> keySet() {
         Set<Integer> res = new TreeSet<>();
         try {
-            String sql = "SELECT idDonativo from donativo";
+            String sql = "SELECT idDonativo from test.Donativo";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
@@ -168,7 +169,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next())
-                res.add(this.get(rs.getString(2)));
+                res.add(this.get(rs.getInt(1)));
             
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
