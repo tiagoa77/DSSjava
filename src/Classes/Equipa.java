@@ -26,8 +26,8 @@ public class Equipa {
         this.voluntarios=new VoluntarioDAO(this.id);
     }
 
-    public Equipa(int id, String nome, String pais) {
-        this.id = id + 1;
+    public Equipa(int id,String nome, String pais) {
+        this.id = id;//id + 1;
         this.nome = nome;
         this.pais=pais;
         this.voluntarios=new VoluntarioDAO(this.id);

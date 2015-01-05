@@ -30,7 +30,7 @@ public class EquipaDAO implements Map<Integer,Equipa>{
         int res = 0;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * from Equipa";
+            String sql = "SELECT * from test.Equipa";
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
                 res++;
@@ -45,7 +45,7 @@ public class EquipaDAO implements Map<Integer,Equipa>{
         boolean res = false;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Equipa";
+            String sql = "SELECT * FROM test.Equipa";
             ResultSet rs = stm.executeQuery(sql);
             if(!rs.next())
                 res=true;
@@ -60,7 +60,7 @@ public class EquipaDAO implements Map<Integer,Equipa>{
         boolean res = false;
         try {
             int id = (Integer) key;
-            String sql = "SELECT * FROM Equipa WHERE idEquipa="+id;
+            String sql = "SELECT * FROM test.Equipa WHERE idEquipa="+id;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -78,13 +78,14 @@ public class EquipaDAO implements Map<Integer,Equipa>{
         try {
             Integer id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Equipa WHERE idEquipa= "+id;
+            String sql = "SELECT * FROM test.Equipa WHERE idEquipa= "+id;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
-                int idEquipa = rs.getInt(1);
-                String nome = rs.getString(2);
-                String pais = rs.getString(3);
+                String nome = rs.getString(1);
+                String pais = rs.getString(2);
+                int idEquipa = rs.getInt(3);
+                eq = new Equipa(idEquipa, nome, pais);
             }           
             
             ConexaoBD.fecharCursor(rs, stm);
@@ -102,13 +103,13 @@ public class EquipaDAO implements Map<Integer,Equipa>{
             int id_equipa=0;
             id_equipa=this.size()+1;
             String sql;
-            sql = "INSERT INTO Equipa(idEquipa,Nome,Pais) VALUES (?,?,?)";                
+            sql = "INSERT INTO test.Equipa(idEquipa,Nome,Pais) VALUES (?,'?','?')";                
                                                           
             pst = ConexaoBD.getConexao().prepareCall(sql);
             pst.setInt(1,id_equipa);
             pst.setString(2, value.getNome());
             pst.setString(3, value.getPais());
-            pst.execute();
+            pst.executeUpdate(sql);
             
         }catch(SQLException e){ }
         d=value;
@@ -120,7 +121,7 @@ public class EquipaDAO implements Map<Integer,Equipa>{
         Equipa eq = null;
         try {
             int id = (Integer) key;
-            String sql = "delete from equipa where idEquipa="+id;
+            String sql = "delete from test.equipa where idEquipa="+id;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
@@ -134,13 +135,14 @@ public class EquipaDAO implements Map<Integer,Equipa>{
     public Set<Integer> keySet() {
         Set<Integer> res = new TreeSet<>();
         try {
-            String sql = "SELECT Nome FROM test.Equipa";
+            String sql = "SELECT * FROM test.Equipa";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
-            while(rs.next())
-                res.add(rs.getInt(1));
-            
+            while(rs.next()){
+                res.add(rs.getInt(3));
+                //System.out.println("keysetEqupa: "+rs.getInt(3));
+            }
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
         }
@@ -151,13 +153,14 @@ public class EquipaDAO implements Map<Integer,Equipa>{
     public Collection<Equipa> values() {
         Collection<Equipa> res = new HashSet<>();
         try {
-            String sql = "SELECT Nome FROM Equipa";
+            String sql = "SELECT * FROM test.Equipa";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
-            
-            while(rs.next())
-                res.add(this.get(rs.getString(3)));
-            
+            int i=0;
+            while(rs.next()){
+                res.add(this.get(rs.getInt(3)));
+                System.out.println(i+1);
+            }
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
         }

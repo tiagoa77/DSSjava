@@ -104,7 +104,7 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
                 int Equipa = rs.getInt(10);
                 String Email = rs.getString(11);
                                 
-                v = new Voluntario(Cod,Dtnas,Email,Prof,Loc,Nome,Rua,Tlm,Equipa);
+                v = new Voluntario(i,Cod,Dtnas,Email,Prof,Loc,Nome,Rua,Tlm,Equipa);
             }            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) { 
@@ -121,12 +121,12 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
             int id_voluntario=0;
             id_voluntario=this.size()+1;
             String sql;
-            sql = "INSERT INTO `test.voluntário`(`idVoluntário`,`Nome`,`Diponibilidade`,`Telemovel`,`Profissao`,`DataNascmento`,`CodPostal`,`Rua`,`Localidade`,`Equipa`,`Email`) VALUES (?,'?',?,'?','?','?','?','?','?',?,'?')";
+            sql = "INSERT INTO `test.voluntário`(`idVoluntário`,`Nome`,`Disponibilidade`,`Telemovel`,`Profissao`,`DataNascimento`,`CodPostal`,`Rua`,`Localidade`,`Equipa`,`Email`) VALUES (?,'?',?,'?','?','?','?','?','?',?,'?')";
             pst = ConexaoBD.getConexao().prepareCall(sql);
             pst.setInt(1,id_voluntario);
-            System.out.println(id_voluntario);
+            //System.out.println(id_voluntario);
             pst.setString(2, value.getNomeVoluntario());
-            System.out.println(value.getNomeVoluntario());
+            //System.out.println(value.getNomeVoluntario());
             pst.setBoolean(3, value.getDisponibilidade());
             pst.setString(4, value.getTelemovel());
             pst.setString(5, value.getProfissao());
@@ -137,9 +137,9 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
             pst.setInt(10, value.getId_equipa());
             pst.setString(11, value.getEmail());
             
-            int aux = pst.executeUpdate();
+            pst.executeUpdate(sql);
             
-            System.out.println("FDS: " + aux);
+            
             
         }catch(SQLException e){ }
         d=value;
@@ -178,7 +178,7 @@ public class VoluntarioDAO implements Map<Integer,Voluntario>{
             
             while(rs.next()){
                 res.add(rs.getInt(1));
-            System.out.println("keysetVoluntarios: "+rs.getInt(1));
+            //System.out.println("keysetVoluntarios: "+rs.getInt(1));
             }
             
             ConexaoBD.fecharCursor(rs, stm);

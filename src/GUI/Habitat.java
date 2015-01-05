@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
+
 import Classes.HabitatClass;
 import Classes.Voluntario;
 import java.text.DateFormat;
@@ -22,26 +23,24 @@ import javax.swing.plaf.basic.BasicListUI;
  * @author Tiago
  */
 public final class Habitat extends javax.swing.JFrame {
-    
+
     private final HabitatClass habitat;
 
     /**
      * Creates new form Projectos
+     *
      * @param h
      */
     public Habitat() {
         this.habitat = new HabitatClass();
         this.setLocationRelativeTo(null);
         initComponents();
-        
-        
+
         listaVoluntarios();
-        
+
         //listaProjectos();  
         //listaEventos();
         //listaDonativos();
-            
-        
         //Projetos
         this.jButton20.setVisible(true);
         this.jButton21.setVisible(false);
@@ -61,12 +60,12 @@ public final class Habitat extends javax.swing.JFrame {
         jTextPaneEquipa.setEditable(false);
         jTextPaneProf.setEditable(false);
         jTextPaneDatNasc.setEditable(false);
-        
+
         //Eventos
         this.jButton22.setVisible(true);
         this.jButton23.setVisible(false);
         jTextPane20.setEditable(false);
-        
+
         //Donativos
         this.jButton24.setVisible(true);
         this.jButton25.setVisible(false);
@@ -77,52 +76,54 @@ public final class Habitat extends javax.swing.JFrame {
         jTextPane15.setEditable(false);
         jComboBox13.disable();
         jTextArea2.setEditable(false);
-      
-       
+
     }
-    public void listaVoluntarios(){
+
+    public void listaVoluntarios() {
         DefaultListModel<String> str = new DefaultListModel<>();
-        for(int i : this.habitat.getVoluntarios().keySet()){  
+        for (int i : this.habitat.getVoluntarios().keySet()) {
+            System.out.println(i);
+            System.out.println(this.habitat.getVoluntarios().get(i).toString());
             str.addElement(this.habitat.getVoluntarios().get(i).getNomeVoluntario());
-            }
+        }
         listaVoluntarios.setModel(str);
     }
-    
-    public void listaProjectos(){
+
+    public void listaProjectos() {
         DefaultListModel<Integer> str1 = new DefaultListModel<>();
-        for(int i : this.habitat.getProjetos().keySet()){
+        for (int i : this.habitat.getProjetos().keySet()) {
             str1.addElement(this.habitat.getProjetos().get(i).getId());
         }
         listaProjectos.setModel(str1);
     }
-    
-    public void listaEventos(){
+
+    public void listaEventos() {
         DefaultListModel<Integer> str2 = new DefaultListModel<>();
-        for(int i : this.habitat.getEventos().keySet()){
+        for (int i : this.habitat.getEventos().keySet()) {
             str2.addElement(this.habitat.getEventos().get(i).getId());
         }
         listaVoluntarios.setModel(str2);
     }
-    
-    public void listaDonativos(){
+
+    public void listaDonativos() {
         DefaultListModel<Integer> str3 = new DefaultListModel<>();
-        for(int i: this.habitat.getDonativos().keySet()){
+        for (int i : this.habitat.getDonativos().keySet()) {
             str3.addElement(this.habitat.getDonativos().get(i).getId());
-            System.out.println(i);
+            //System.out.println(i);
         }
     }
-    
+
     public String seleccionaVoluntario() {
         String s = null;
 
-        if (listaVoluntarios.getSelectedIndex() != -1)
+        if (listaVoluntarios.getSelectedIndex() != -1) {
             s = listaVoluntarios.getSelectedValue().toString();
-        
+        }
+
         //listaVoluntarios.clearSelection();
         return s;
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1417,7 +1418,7 @@ public final class Habitat extends javax.swing.JFrame {
         jTextPaneCod.setEditable(true);
         jTextPaneEquipa.setEditable(true);
         jTextPaneProf.setEditable(true);
-        
+
         this.jTextPaneNome.setText(this.jTextPaneNome.getText());
         this.jTextPaneLocalidade.setText(this.jTextPaneLocalidade.getText());
         this.jTextPaneDatNasc.setText(this.jTextPaneDatNasc.getText());
@@ -1444,7 +1445,7 @@ public final class Habitat extends javax.swing.JFrame {
 
     private void jButtonConfirmarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarEditarActionPerformed
         // TODO add your handling code here:
-         //Voluntarios
+        //Voluntarios
         this.jButtonConfirmarEditar.setVisible(false);
         this.jButtonEditarVoluntario.setVisible(true);
         jTextPaneNome.setEditable(false);
@@ -1454,14 +1455,13 @@ public final class Habitat extends javax.swing.JFrame {
         jTextPaneEquipa.setEditable(false);
         jTextPaneProf.setEditable(false);
         jTextPaneDatNasc.setEditable(false);
-        
-                
-        
+
+
     }//GEN-LAST:event_jButtonConfirmarEditarActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         // TODO add your handling code here:
-        
+
         //Projetos
         jButton21.setVisible(true);
         jButton20.setVisible(false);
@@ -1471,28 +1471,28 @@ public final class Habitat extends javax.swing.JFrame {
         jTextArea1.setEditable(true);
         jComboBox14.enable();
         jTextPane2.setEditable(true);
-      
-  
+
+
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         // TODO add your handling code here:
-        
+
         //Projetos
-      jButton21.setVisible(false);
-      jButton20.setVisible(true); 
-      jButton2.setVisible(false);
-      jButton3.setVisible(false);
-      jTextPane1.setEditable(false);
-      jTextArea1.setEditable(false);
-      jComboBox14.disable();
-      jTextPane2.setEditable(false);
+        jButton21.setVisible(false);
+        jButton20.setVisible(true);
+        jButton2.setVisible(false);
+        jButton3.setVisible(false);
+        jTextPane1.setEditable(false);
+        jTextArea1.setEditable(false);
+        jComboBox14.disable();
+        jTextPane2.setEditable(false);
 
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
         // TODO add your handling code here:
-        
+
         //Eventos
         this.jButton22.setVisible(false);
         this.jButton23.setVisible(true);
@@ -1501,7 +1501,7 @@ public final class Habitat extends javax.swing.JFrame {
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         // TODO add your handling code here:
-         //Eventos
+        //Eventos
         this.jButton23.setVisible(false);
         this.jButton22.setVisible(true);
         jTextPane20.setEditable(false);
@@ -1537,7 +1537,7 @@ public final class Habitat extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-      
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1549,7 +1549,7 @@ public final class Habitat extends javax.swing.JFrame {
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
         // TODO add your handling code here:
         new AdicionarVoluntario(habitat).setVisible(true);
-        
+
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -1579,7 +1579,7 @@ public final class Habitat extends javax.swing.JFrame {
         // TODO add your handling code here:
         String aux = seleccionaVoluntario();
         Voluntario v = this.habitat.getVoluntario(aux);
-        
+
         this.jTextPaneNome.setText(v.getNomeVoluntario());
         DateFormat df = new SimpleDateFormat("MM//dd/yyy");
         String data = df.format(v.getDataNascimento());
@@ -1589,22 +1589,23 @@ public final class Habitat extends javax.swing.JFrame {
         this.jTextPaneProf.setText(v.getProfissao());
         this.jTextPaneCod.setText(v.getCodPostal());
         this.jTextPaneEquipa.setText(Integer.toString(v.getId_equipa()));
-        
+
     }//GEN-LAST:event_listaVoluntariosValueChanged
 
     private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
         // TODO add your handling code here:
         String aux = seleccionaVoluntario();
         System.out.println(aux);
-        for (int i : this.habitat.getVoluntarios().keySet())
-            for(Voluntario v : this.habitat.getVoluntarios().values())
-                if(v.getNomeVoluntario().equals(aux))
+        for (int i : this.habitat.getVoluntarios().keySet()) {
+            for (Voluntario v : this.habitat.getVoluntarios().values()) {
+                if (v.getNomeVoluntario().equals(aux)) {
                     this.habitat.getVoluntarios().remove(i);
-                    System.out.println("É o mesmo");
+                }
+            }
+        }
+        //System.out.println("É o mesmo");
     }//GEN-LAST:event_jButtonRemoverActionPerformed
 
-   
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Donativos;

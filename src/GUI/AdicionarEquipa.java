@@ -9,30 +9,125 @@ import Classes.Equipa;
 import Classes.Funcionario;
 import Classes.HabitatClass;
 import Classes.Voluntario;
+import ClassesDAO.ConexaoBD;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Patrícia
  */
-
-  
 public class AdicionarEquipa extends javax.swing.JFrame {
+
     HabitatClass habitat;
-    ArrayList<String> membros = new ArrayList<>();
-    ArrayList<String> voluntarios = new ArrayList<>();
-    
+    Map<Integer, Voluntario> membros;
+    DefaultListModel<String> voluntariosList = new DefaultListModel<String>();
+    DefaultListModel<String> membrosList = new DefaultListModel<String>();
+
     /**
      * Creates new form AdicionarEquipa1
      */
     public AdicionarEquipa(HabitatClass h) {
         initComponents();
         this.habitat = h;
-        
+        membros = new HashMap<>();
+        voluntariosList = new DefaultListModel<>();
+        membrosList = new DefaultListModel<>();
+        for (int i : this.habitat.getVoluntarios().keySet()) {
+            voluntariosList.addElement(this.habitat.getVoluntarios().get(i).getNomeVoluntario());
+        }
+        JListVoluntarios.setModel(voluntariosList);
+        jListMembros.setModel(membrosList);
+        //listaMembros();
+
         //Continuar -- falta preencher a lista com da esqueda com todos os voluntarios da habitat
+    }
+
+    public String seleccionaVoluntario() {
+        String s = null;
+
+        if (JListVoluntarios.getSelectedIndex() != -1) {
+            s = JListVoluntarios.getSelectedValue().toString();
+        }
+        return s;
+    }
+
+    public String seleccionaMembro() {
+        String s = null;
+
+        if (jListMembros.getSelectedIndex() != -1) {
+            s = jListMembros.getSelectedValue().toString();
+        }
+        return s;
+    }
+
+    public boolean selecionado(String s) {
+        boolean bool = false;
+        if (seleccionaVoluntario() != null) {
+            bool = true;
+        }
+        return bool;
+    }
+
+    public Voluntario addMembro(String selec) {
+        Voluntario vol = null;
+        int key = 0;
+        for (int id : this.habitat.getVoluntarios().keySet()) {
+            for (Voluntario v : this.habitat.getVoluntarios().values()) {
+                if (v.getNomeVoluntario().equals(selec)) {
+                    key = id;
+                    vol = v;
+                }
+            }
+            this.membros.put(key, vol);
+        }
         
         
+        membrosList.addElement(selec);
+        voluntariosList.removeElement(selec);
+        
+        return vol;
+    }
+
+    public String remMembro(String selec) {
+        String s = null;
+        Voluntario vol = null;
+        int key = 0;
+
+        voluntariosList.addElement(selec);
+        membrosList.removeElement(selec);
+
+        //voluntariosList.remove(sele);
+        return s;
+    }
+    
+    
+    public void associaEquipa(int id) {
+        PreparedStatement pst = null;
+
+        try {
+            
+            for (int i=0 ; i<this.membros.size() ; i++){
+                String sql;
+                
+                //System.out.println(this.membros.get(i).getId());
+                sql = "UPDATE test.Voluntário "
+                    + "SET Equipa = "+id
+                    + "WHERE idVoluntário="+i;
+
+                pst = ConexaoBD.getConexao().prepareCall(sql);
+                pst.execute();
+            }
+            System.out.println(this.membros.size());
+        } catch (SQLException e) {
+        }
     }
 
     /**
@@ -49,15 +144,17 @@ public class AdicionarEquipa extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonAdicionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jListMembros = new javax.swing.JList();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        JListVoluntarios = new javax.swing.JList();
+        jButtonAdd = new javax.swing.JButton();
+        jButtonRemove = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldPais = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,38 +183,36 @@ public class AdicionarEquipa extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Membros:");
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jButton1.setText("Adicionar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAdicionar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jButtonAdicionar.setText("Adicionar");
+        jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAdicionarActionPerformed(evt);
             }
         });
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(jListMembros);
 
-        jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(JListVoluntarios);
 
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jButton2.setText("-->");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAdd.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jButtonAdd.setText("-->");
+        jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonAddActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jButton3.setText("<--");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRemove.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jButtonRemove.setText("<--");
+        jButtonRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonRemoveActionPerformed(evt);
             }
         });
+
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel4.setText("País:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,25 +233,34 @@ public class AdicionarEquipa extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(12, 12, 12)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 25, Short.MAX_VALUE)
+                        .addGap(0, 307, Short.MAX_VALUE)
+                        .addComponent(jButtonAdicionar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel3))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(jButtonAdd, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButtonRemove, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)))))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jTextFieldPais, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -166,31 +270,29 @@ public class AdicionarEquipa extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(11, 11, 11)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(84, 84, 84)
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 68, Short.MAX_VALUE)))
+                        .addGap(46, 46, 46)
+                        .addComponent(jButtonAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonRemove))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jButtonAdicionar)
                 .addContainerGap())
         );
 
@@ -212,58 +314,74 @@ public class AdicionarEquipa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
         // TODO add your handling code here:
-        
-        
-        this.membros.add(jList2.getSelectedValue().toString());
-    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        this.membros.remove(jList1.getSelectedValue().toString());
-    }//GEN-LAST:event_jButton3ActionPerformed
+        String selec = JListVoluntarios.getSelectedValue().toString();
+        addMembro(selec);
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonAddActionPerformed
+
+    private void jButtonRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveActionPerformed
         // TODO add your handling code here:
-        
-        String nome = jTextField1.getText();
-        ArrayList<Voluntario> membross = new ArrayList<>();
-        Equipa nova = new Equipa(nome,membross);
-        
-        for(String s : this.membros){
-            membross.add(habitat.getVoluntario(s));
+        String selec = jListMembros.getSelectedValue().toString();
+
+        remMembro(selec);
+
+    }//GEN-LAST:event_jButtonRemoveActionPerformed
+
+    private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
+        // TODO add your handling code here:
+        String nomeEquipa=null;
+        String pais =null;
+        if(jTextFieldNome.getText()!=null)
+             nomeEquipa= jTextFieldNome.getText();
+        else{
+            System.out.println("Nome inválido");
         }
+        if(jTextFieldPais.getText()!=null)
+            pais = jTextFieldPais.getText();
+        else{
+            System.out.println("País inválido");
+        }        
         
-        if(habitat.addEquipa(nova,nova.getId())==1){
+        int id = habitat.getEquipas().size() + 1;
+        
+        Equipa nova = new Equipa(id, nomeEquipa, pais);
+        habitat.getEquipas().put(id, nova);
+        
+        associaEquipa(id);
+        
+        if (habitat.addEquipa(nova, nova.getId()) == 1) {
             JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
             this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Já existe uma equipa com esse nome");
         }
-        else
-             JOptionPane.showMessageDialog(null, "Já existe uma equipa com esse nome");
-            
-       
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+
+    }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JList JListVoluntarios;
+    private javax.swing.JButton jButtonAdd;
+    private javax.swing.JButton jButtonAdicionar;
+    private javax.swing.JButton jButtonRemove;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
-    private javax.swing.JList jList2;
+    private javax.swing.JList jListMembros;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldNome;
+    private javax.swing.JTextField jTextFieldPais;
     // End of variables declaration//GEN-END:variables
 }

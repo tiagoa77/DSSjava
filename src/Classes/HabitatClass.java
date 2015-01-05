@@ -410,8 +410,8 @@ public class HabitatClass {
     }
     
     public boolean validaLogin(String login, String password) {
-        System.out.println("PasswordParametro: "+password);
-        System.out.println("PasswordBD: "+this.funcionarios.size());
+        //System.out.println("PasswordParametro: "+password);
+        //System.out.println("PasswordBD: "+this.funcionarios.size());
        // System.out.println(this.funcionarios.get(login).getPassword()==password);
         return (existeLogin(login) && this.funcionarios.get(login).getPassword().equals(password));
     }

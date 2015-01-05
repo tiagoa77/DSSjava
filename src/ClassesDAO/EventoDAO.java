@@ -147,7 +147,7 @@ public class EventoDAO implements Map<Integer,Evento> {
             
             while(rs.next()){
                 res.add(rs.getInt(1));
-            System.out.println("keysetEventos: "+rs.getInt(1));
+            //System.out.println("keysetEventos: "+rs.getInt(1));
             }
             
             ConexaoBD.fecharCursor(rs, stm);

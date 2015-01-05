@@ -8,7 +8,6 @@ package GUI;
 import Classes.Equipa;
 import Classes.HabitatClass;
 import Classes.Voluntario;
-import static com.sun.org.apache.xerces.internal.impl.dtd.XMLDTDLoader.LOCALE;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,12 +30,13 @@ public class AdicionarVoluntario extends javax.swing.JFrame {
 
     public AdicionarVoluntario(HabitatClass h) {
         this.habitat = h;
+        initComponents();
         for (int i : habitat.getEquipas().keySet()) {
             jComboBox4.addItem(habitat.getEquipas().get(i).getNome());
-            System.out.println("KEYSET EUIPAS:" + i);
+            //System.out.println("KEYSET EUIPAS:" + i);
         }
 
-        initComponents();
+        
 
     }
 
@@ -103,6 +103,12 @@ public class AdicionarVoluntario extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Nome:");
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Data de Nascimento (MM/dd/yyyy):");
 
@@ -137,7 +143,6 @@ public class AdicionarVoluntario extends javax.swing.JFrame {
         jLabel7.setText("Equipa:");
 
         jComboBox4.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox4ActionPerformed(evt);
@@ -337,7 +342,7 @@ public class AdicionarVoluntario extends javax.swing.JFrame {
             Equipa nova = new Equipa();
 
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-            Voluntario novo = new Voluntario(codPostal, sqlDate, email, profissao, localidade, nome, rua, telefone, nova.getId());
+            Voluntario novo = new Voluntario(habitat.getVoluntarios().size()+1,codPostal, sqlDate, email, profissao, localidade, nome, rua, telefone, nova.getId());
 
             if (habitat.addVoluntario(novo, novo.getId()) == 1) {
                 JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
@@ -356,6 +361,10 @@ public class AdicionarVoluntario extends javax.swing.JFrame {
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox4ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
