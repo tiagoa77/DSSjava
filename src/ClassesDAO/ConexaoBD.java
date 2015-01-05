@@ -17,7 +17,11 @@ import java.sql.Statement;
  * @author Tiago
  */
 public class ConexaoBD {
+<<<<<<< HEAD
     public static final String url = "jdbc:mysql://diguest-pc/MySQL?" + "user=root&password=root" ;
+=======
+    public static final String url = "jdbc:mysql://localhost/test?" + "user=root&password=root" ;
+>>>>>>> origin/master
     public static Connection conexao;
 	
     public static void iniciarConexao() {
