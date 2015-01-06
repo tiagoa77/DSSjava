@@ -17,7 +17,6 @@ public class Familia {
     private int idFamilia;
     private String nome;
     private ArrayList<Membro> membros;
-    private Membro representante;
     private String codPostal;
     private String localidade;
     private String rua;
@@ -27,7 +26,7 @@ public class Familia {
         this.idFamilia=f.getIdFamilia();
         this.nome = f.getNome();
         this.membros = f.getMembros();
-        this.representante = f.getRepresentante();
+        
         this.codPostal = f.getCodPostal();
         this.localidade = f.getLocalidade();
         this.rua = f.getRua();
@@ -36,16 +35,16 @@ public class Familia {
         this.idFamilia=0;
         this.nome = "";
         this.membros = new ArrayList<Membro>();
-        this.representante = new Membro();
+        
         this.codPostal = "";
         this.localidade = "";
         this.rua = "";
     }
-    public Familia(int id, String n, ArrayList<Membro> ms, Membro m, String c, String l, String r){
+    public Familia(int id, String n, ArrayList<Membro> ms, String c, String l, String r){
         this.idFamilia=id;
         this.nome = n;
         this.membros = ms;
-        this.representante = m;
+        
         this.codPostal = c;
         this.localidade = l;
         this.rua = r;
@@ -73,9 +72,7 @@ public class Familia {
     public void setRua(String r){
         this.rua = r;
     }
-    public void setRepresentante(Membro m){
-        this.representante = m;
-    }
+    
     public void setMembros(ArrayList<Membro> membros){
         this.membros = membros;
     }
@@ -91,9 +88,7 @@ public class Familia {
     public String getRua(){
         return this.rua;
     }
-    public Membro getRepresentante(){
-        return this.representante;
-    }
+   
     public ArrayList<Membro> getMembros(){
         return this.membros;
     }
@@ -135,7 +130,7 @@ public class Familia {
     public String toString() {
         StringBuilder s = new StringBuilder("------ Família ---------\n");
         s.append("Nome: ").append(nome).append("\n");
-        s.append("Representante : ").append(representante).append("\n");
+      
         s.append("Localidade: ").append(localidade).append("\n");
         s.append("Rua: ").append(rua).append("\n");
         s.append("Código Postal: ").append(codPostal).append("\n");
