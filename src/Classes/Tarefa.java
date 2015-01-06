@@ -1,40 +1,55 @@
 package Classes;
 
 import ClassesDAO.ProjetoDAO;
+import java.util.Date;
 import java.util.Map;
 
 public class Tarefa {
     
     private int id;
-    private String nome;
-    private Map<Integer,Projeto> projetos;
+    private double custo;
+    private Date dataLimite;
+    private String descricao;
     
     public Tarefa() {
         this.id=this.id+1;
-        this.nome = "";
-        this.projetos=new ProjetoDAO(this.id);
+        this.custo = 0.0;
+        this.dataLimite = new Date();
+        this.descricao = "";
     }
 
-    public Tarefa(String n) {
-        this.id = id + 1;
-        this.nome = n;
+    public Tarefa(int id, double c, Date d, String desc) {
+        this.id = id;
+        this.custo = c;
+        this.dataLimite = d;
+        this.descricao = desc;
     }
 
     public Tarefa(Tarefa t) {
-        this.nome = t.getNomeTarefa();
+        this.custo = t.getCusto();
+        this.dataLimite = t.getDataLimite();
+        this.descricao = t.getDescricao();
         this.id = t.getId();
     }
 
-    public String getNomeTarefa() {
-        return this.nome;
+    public double getCusto() {
+        return this.custo;
+    }
+    
+    public Date getDataLimite() {
+        return this.dataLimite;
+    }
+    
+    public String getDescricao() {
+        return this.descricao;
     }
 
     public int getId() {
         return this.id;
     }
 
-    public void setNome(String n) {
-        this.nome = n;
+    public void setDescricao(String d) {
+        this.descricao = d;
     }
 
     public void setId(int i) {
@@ -47,7 +62,6 @@ public class Tarefa {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Nome: ").append(this.getNomeTarefa()).append("\n");
         sb.append("Id:").append(this.getId()).append("\n");
         return sb.toString();
     }
@@ -60,7 +74,7 @@ public class Tarefa {
             return false;
         }
         Tarefa t = (Tarefa) obj;
-        return this.nome.equals(t.getNomeTarefa()) && (this.id == t.getId());
+        return this.descricao.equals(t.getDescricao()) && (this.id == t.getId());
     }
 
 }
