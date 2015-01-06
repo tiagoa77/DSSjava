@@ -122,7 +122,17 @@ public class ProjetoDAO implements Map<Integer,Projeto>{
 
     @Override
     public Projeto remove(Object key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Projeto proj = null;
+        try {
+            int id = (Integer) key;
+            String sql = "delete from test.Projeto where idProjeto='"+id+"'";
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return proj;
     }
 
     
