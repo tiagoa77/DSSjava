@@ -21,14 +21,14 @@ import java.util.TreeSet;
  * @author Tiago
  */
 public class DonativoDAO implements Map<Integer,Donativo> {
-    private int id;
+    private int idDoador;
 
     public DonativoDAO() {
     }
     
     
     public DonativoDAO(int id) {
-        this.id=id;
+        this.idDoador=id;
     }
     
     @Override
@@ -36,7 +36,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
         int res = 0;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM DONATIVO where doador="+this.id;
+            String sql = "SELECT * FROM DONATIVO where doador="+this.idDoador;
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
@@ -52,7 +52,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
         boolean res = false;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Donativo where doador=" + this.id;
+            String sql = "SELECT * FROM Donativo where doador=" + this.idDoador;
             ResultSet rs = stm.executeQuery(sql);
             if(!rs.next())
                 res=true;
@@ -67,7 +67,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
         boolean res = false;
         try {
             int id = (Integer) key;
-            String sql = "SELECT * FROM Donativo WHERE doador="+ this.id;
+            String sql = "SELECT * FROM Donativo WHERE doador="+ this.idDoador;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -132,7 +132,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
         Donativo don = null;
         try {
             int id = (Integer) key;
-            String sql = "delete from donativo where idDonativo="+id+" and Doador= "+this.id;
+            String sql = "delete from donativo where idDonativo="+id+" and Doador= "+this.idDoador;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
