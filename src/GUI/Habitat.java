@@ -6,17 +6,17 @@
 package GUI;
 
 import Classes.HabitatClass;
+import Classes.Material;
 import Classes.Voluntario;
+import ClassesDAO.ConexaoBD;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.JTextPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.plaf.basic.BasicListUI;
 
 /**
  *
@@ -29,16 +29,16 @@ public final class Habitat extends javax.swing.JFrame {
     /**
      * Creates new form Projectos
      *
-     * @param h
+     
      */
     public Habitat() {
         this.habitat = new HabitatClass();
-        this.setLocationRelativeTo(null);
+//        this.setLocationRelativeTo(null);
         initComponents();
 
         listaVoluntarios();
-
-        //listaProjectos();  
+        listaProjectos();
+        listaMateriais();
         //listaEventos();
         //listaDonativos();
         //Projetos
@@ -82,12 +82,72 @@ public final class Habitat extends javax.swing.JFrame {
     public void listaVoluntarios() {
         DefaultListModel<String> str = new DefaultListModel<>();
         for (int i : this.habitat.getVoluntarios().keySet()) {
-            System.out.println(i);
-            System.out.println(this.habitat.getVoluntarios().get(i).toString());
             str.addElement(this.habitat.getVoluntarios().get(i).getNomeVoluntario());
         }
         listaVoluntarios.setModel(str);
     }
+    
+    public Set<Integer> keysetVoluntariosDisponiveis(){
+        Set<Integer> res = new TreeSet<>();
+        try {
+            String sql = "SELECT * FROM Voluntário WHERE Disponibilidade=1";
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                res.add(rs.getInt(1));
+            }
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
+    }
+    
+    public Set<Integer> keysetVoluntariosIndisponiveis(){
+        Set<Integer> res = new TreeSet<>();
+        try {
+            String sql = "SELECT * FROM Voluntário WHERE Disponibilidade=0";
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                res.add(rs.getInt(1));
+            }
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
+    }
+    
+    public void listaVoluntariosDisponiveis() {
+        DefaultListModel<String> str = new DefaultListModel<>();
+        for (int i : keysetVoluntariosDisponiveis()) {
+            str.addElement(this.habitat.getVoluntarios().get(i).getNomeVoluntario());
+        }
+        listaVoluntarios.setModel(str);
+    }
+    
+    public void listaVoluntariosIndisponiveis() {
+        DefaultListModel<String> str = new DefaultListModel<>();
+        for (int i : keysetVoluntariosIndisponiveis()) {
+            str.addElement(this.habitat.getVoluntarios().get(i).getNomeVoluntario());
+        }
+        listaVoluntarios.setModel(str);
+    }
+    
+    private void updateListaVoluntarios()  {
+        if (jCheckBoxDisponivel.isSelected() && jCheckBoxIndisponivel.isSelected()) {
+            listaVoluntarios();
+        }else if(jCheckBoxDisponivel.isSelected()){
+            listaVoluntariosDisponiveis();
+        }else if(jCheckBoxIndisponivel.isSelected()){
+            listaVoluntariosIndisponiveis();
+        }else{
+            listaVoluntarios();
+        }
+        
+    }
+    
 
     public void listaProjectos() {
         DefaultListModel<Integer> str1 = new DefaultListModel<>();
@@ -102,7 +162,7 @@ public final class Habitat extends javax.swing.JFrame {
         for (int i : this.habitat.getEventos().keySet()) {
             str2.addElement(this.habitat.getEventos().get(i).getId());
         }
-        listaVoluntarios.setModel(str2);
+        //listaVoluntarios.setModel(str2);
     }
 
     public void listaDonativos() {
@@ -112,12 +172,32 @@ public final class Habitat extends javax.swing.JFrame {
             //System.out.println(i);
         }
     }
+    
+    public void listaMateriais() {
+        DefaultListModel<Integer> str4 = new DefaultListModel<>();
+        for (int i : this.habitat.getMateriais().keySet()) {
+            System.out.println(i);
+            str4.addElement(this.habitat.getMateriais().get(i).getId());
+        }
+        listMateriais.setModel(str4);
+    }
 
     public String seleccionaVoluntario() {
         String s = null;
 
         if (listaVoluntarios.getSelectedIndex() != -1) {
             s = listaVoluntarios.getSelectedValue().toString();
+        }
+
+        //listaVoluntarios.clearSelection();
+        return s;
+    }
+    
+    public String seleccionaMaterial() {
+        String s = null;
+
+        if (listMateriais.getSelectedIndex() != -1) {
+            s = listMateriais.getSelectedValue().toString();
         }
 
         //listaVoluntarios.clearSelection();
@@ -262,21 +342,21 @@ public final class Habitat extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         jScrollPane24 = new javax.swing.JScrollPane();
-        jList7 = new javax.swing.JList();
+        listMateriais = new javax.swing.JList();
         jButton16 = new javax.swing.JButton();
         jPanel15 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jScrollPane25 = new javax.swing.JScrollPane();
-        jTextPane16 = new javax.swing.JTextPane();
+        txtQuantidade = new javax.swing.JTextPane();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jScrollPane27 = new javax.swing.JScrollPane();
-        jTextPane17 = new javax.swing.JTextPane();
+        txtDoador = new javax.swing.JTextPane();
         jLabel37 = new javax.swing.JLabel();
         jScrollPane28 = new javax.swing.JScrollPane();
-        jTextPane18 = new javax.swing.JTextPane();
+        txtProjeto = new javax.swing.JTextPane();
         jScrollPane19 = new javax.swing.JScrollPane();
-        jTextPane13 = new javax.swing.JTextPane();
+        txtDescricao = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -480,7 +560,7 @@ public final class Habitat extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton20)
                     .addComponent(jButton21))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Resources/logo.png.jpg"))); // NOI18N
@@ -574,10 +654,20 @@ public final class Habitat extends javax.swing.JFrame {
         jCheckBoxDisponivel.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBoxDisponivel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBoxDisponivel.setText("Disponíveis");
+        jCheckBoxDisponivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxDisponivelActionPerformed(evt);
+            }
+        });
 
         jCheckBoxIndisponivel.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBoxIndisponivel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBoxIndisponivel.setText("Não Disponíveis");
+        jCheckBoxIndisponivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxIndisponivelActionPerformed(evt);
+            }
+        });
 
         jButtonAdicionar.setText("Adicionar");
         jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -1271,8 +1361,13 @@ public final class Habitat extends javax.swing.JFrame {
 
         jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Resources/logo.png.jpg"))); // NOI18N
 
-        jList7.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jScrollPane24.setViewportView(jList7);
+        listMateriais.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        listMateriais.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listMateriaisValueChanged(evt);
+            }
+        });
+        jScrollPane24.setViewportView(listMateriais);
 
         jButton16.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton16.setText("Adicionar Material");
@@ -1287,8 +1382,8 @@ public final class Habitat extends javax.swing.JFrame {
         jLabel34.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel34.setText("Quantidade Disponível");
 
-        jTextPane16.setEditable(false);
-        jScrollPane25.setViewportView(jTextPane16);
+        txtQuantidade.setEditable(false);
+        jScrollPane25.setViewportView(txtQuantidade);
 
         jLabel35.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel35.setText("Descrição");
@@ -1296,17 +1391,17 @@ public final class Habitat extends javax.swing.JFrame {
         jLabel36.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel36.setText("Doador");
 
-        jTextPane17.setEditable(false);
-        jScrollPane27.setViewportView(jTextPane17);
+        txtDoador.setEditable(false);
+        jScrollPane27.setViewportView(txtDoador);
 
         jLabel37.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel37.setText("Projeto");
 
-        jTextPane18.setEditable(false);
-        jScrollPane28.setViewportView(jTextPane18);
+        txtProjeto.setEditable(false);
+        jScrollPane28.setViewportView(txtProjeto);
 
-        jTextPane13.setEditable(false);
-        jScrollPane19.setViewportView(jTextPane13);
+        txtDescricao.setEditable(false);
+        jScrollPane19.setViewportView(txtDescricao);
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -1547,9 +1642,9 @@ public final class Habitat extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
-        // TODO add your handling code here:
-        new AdicionarVoluntario(habitat).setVisible(true);
-
+        AdicionarVoluntario d = new AdicionarVoluntario(this.habitat);
+        d.setVisible(true);
+        listaVoluntarios();
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -1564,7 +1659,9 @@ public final class Habitat extends javax.swing.JFrame {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
-        new AdicionarMaterial(habitat).setVisible(true);
+        AdicionarMaterial a = new AdicionarMaterial(habitat);
+        a.setVisible(true);
+        listaMateriais();
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1580,31 +1677,68 @@ public final class Habitat extends javax.swing.JFrame {
         String aux = seleccionaVoluntario();
         Voluntario v = this.habitat.getVoluntario(aux);
 
-        this.jTextPaneNome.setText(v.getNomeVoluntario());
-        DateFormat df = new SimpleDateFormat("MM//dd/yyy");
-        String data = df.format(v.getDataNascimento());
-        this.jTextPaneDatNasc.setText(data);
-        this.jTextPaneLocalidade.setText(v.getLocalidade());
-        this.jTextPaneRua.setText(v.getRua());
-        this.jTextPaneProf.setText(v.getProfissao());
-        this.jTextPaneCod.setText(v.getCodPostal());
-        this.jTextPaneEquipa.setText(Integer.toString(v.getId_equipa()));
+        if (aux != null && v != null) {
+            this.jTextPaneNome.setText(v.getNomeVoluntario());
+            DateFormat df = new SimpleDateFormat("MM//dd/yyy");
+            String data = df.format(v.getDataNascimento());
+            this.jTextPaneDatNasc.setText(data);
+            this.jTextPaneLocalidade.setText(v.getLocalidade());
+            this.jTextPaneRua.setText(v.getRua());
+            this.jTextPaneProf.setText(v.getProfissao());
+            this.jTextPaneCod.setText(v.getCodPostal());
+            String equipa = this.habitat.getEquipas().get(v.getId_equipa()).getNome();
+            this.jTextPaneEquipa.setText(equipa);
+        }
 
     }//GEN-LAST:event_listaVoluntariosValueChanged
 
     private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
         // TODO add your handling code here:
         String aux = seleccionaVoluntario();
-        System.out.println(aux);
+        int key=0;
         for (int i : this.habitat.getVoluntarios().keySet()) {
-            for (Voluntario v : this.habitat.getVoluntarios().values()) {
-                if (v.getNomeVoluntario().equals(aux)) {
-                    this.habitat.getVoluntarios().remove(i);
-                }
+            if (this.habitat.getVoluntarios().get(i).getNomeVoluntario().equals(aux)) {
+                key=i;
             }
         }
-        //System.out.println("É o mesmo");
+        this.habitat.getVoluntarios().remove(key);
+        System.out.println("KEY :"+key);
+        listaVoluntarios.clearSelection();
+        listaVoluntarios();
+        this.jTextPaneNome.setText(null);
+        this.jTextPaneDatNasc.setText(null);
+        this.jTextPaneLocalidade.setText(null);
+        this.jTextPaneRua.setText(null);
+        this.jTextPaneProf.setText(null);
+        this.jTextPaneCod.setText(null);
+        this.jTextPaneEquipa.setText(null);
+        
+
+
     }//GEN-LAST:event_jButtonRemoverActionPerformed
+
+    private void jCheckBoxDisponivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxDisponivelActionPerformed
+        updateListaVoluntarios();
+    }//GEN-LAST:event_jCheckBoxDisponivelActionPerformed
+
+    private void jCheckBoxIndisponivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxIndisponivelActionPerformed
+        updateListaVoluntarios();
+    }//GEN-LAST:event_jCheckBoxIndisponivelActionPerformed
+
+    private void listMateriaisValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listMateriaisValueChanged
+        String aux = seleccionaMaterial();
+        int id = Integer.parseInt(aux);
+        Material m = this.habitat.getMateriais().get(id);
+        
+
+        if (aux != null && m != null) {
+            String quant = Double.toString(m.getStock());
+            this.txtQuantidade.setText(quant);
+            this.txtDescricao.setText(m.getDescricao());
+            this.txtDoador.setText(Integer.toString(m.getId_donativo()));
+            this.txtProjeto.setText(Integer.toString(m.getId_projecto()));
+        }
+    }//GEN-LAST:event_listMateriaisValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1685,7 +1819,6 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelProf;
     private javax.swing.JLabel jLabelRua;
     private javax.swing.JList jList2;
-    private javax.swing.JList jList7;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -1733,12 +1866,8 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPane10;
     private javax.swing.JTextPane jTextPane11;
     private javax.swing.JTextPane jTextPane12;
-    private javax.swing.JTextPane jTextPane13;
     private javax.swing.JTextPane jTextPane14;
     private javax.swing.JTextPane jTextPane15;
-    private javax.swing.JTextPane jTextPane16;
-    private javax.swing.JTextPane jTextPane17;
-    private javax.swing.JTextPane jTextPane18;
     private javax.swing.JTextPane jTextPane2;
     private javax.swing.JTextPane jTextPane20;
     private javax.swing.JTextPane jTextPaneCod;
@@ -1748,9 +1877,14 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPaneNome;
     private javax.swing.JTextPane jTextPaneProf;
     private javax.swing.JTextPane jTextPaneRua;
+    private javax.swing.JList listMateriais;
     private javax.swing.JList listaDonativos;
     private javax.swing.JList listaEventos;
     private javax.swing.JList listaProjectos;
     private javax.swing.JList listaVoluntarios;
+    private javax.swing.JTextPane txtDescricao;
+    private javax.swing.JTextPane txtDoador;
+    private javax.swing.JTextPane txtProjeto;
+    private javax.swing.JTextPane txtQuantidade;
     // End of variables declaration//GEN-END:variables
 }

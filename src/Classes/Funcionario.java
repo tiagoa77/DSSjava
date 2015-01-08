@@ -153,24 +153,25 @@ public class Funcionario {
 
     /*
      Método para aceitar uma candidatura passada como argumento
-     */
+     
     public void aceitaCandidatura(Candidatura c) {
         HabitatClass.getCandidaturas().get(c.getId()).setEstado("Aceite");
     }
-    /*
+    
      Método para rejeitar uma candidatura passada como argumento
-     */
+    
 
     public void rejeitaCandidatura(Candidatura c) {
         HabitatClass.getCandidaturas().get(c.getId()).setEstado("Rejeitada");
     }
-    /*
+
      Método para analisar uma candidatura passada como argumento
-     */
+
 
     public void analisaCandidatura(Candidatura c) {
         HabitatClass.getCandidaturas().get(c.getId()).setEstado("A analisar");
-    }
+    } 
+*/
     /*
     public static String encriptarPassword (String pw) {
         byte[] pwB = pw.getBytes() ;

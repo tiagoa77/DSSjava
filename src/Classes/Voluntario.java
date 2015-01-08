@@ -33,6 +33,7 @@ public Voluntario (int id,String c,Date d,String e,String p,String l,String n, S
     this.id = id;
     //this.id=id;
     this.disponibilidade = true;
+    this.id_equipa=id_equipa;
     
     }
     

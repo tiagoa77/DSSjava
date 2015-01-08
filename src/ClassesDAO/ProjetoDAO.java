@@ -66,7 +66,7 @@ public class ProjetoDAO implements Map<Integer,Projeto>{
         boolean res = false;
         try {
             int id = (Integer) key;
-            String sql = "SELECT * FROM Projeto WHERE idProjeto='"+id+"'";
+            String sql = "SELECT * FROM Projeto WHERE idProjeto="+id;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -80,17 +80,17 @@ public class ProjetoDAO implements Map<Integer,Projeto>{
     
     @Override
     public Projeto get(Object key) {
-        Projeto p = null;
+        Projeto p = new Projeto();
         
         try {
             Integer id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Projeto WHERE idProjeto= '"+id+"'";
+            String sql = "SELECT * FROM Projeto WHERE idProjeto="+id;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
                 int idProjeto = rs.getInt(1);
-                Date dataAprovacao = rs.getDate(2);
+                p.setId(idProjeto);
             }           
             
             ConexaoBD.fecharCursor(rs, stm);

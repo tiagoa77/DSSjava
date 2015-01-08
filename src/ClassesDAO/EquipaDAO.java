@@ -103,12 +103,12 @@ public class EquipaDAO implements Map<Integer,Equipa>{
             int id_equipa=0;
             id_equipa=this.size()+1;
             String sql;
-            sql = "INSERT INTO test.Equipa(idEquipa,Nome,Pais) VALUES (?,'?','?')";                
+            sql = "INSERT INTO test.Equipa(Nome,Pais,idEquipa) VALUES (?,?,?)";                
                                                           
             pst = ConexaoBD.getConexao().prepareCall(sql);
-            pst.setInt(1,id_equipa);
-            pst.setString(2, value.getNome());
-            pst.setString(3, value.getPais());
+            pst.setString(1, value.getNome());
+            pst.setString(2, value.getPais());
+            pst.setInt(3,id_equipa);
             pst.executeUpdate(sql);
             
         }catch(SQLException e){ }

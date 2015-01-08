@@ -38,7 +38,7 @@ public class MaterialDAO implements Map<Integer, Material>{
         int res = 0;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Material where donativo="+this.iddonativo+" and projecto="+this.idprojecto;
+            String sql = "SELECT * FROM test.Material";
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
@@ -54,7 +54,7 @@ public class MaterialDAO implements Map<Integer, Material>{
         boolean res = false;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Materal where donativo="+this.iddonativo+" and projecto="+this.idprojecto;
+            String sql = "SELECT * FROM Material";
             ResultSet rs = stm.executeQuery(sql);
             if(!rs.next())
                 res=true;
@@ -69,7 +69,7 @@ public class MaterialDAO implements Map<Integer, Material>{
         boolean res = false;
         try {
             int id = (Integer) key;
-            String sql = "SELECT * FROM Material WHERE donativo="+ this.iddonativo+" and projecto="+this.idprojecto;;
+            String sql = "SELECT * FROM Material WHERE idMaterial="+id;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -86,16 +86,16 @@ public class MaterialDAO implements Map<Integer, Material>{
         try {
             int id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Material WHERE donativo= "+this.iddonativo+" and projecto="+this.idprojecto+" and id_material="+id;
+            String sql = "SELECT * FROM Material where idMaterial="+id;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
                 double Quantidade = rs.getInt(2);
                 String Descricao = rs.getString(3);
-                int projecto = rs.getInt(4);
-                int donativo = rs.getInt(5);
+                //int projecto = rs.getInt(4);
+                //int donativo = rs.getInt(5);
                                 
-                v = new Material(Descricao,Quantidade,projecto,donativo);
+                v = new Material(id,Descricao,Quantidade);
             }            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
@@ -112,14 +112,14 @@ public class MaterialDAO implements Map<Integer, Material>{
             int id_material=0;
             id_material=this.size()+1;
             String sql;
-            sql = "INSERT INTO Material(idMaterial,Stock,Descricao,Projecto,Donativo) VALUES (?,?,?,?,?)";
+            sql = "INSERT INTO Material(idMaterial,Stock,Descricao) VALUES (?,?,?)";
             pst = ConexaoBD.getConexao().prepareCall(sql);
             pst.setInt(1,id_material);
             pst.setDouble(2, value.getStock());
-            pst.setString(2, value.getDesc());
-            pst.setInt(4, value.getId_projecto());
-            pst.setInt(5, value.getId_donativo());
-            pst.execute();
+            pst.setString(3, value.getDesc());
+            
+            
+            pst.executeUpdate();
             
         }catch(SQLException e){ }
         m=value;
@@ -131,7 +131,7 @@ public class MaterialDAO implements Map<Integer, Material>{
         Material m = null;
         try {
             int id = (Integer) key;
-            String sql = "delete from Material where idMaterial="+id+" and Donativo= "+this.iddonativo+" and projecto="+this.idprojecto;
+            String sql = "delete from Material where idMaterial="+id;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
@@ -145,13 +145,14 @@ public class MaterialDAO implements Map<Integer, Material>{
     public Set<Integer> keySet() {
         Set<Integer> res = new TreeSet<>();
         try {
-            String sql = "SELECT idMaterial from Material";
+            String sql = "SELECT idMaterial from test.Material";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
-            
-            while(rs.next())
+
+            while (rs.next()) {
                 res.add(rs.getInt(1));
-            
+                //System.out.println("keysetVoluntarios: "+rs.getInt(1));
+            }
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
         }

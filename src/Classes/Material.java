@@ -15,7 +15,7 @@ import java.util.Map;
  * @author Sandra
  */
 public class Material {
-int id = 0;
+int id;
 private String desc;
 private double stock;
 private int id_projecto;
@@ -26,17 +26,18 @@ private int id_donativo;
 public Material() {
     this.desc = "";
     this.stock = 0.0;
-    this.id = id +1;
-    this.id_projecto=0;
-    this.id_donativo=0;
+    //this.id = id +1;
+    this.id = 0;
+    //this.id_projecto;
+    //this.id_donativo;
 }
 
-public Material(String desc, Double quant,int id_donativo,int id_projecto) {
+public Material(int id,String desc, Double quant) {
     this.desc = desc;
     this.stock = quant;
-    this.id = id+1;
-    this.id_donativo=id_donativo;
-    this.id_projecto=id_projecto;
+    this.id = id;
+    //this.id_donativo=id_donativo;
+    //this.id_projecto=id_projecto;
 }
 
 
@@ -67,11 +68,11 @@ public Material (Material m){
 
 
 public String getDescricao(){
-    return this.desc;
+    return desc;
 }
 
 public int getId(){
-    return this.id;
+    return id;
 }
 
 public void setDesc(String desc){

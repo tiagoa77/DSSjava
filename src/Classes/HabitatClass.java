@@ -43,6 +43,7 @@ public class HabitatClass {
         this.funcionarios = new FuncionarioDAO();
         this.candidaturas = new CandidaturaDAO();
         this.equipas = new EquipaDAO();
+        this.materiais=new MaterialDAO();
         //this.familias = new FamiliaDAO();
         //this.donativos = new DonativoDAO();
         this.doadores = new DoadorDAO();
@@ -109,7 +110,6 @@ public class HabitatClass {
     }
 
     public Map<Integer, Material> getMateriais() {
-
         return this.materiais;
     }
 
@@ -396,12 +396,12 @@ public class HabitatClass {
     }
 
     public void addMaterial(Material m, int id) {
-        for (Integer i : materiais.keySet()) {
-            if (materiais.get(i).getId() == id) {
-                materiais.get(i).setStock(m.getStock() + materiais.get(i).getStock());
+        for (Integer i : this.materiais.keySet()) {
+            if (this.materiais.get(i).getDescricao().equals(m.getDescricao())) {
+                this.materiais.get(i).setStock(m.getStock() + this.materiais.get(i).getStock());
             }
         }
-        materiais.put(id, m);
+        this.materiais.put(id, m);
 
     }
 
