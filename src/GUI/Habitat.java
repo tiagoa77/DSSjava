@@ -203,6 +203,8 @@ public final class Habitat extends javax.swing.JFrame {
         return res;
     }
     
+    
+    
     public void listaVoluntariosDisponiveis() {
         DefaultListModel<String> str = new DefaultListModel<>();
         for (int i : keysetVoluntariosDisponiveis()) {
@@ -528,8 +530,6 @@ public final class Habitat extends javax.swing.JFrame {
         jCheckBoxMaterial = new javax.swing.JCheckBox();
         jCheckBoxMonetario = new javax.swing.JCheckBox();
         jCheckBoxMaodeObra = new javax.swing.JCheckBox();
-        jLabel19 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -555,7 +555,6 @@ public final class Habitat extends javax.swing.JFrame {
         tipoDoa = new javax.swing.JComboBox();
         jButton24 = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
         jLabel29 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         Stock = new javax.swing.JPanel();
@@ -1337,15 +1336,6 @@ public final class Habitat extends javax.swing.JFrame {
             }
         });
 
-        jLabel19.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel19.setText("Procurar por doador:");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
         jPanel10.setBackground(new java.awt.Color(0, 85, 150));
 
         jLabel20.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -1495,9 +1485,6 @@ public final class Habitat extends javax.swing.JFrame {
                 .addGap(39, 39, 39))
         );
 
-        jButton12.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        jButton12.setText("Ir");
-
         jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Resources/logo.png.jpg"))); // NOI18N
 
         jPanel11.setBackground(new java.awt.Color(84, 184, 72));
@@ -1527,24 +1514,12 @@ public final class Habitat extends javax.swing.JFrame {
                                 .addComponent(jButton10)
                                 .addGap(38, 38, 38)
                                 .addComponent(jButton11)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(DonativosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(DonativosLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(DonativosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBoxMaterial)
-                                    .addComponent(jCheckBoxMonetario)))
-                            .addGroup(DonativosLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(DonativosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel19)))
-                            .addGroup(DonativosLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBoxMaodeObra, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DonativosLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton12)))
-                        .addGap(62, 62, 62)
+                            .addComponent(jCheckBoxMaterial)
+                            .addComponent(jCheckBoxMonetario)
+                            .addComponent(jCheckBoxMaodeObra, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(66, 66, 66)
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(DonativosLayout.createSequentialGroup()
                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1568,13 +1543,7 @@ public final class Habitat extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBoxMonetario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBoxMaodeObra)
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton12)))
+                        .addComponent(jCheckBoxMaodeObra)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DonativosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton10)
@@ -1765,10 +1734,6 @@ public final class Habitat extends javax.swing.JFrame {
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton15ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jCheckBoxMonetarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMonetarioActionPerformed
         // TODO add your handling code here:
@@ -2075,7 +2040,6 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
@@ -2106,7 +2070,6 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxMonetario;
     private javax.swing.JCheckBox jCheckBoxRealizados;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -2178,7 +2141,6 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPaneProf;
     private javax.swing.JScrollPane jScrollPaneRua;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextPane jTextPane2;
     private javax.swing.JTextPane jTextPaneCod;
     private javax.swing.JTextPane jTextPaneDatNasc;
