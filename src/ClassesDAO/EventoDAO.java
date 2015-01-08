@@ -92,7 +92,7 @@ public class EventoDAO implements Map<Integer,Evento> {
                 String Local = rs.getString(3);
                 Date DataReal = rs.getDate(4);
                                 
-                v = new Evento(DataReal,Local,Descricao);
+                v = new Evento(i,DataReal,Local,Descricao);
             }            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {

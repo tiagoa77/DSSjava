@@ -44,11 +44,11 @@ public class HabitatClass {
         this.candidaturas = new CandidaturaDAO();
         this.equipas = new EquipaDAO();
         this.materiais=new MaterialDAO();
-        //this.familias = new FamiliaDAO();
-        //this.donativos = new DonativoDAO();
+        this.familias = new FamiliaDAO();
+        this.donativos = new DonativoDAO();
         this.doadores = new DoadorDAO();
-        //this.eventos = new EventoDAO();
-        //this.materiais = new MaterialDAO();
+        this.eventos = new EventoDAO();
+        this.materiais = new MaterialDAO();
         this.utilizadorLigado = new Funcionario();
         ConexaoBD.iniciarConexao();
     }
@@ -464,6 +464,15 @@ public class HabitatClass {
         for (int i : voluntarios.keySet()) {
             if (voluntarios.get(i).getNomeVoluntario().equals(nome)) {
                 return voluntarios.get(i);
+            }
+        }
+        return null;
+    }
+    
+    public Projeto getProjeto(int id) {
+        for (int i : projetos.keySet()) {
+            if (projetos.get(i).getId() == id) {
+                return projetos.get(i);
             }
         }
         return null;

@@ -18,7 +18,7 @@ import java.util.Map;
  * @author Patrícia
  */
 public class Evento {
-    private int id = 0;
+    private int id;
     Date data;
     String local;
     String descricao;
@@ -39,16 +39,15 @@ public class Evento {
     public Evento(){
         this.data = new Date();
         this.descricao="";
-        this.id=this.id+1;
         this.local="";
-        //this.id_donativo=0;
+        this.id=0;
         this.donativos=new DonativoDAO(this.id);
         this.funcionarios=new FuncionarioDAO(this.id);
     }
-    public Evento(Date d, String l, String de){
+    public Evento(int i,Date d, String l, String de){
         this.data = d;
         this.descricao=de;
-        this.id=id+1;
+        this.id=i;
         this.local=l;
         //this.id_donativo=id_donativo;
         this.donativos=new DonativoDAO(this.id);

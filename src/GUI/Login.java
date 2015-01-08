@@ -135,7 +135,7 @@ public class Login extends javax.swing.JFrame {
         Boolean ligado = habitat.ligaFuncionario(login,pass);
         
         if(ligado){
-            JOptionPane.showMessageDialog(null, "Bem vindo ");
+           
             new Habitat().setVisible(true);
             this.setVisible(false);
         }

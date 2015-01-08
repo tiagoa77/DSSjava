@@ -7,6 +7,7 @@ package GUI;
 
 import Classes.HabitatClass;
 import Classes.Material;
+import Classes.Projeto;
 import Classes.Voluntario;
 import ClassesDAO.ConexaoBD;
 import java.sql.ResultSet;
@@ -39,16 +40,15 @@ public final class Habitat extends javax.swing.JFrame {
         listaVoluntarios();
         listaProjectos();
         listaMateriais();
-        //listaEventos();
-        //listaDonativos();
+        listaEventos();
+        listaDonativos();
         //Projetos
         this.jButton20.setVisible(true);
         this.jButton21.setVisible(false);
         this.jButton2.setVisible(false);
         this.jButton3.setVisible(false);
-        jTextPane1.setEditable(false);
-        jTextArea1.setEditable(false);
-        jComboBox14.disable();
+        NomeFamilia.setEditable(false);
+        Estado.disable();
         jTextPane2.setEditable(false);
         //Voluntarios
         this.jButtonEditarVoluntario.setVisible(true);
@@ -158,26 +158,27 @@ public final class Habitat extends javax.swing.JFrame {
     }
 
     public void listaEventos() {
-        DefaultListModel<Integer> str2 = new DefaultListModel<>();
+        DefaultListModel<String> str2 = new DefaultListModel<>();
         for (int i : this.habitat.getEventos().keySet()) {
-            str2.addElement(this.habitat.getEventos().get(i).getId());
+            str2.addElement(this.habitat.getEventos().get(i).getDescricao());
         }
-        //listaVoluntarios.setModel(str2);
+        listaEventos.setModel(str2);
     }
 
     public void listaDonativos() {
         DefaultListModel<Integer> str3 = new DefaultListModel<>();
         for (int i : this.habitat.getDonativos().keySet()) {
             str3.addElement(this.habitat.getDonativos().get(i).getId());
-            //System.out.println(i);
+            
         }
+        listaDonativos.setModel(str3);
     }
     
     public void listaMateriais() {
-        DefaultListModel<Integer> str4 = new DefaultListModel<>();
+        DefaultListModel<String> str4 = new DefaultListModel<>();
         for (int i : this.habitat.getMateriais().keySet()) {
             System.out.println(i);
-            str4.addElement(this.habitat.getMateriais().get(i).getId());
+            str4.addElement(this.habitat.getMateriais().get(i).getDescricao());
         }
         listMateriais.setModel(str4);
     }
@@ -191,6 +192,24 @@ public final class Habitat extends javax.swing.JFrame {
 
         //listaVoluntarios.clearSelection();
         return s;
+    }
+    
+    public int seleccionaProjeto() {
+        int i = -1;
+        String aux = "";
+
+        if (listaProjectos.getSelectedIndex() != -1) {
+            aux = listaProjectos.getSelectedValue().toString();
+        }
+        
+        int x = Integer.parseInt(aux);
+        
+        for(int j : this.habitat.getProjetos().keySet()){
+            if(this.habitat.getProjetos().get(j).getId()==x)
+               i = x;
+        }
+
+        return i;
     }
     
     public String seleccionaMaterial() {
@@ -225,23 +244,20 @@ public final class Habitat extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        NomeFamilia = new javax.swing.JTextPane();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
-        jLabel7 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
+        listaVoluntariosProj = new javax.swing.JList();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
         jButton21 = new javax.swing.JButton();
-        jComboBox14 = new javax.swing.JComboBox();
+        Estado = new javax.swing.JComboBox();
         jButton5 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPane2 = new javax.swing.JTextPane();
@@ -363,6 +379,11 @@ public final class Habitat extends javax.swing.JFrame {
         Projectos.setBackground(new java.awt.Color(255, 255, 255));
 
         listaProjectos.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        listaProjectos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaProjectosValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaProjectos);
 
         jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
@@ -403,7 +424,7 @@ public final class Habitat extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel1.setText("Nome da Família");
 
-        jScrollPane2.setViewportView(jTextPane1);
+        jScrollPane2.setViewportView(NomeFamilia);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel3.setText("Estado");
@@ -414,17 +435,10 @@ public final class Habitat extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel6.setText("Progresso");
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel7.setText("Observações");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane5.setViewportView(jTextArea1);
-
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel8.setText("Voluntários");
 
-        jScrollPane6.setViewportView(jList2);
+        jScrollPane6.setViewportView(listaVoluntariosProj);
 
         jButton2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton2.setText("Remover");
@@ -461,8 +475,8 @@ public final class Habitat extends javax.swing.JFrame {
             }
         });
 
-        jComboBox14.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        jComboBox14.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Em curso", "Pendente", "Rejeitado", "Terminado" }));
+        Estado.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        Estado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Em curso", "Pendente", "Rejeitado", "Terminado" }));
 
         jButton5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton5.setText("Ver Família");
@@ -483,7 +497,7 @@ public final class Habitat extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane2)
-                            .addComponent(jComboBox14, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Estado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -513,11 +527,8 @@ public final class Habitat extends javax.swing.JFrame {
                             .addComponent(jButton21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 23, 23))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(85, 85, 85))))
+                        .addComponent(jLabel8)
+                        .addGap(246, 246, 246))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -533,7 +544,7 @@ public final class Habitat extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -544,18 +555,13 @@ public final class Habitat extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6))
+                .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4)
+                .addGap(26, 26, 26)
+                .addComponent(jButton5)
                 .addGap(56, 56, 56)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton20)
@@ -1415,9 +1421,9 @@ public final class Habitat extends javax.swing.JFrame {
                     .addComponent(jLabel36)
                     .addComponent(jLabel37)
                     .addComponent(jScrollPane25, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                    .addComponent(jScrollPane19)
                     .addComponent(jScrollPane27)
-                    .addComponent(jScrollPane28))
+                    .addComponent(jScrollPane28)
+                    .addComponent(jScrollPane19))
                 .addContainerGap(351, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
@@ -1430,16 +1436,16 @@ public final class Habitat extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel35)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel36)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel37)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout StockLayout = new javax.swing.GroupLayout(Stock);
@@ -1458,7 +1464,7 @@ public final class Habitat extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton16))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         StockLayout.setVerticalGroup(
             StockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1562,9 +1568,8 @@ public final class Habitat extends javax.swing.JFrame {
         jButton20.setVisible(false);
         jButton2.setVisible(true);
         jButton3.setVisible(true);
-        jTextPane1.setEditable(true);
-        jTextArea1.setEditable(true);
-        jComboBox14.enable();
+        NomeFamilia.setEditable(true);
+        Estado.enable();
         jTextPane2.setEditable(true);
 
 
@@ -1578,9 +1583,8 @@ public final class Habitat extends javax.swing.JFrame {
         jButton20.setVisible(true);
         jButton2.setVisible(false);
         jButton3.setVisible(false);
-        jTextPane1.setEditable(false);
-        jTextArea1.setEditable(false);
-        jComboBox14.disable();
+        NomeFamilia.setEditable(false);
+        Estado.disable();
         jTextPane2.setEditable(false);
 
     }//GEN-LAST:event_jButton21ActionPerformed
@@ -1691,6 +1695,7 @@ public final class Habitat extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_listaVoluntariosValueChanged
+   
 
     private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
         // TODO add your handling code here:
@@ -1740,10 +1745,33 @@ public final class Habitat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_listMateriaisValueChanged
 
+    private void listaProjectosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaProjectosValueChanged
+        // TODO add your handling code here:
+        int aux = seleccionaProjeto();
+        Projeto p = this.habitat.getProjeto(aux);
+        
+ 
+        
+        if (aux != -1 && p != null) {
+            
+            //this.NomeFamilia.setText("aaa");
+            this.NomeFamilia.setText(p.getFamilia().getNome());
+            this.Estado.setSelectedItem(p.getestado());
+           
+            DefaultListModel<String> str = new DefaultListModel<>();
+                for (Voluntario v : p.getVoluntarios()) {
+                     str.addElement(v.getNomeVoluntario());
+            }
+                listaVoluntariosProj.setModel(str);
+            }
+    }//GEN-LAST:event_listaProjectosValueChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Donativos;
+    private javax.swing.JComboBox Estado;
     private javax.swing.JPanel Eventos;
+    private javax.swing.JTextPane NomeFamilia;
     private javax.swing.JTabbedPane PainelPrincipal;
     private javax.swing.JPanel Projectos;
     private javax.swing.JPanel Stock;
@@ -1782,7 +1810,6 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxDisponivel;
     private javax.swing.JCheckBox jCheckBoxIndisponivel;
     private javax.swing.JComboBox jComboBox13;
-    private javax.swing.JComboBox jComboBox14;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
@@ -1806,7 +1833,6 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelCod;
@@ -1818,7 +1844,6 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelProf;
     private javax.swing.JLabel jLabelRua;
-    private javax.swing.JList jList2;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -1848,7 +1873,6 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane28;
     private javax.swing.JScrollPane jScrollPane29;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPaneCod;
@@ -1859,10 +1883,8 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPaneProf;
     private javax.swing.JScrollPane jScrollPaneRua;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane jTextPane10;
     private javax.swing.JTextPane jTextPane11;
     private javax.swing.JTextPane jTextPane12;
@@ -1882,6 +1904,7 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JList listaEventos;
     private javax.swing.JList listaProjectos;
     private javax.swing.JList listaVoluntarios;
+    private javax.swing.JList listaVoluntariosProj;
     private javax.swing.JTextPane txtDescricao;
     private javax.swing.JTextPane txtDoador;
     private javax.swing.JTextPane txtProjeto;

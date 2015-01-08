@@ -41,7 +41,7 @@ public class Donativo {
 
     public Donativo(){
        this.tipo = "";
-       this.id = this.id +1;
+       this.id = 0;
        this.descricao = "";
        this.valor = 0;
        this.quantidade = 0.00; 
@@ -51,9 +51,9 @@ public class Donativo {
        
     }
     
-    public Donativo(String t, String d, float v, double q,int id_doador,int id_evento){
+    public Donativo(int i,String t, String d, float v, double q,int id_doador,int id_evento){
        this.tipo = t;
-       this.id = id+1;
+       this.id = i;
        this.descricao = d;
        this.valor = v;
        this.quantidade = q; 

@@ -95,7 +95,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
                 int Doador = rs.getInt(6);
                 int Evento = rs.getInt(7);
                                 
-                v = new Donativo(Tipo,Descricao,Valor,Quantidade,Doador,Evento);
+                v = new Donativo(id,Tipo,Descricao,Valor,Quantidade,Doador,Evento);
             }            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
