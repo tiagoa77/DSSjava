@@ -1975,8 +1975,11 @@ public final class Habitat extends javax.swing.JFrame {
         Evento e = this.habitat.getEvento(aux);
         
         
+        
         if (aux!=null && e != null) {
             this.dataEvento.setText(e.getData().toString());
+            for(Donativo d : e.getDonativos())
+             
         }
         
         

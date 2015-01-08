@@ -7,24 +7,28 @@ package GUI;
 
 import Classes.Evento;
 import Classes.HabitatClass;
-import java.util.GregorianCalendar;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Patrícia
  */
-public class AdicionarEvento extends javax.swing.JFrame {
-    HabitatClass habitat;
-    String desc;
-    String local;
-    String data;
+
+
+public class AdicionarEvento extends javax.swing.JDialog {
+private HabitatClass habitat;
     /**
      * Creates new form AdicionarEvento1
      */
     public AdicionarEvento(HabitatClass h) {
-        initComponents();
+        //super(parent, modal);
         this.habitat = h;
+        initComponents();
     }
 
     /**
@@ -49,7 +53,7 @@ public class AdicionarEvento extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -158,7 +162,7 @@ public class AdicionarEvento extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -173,7 +177,7 @@ public class AdicionarEvento extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 338, Short.MAX_VALUE)
+            .addGap(0, 334, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -186,31 +190,32 @@ public class AdicionarEvento extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        desc = jTextField1.getText();
-        local = jTextField2.getText();
-        data = jTextField3.getText();
-        
-        Evento novo = new Evento(data,local,desc);
-        
-        if(habitat.addEvento(novo,novo.getId())==1){
-            JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
-            this.setVisible(false);
+        try {
+            // TODO add your handling code here:
+            String desc = jTextField1.getText();
+            String local = jTextField2.getText();
+            String data = jTextField3.getText();
+            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            Date date = df.parse(data);
+            Evento novo = new Evento(habitat.getEventos().size()+2,date,local,desc);
+            
+            if(habitat.addEvento(novo,novo.getId())==1){
+                JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
+                this.setVisible(false);
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Erro");
+        } catch (ParseException ex) {
+            Logger.getLogger(AdicionarEvento.class.getName()).log(Level.SEVERE, null, ex);
         }
-        else
-            JOptionPane.showMessageDialog(null, "Erro");
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

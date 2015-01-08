@@ -3,6 +3,7 @@ package Classes;
 
 import ClassesDAO.DonativoDAO;
 import ClassesDAO.FuncionarioDAO;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Map;
@@ -78,6 +79,15 @@ public class Evento {
     }
     public Date getData(){
         return this.data;
+    }
+    
+    public ArrayList<Donativo> getDonativos(){
+        ArrayList<Donativo> dons = new ArrayList<Donativo>();
+        
+        for(int i : donativos.keySet()){
+            dons.add(donativos.get(i));
+        }
+        return dons;
     }
     
      public boolean Equals(Object o){
