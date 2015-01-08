@@ -155,6 +155,54 @@ public final class Habitat extends javax.swing.JFrame {
         return res;
     }
     
+    public Set<Integer> keysetDonativoMaterial(){
+        Set<Integer> res = new TreeSet<>();
+        try {
+            String sql = "SELECT * FROM Donativo WHERE Tipo='Material';";
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                res.add(rs.getInt(1));
+            }
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
+    }
+    
+    public Set<Integer> keysetDonativoMonetario(){
+        Set<Integer> res = new TreeSet<>();
+        try {
+            String sql = "SELECT * FROM Donativo WHERE Tipo='Monetario';";
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                res.add(rs.getInt(1));
+            }
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
+    }
+    
+    public Set<Integer> keysetDonativoMaodeObra(){
+        Set<Integer> res = new TreeSet<>();
+        try {
+            String sql = "SELECT * FROM Donativo WHERE Tipo='Mão de Obra';";
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                res.add(rs.getInt(1));
+            }
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
+    }
+    
     public void listaVoluntariosDisponiveis() {
         DefaultListModel<String> str = new DefaultListModel<>();
         for (int i : keysetVoluntariosDisponiveis()) {
@@ -171,6 +219,62 @@ public final class Habitat extends javax.swing.JFrame {
         listaVoluntarios.setModel(str);
     }
     
+     public void listaDonativosMaterial() {
+        DefaultListModel<Integer> str = new DefaultListModel<>();
+        for (int i : keysetDonativoMaterial()) {
+            str.addElement(this.habitat.getDonativos().get(i).getId());
+        }
+        listaDonativos.setModel(str);
+    }
+     
+      public void listaDonativosMonetario() {
+        DefaultListModel<Integer> str = new DefaultListModel<>();
+        for (int i : keysetDonativoMonetario()) {
+            str.addElement(this.habitat.getDonativos().get(i).getId());
+        }
+        listaDonativos.setModel(str);
+    }
+      
+       public void listaDonativosMaodeObra() {
+        DefaultListModel<Integer> str = new DefaultListModel<>();
+        for (int i : keysetDonativoMaodeObra()) {
+            str.addElement(this.habitat.getDonativos().get(i).getId());
+        }
+        listaDonativos.setModel(str);
+    }
+       public void listaDonativosMaodeObraeMonetario() {
+        DefaultListModel<Integer> str = new DefaultListModel<>();
+        for (int i : keysetDonativoMaodeObra()) {
+            str.addElement(this.habitat.getDonativos().get(i).getId());
+        }
+        for (int i : keysetDonativoMonetario()) {
+            str.addElement(this.habitat.getDonativos().get(i).getId());
+        }
+        listaDonativos.setModel(str);
+       }
+       
+        public void listaDonativosMaodeObraeMaterial() {
+        DefaultListModel<Integer> str = new DefaultListModel<>();
+        for (int i : keysetDonativoMaodeObra()) {
+            str.addElement(this.habitat.getDonativos().get(i).getId());
+        }
+        for (int i : keysetDonativoMaterial()) {
+            str.addElement(this.habitat.getDonativos().get(i).getId());
+        }
+        listaDonativos.setModel(str);
+       }
+        
+        public void listaDonativosMonetarioeMaterial() {
+        DefaultListModel<Integer> str = new DefaultListModel<>();
+        for (int i : keysetDonativoMonetario()) {
+            str.addElement(this.habitat.getDonativos().get(i).getId());
+        }
+        for (int i : keysetDonativoMaterial()) {
+            str.addElement(this.habitat.getDonativos().get(i).getId());
+        }
+        listaDonativos.setModel(str);
+       }
+        
     public void listaEventosRealizados() {
         DefaultListModel<String> str = new DefaultListModel<>();
         for (int i : keysetEventosRealizados()) {
@@ -196,6 +300,27 @@ public final class Habitat extends javax.swing.JFrame {
             listaVoluntariosIndisponiveis();
         }else{
             listaVoluntarios();
+        }
+        
+    }
+    
+    private void updateListaDonativos()  {
+        if (jCheckBoxMaterial.isSelected() && jCheckBoxMonetario.isSelected()&& jCheckBoxMaodeObra.isSelected()) {
+            listaDonativos();
+        }else if(jCheckBoxMaterial.isSelected()){
+            listaDonativosMaterial();
+        }else if(jCheckBoxMonetario.isSelected()){
+            listaDonativosMonetario();
+         }else if(jCheckBoxMaodeObra.isSelected()){
+            listaDonativosMaodeObra();
+         }else if(jCheckBoxMaodeObra.isSelected() && jCheckBoxMonetario.isSelected()){
+            listaDonativosMaodeObraeMonetario();
+        }else if(jCheckBoxMaodeObra.isSelected() && jCheckBoxMaterial.isSelected()){
+            listaDonativosMaodeObraeMaterial();
+        }else if(jCheckBoxMonetario.isSelected() && jCheckBoxMaterial.isSelected()){
+            listaDonativosMonetarioeMaterial();
+        }else{
+            listaDonativos();
         }
         
     }
@@ -400,9 +525,9 @@ public final class Habitat extends javax.swing.JFrame {
         listaDonativos = new javax.swing.JList();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
+        jCheckBoxMaterial = new javax.swing.JCheckBox();
+        jCheckBoxMonetario = new javax.swing.JCheckBox();
+        jCheckBoxMaodeObra = new javax.swing.JCheckBox();
         jLabel19 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
@@ -1185,27 +1310,32 @@ public final class Habitat extends javax.swing.JFrame {
         jButton11.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton11.setText("Remover");
 
-        jCheckBox7.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox7.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jCheckBox7.setText("Material");
-        jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxMaterial.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBoxMaterial.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jCheckBoxMaterial.setText("Material");
+        jCheckBoxMaterial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox7ActionPerformed(evt);
+                jCheckBoxMaterialActionPerformed(evt);
             }
         });
 
-        jCheckBox8.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox8.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jCheckBox8.setText("Monetário");
-        jCheckBox8.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxMonetario.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBoxMonetario.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jCheckBoxMonetario.setText("Monetário");
+        jCheckBoxMonetario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox8ActionPerformed(evt);
+                jCheckBoxMonetarioActionPerformed(evt);
             }
         });
 
-        jCheckBox9.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox9.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jCheckBox9.setText("Mão-de-Obra");
+        jCheckBoxMaodeObra.setBackground(new java.awt.Color(255, 255, 255));
+        jCheckBoxMaodeObra.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jCheckBoxMaodeObra.setText("Mão-de-Obra");
+        jCheckBoxMaodeObra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMaodeObraActionPerformed(evt);
+            }
+        });
 
         jLabel19.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel19.setText("Procurar por doador:");
@@ -1401,8 +1531,8 @@ public final class Habitat extends javax.swing.JFrame {
                             .addGroup(DonativosLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(DonativosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox7)
-                                    .addComponent(jCheckBox8)))
+                                    .addComponent(jCheckBoxMaterial)
+                                    .addComponent(jCheckBoxMonetario)))
                             .addGroup(DonativosLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addGroup(DonativosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1410,7 +1540,7 @@ public final class Habitat extends javax.swing.JFrame {
                                     .addComponent(jLabel19)))
                             .addGroup(DonativosLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox9, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jCheckBoxMaodeObra, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DonativosLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton12)))
@@ -1434,11 +1564,11 @@ public final class Habitat extends javax.swing.JFrame {
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(DonativosLayout.createSequentialGroup()
-                        .addComponent(jCheckBox7)
+                        .addComponent(jCheckBoxMaterial)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox8)
+                        .addComponent(jCheckBoxMonetario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox9)
+                        .addComponent(jCheckBoxMaodeObra)
                         .addGap(6, 6, 6)
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1640,13 +1770,15 @@ public final class Habitat extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jCheckBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox8ActionPerformed
+    private void jCheckBoxMonetarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMonetarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox8ActionPerformed
+        updateListaDonativos();
+    }//GEN-LAST:event_jCheckBoxMonetarioActionPerformed
 
-    private void jCheckBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox7ActionPerformed
+    private void jCheckBoxMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMaterialActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox7ActionPerformed
+        updateListaDonativos();
+    }//GEN-LAST:event_jCheckBoxMaterialActionPerformed
 
     private void jButtonConfirmarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarEditarActionPerformed
         // TODO add your handling code here:
@@ -1922,6 +2054,11 @@ public final class Habitat extends javax.swing.JFrame {
         updateListaEventos();
     }//GEN-LAST:event_jCheckBoxARealizarActionPerformed
 
+    private void jCheckBoxMaodeObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMaodeObraActionPerformed
+        // TODO add your handling code here:
+        updateListaDonativos();
+    }//GEN-LAST:event_jCheckBoxMaodeObraActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea DescricaoDon;
@@ -1961,12 +2098,12 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
     private javax.swing.JCheckBox jCheckBoxARealizar;
     private javax.swing.JCheckBox jCheckBoxDisponivel;
     private javax.swing.JCheckBox jCheckBoxIndisponivel;
+    private javax.swing.JCheckBox jCheckBoxMaodeObra;
+    private javax.swing.JCheckBox jCheckBoxMaterial;
+    private javax.swing.JCheckBox jCheckBoxMonetario;
     private javax.swing.JCheckBox jCheckBoxRealizados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
