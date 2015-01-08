@@ -15,7 +15,7 @@ public class Projeto {
 
     private String estado;
     private int id = 0;
-    private Familia familia;
+    private int id_familia;
     private ArrayList<Tarefa> tarefas; // MUDAR PARA MAPS
     private ArrayList<Voluntario> voluntarios; //MUDAR PARA MAPS
 
@@ -25,10 +25,10 @@ public class Projeto {
         this.voluntarios = new ArrayList<Voluntario>();
     }
 
-    public Projeto(String n, Familia f, ArrayList<Tarefa> tarefa, ArrayList<Voluntario> v) {
+    public Projeto(String n, int f, ArrayList<Tarefa> tarefa, ArrayList<Voluntario> v) {
         this.estado = n;
         this.id = id + 1;
-        this.familia = f.clone();
+        this.id_familia = f;
         for (Tarefa t : tarefa) {
             tarefas.add(t.clone());
         }
@@ -40,7 +40,7 @@ public class Projeto {
     public Projeto(Projeto p) {
         this.estado = p.getestado();
         this.id = p.getId();
-        this.familia = p.getFamilia();
+        this.id_familia = p.getId_Familia();
         this.tarefas = p.getTarefas();
         this.voluntarios = p.getVoluntarios();
     }
@@ -53,8 +53,8 @@ public class Projeto {
         return this.id;
     }
 
-    public Familia getFamilia() {
-        return this.familia;
+    public int getId_Familia() {
+        return this.id_familia;
     }
 
     public ArrayList<Tarefa> getTarefas() {
@@ -73,8 +73,8 @@ public class Projeto {
         this.id = id;
     }
 
-    public void setFamilia(Familia f) {
-        this.familia = f;
+    public void setFamilia(int f) {
+        this.id_familia = f;
     }
 
     public void setTarefas(ArrayList<Tarefa> f) {
@@ -107,7 +107,7 @@ public class Projeto {
         StringBuilder sb = new StringBuilder();
         sb.append("estado").append(estado).append("\n");
         sb.append("Id").append(id).append("\n");
-        sb.append("Familia: ").append(familia).append("\n");
+        sb.append("Familia: ").append(id_familia).append("\n");
         sb.append("Tarefas");
         for (Tarefa t1 : tarefas) {
             sb.append(t1.getId()).append("\n");
@@ -127,7 +127,7 @@ public class Projeto {
             return false;
         }
         Projeto p = (Projeto) obj;
-        return this.estado.equals(p.getestado()) && (this.id == p.getId() && this.familia.equals(p.getFamilia()) && this.voluntarios.equals(p.getVoluntarios()) && this.tarefas.equals(p.getTarefas()));
+        return this.estado.equals(p.getestado()) && (this.id == p.getId() && (this.id_familia== p.getId_Familia()) && this.voluntarios.equals(p.getVoluntarios()) && this.tarefas.equals(p.getTarefas()));
     }
 
 }

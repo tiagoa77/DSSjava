@@ -477,7 +477,26 @@ public class HabitatClass {
         }
         return null;
     }
-/*
+
+    public Evento getEvento(String desc) {
+        for (int i : eventos.keySet()) {
+            if (eventos.get(i).getDescricao().equals(desc)) {
+                return eventos.get(i);
+            }
+        }
+        return null;
+    }
+    
+    
+    public Doador getDoador(int id){
+        Doador novo = new Doador();
+        for(int i : doadores.keySet())
+            if(doadores.get(i).getId() == id)
+                novo = doadores.get(i);
+        return novo;
+    }
+    
+    /*
     public ArrayList<Voluntario> getVoluntariosEstado(Boolean disp) {
         ArrayList<Voluntario> res = new ArrayList<Voluntario>();
         for (Voluntario v : this.voluntarios.values()) {

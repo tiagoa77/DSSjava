@@ -111,6 +111,8 @@ public class Donativo {
         return this.quantidade;
     }
     
+    
+    
     public boolean Equals(Object o){
         if (this == o)
             return true;

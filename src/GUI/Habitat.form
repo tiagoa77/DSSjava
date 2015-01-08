@@ -971,8 +971,8 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jCheckBox10" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCheckBox11" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxRealizados" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBoxARealizar" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jPanel13" max="32767" attributes="0"/>
@@ -993,9 +993,9 @@
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jCheckBox10" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCheckBoxRealizados" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jCheckBox11" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCheckBoxARealizar" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane22" min="-2" pref="435" max="-2" attributes="0"/>
                           <Component id="jPanel13" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1054,10 +1054,13 @@
                       <StringArray count="0"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="listaEventosValueChanged"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox10">
+            <Component class="javax.swing.JCheckBox" name="jCheckBoxRealizados">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1067,8 +1070,11 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="J&#xe1; Realizados"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxRealizadosActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox11">
+            <Component class="javax.swing.JCheckBox" name="jCheckBoxARealizar">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1078,6 +1084,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="A Realizar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxARealizarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton13">
               <Properties>
@@ -1236,7 +1245,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTextPane" name="jTextPane20">
+                    <Component class="javax.swing.JTextPane" name="dataEvento">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1363,6 +1372,9 @@
                       <StringArray count="0"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="listaDonativosValueChanged"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1481,7 +1493,7 @@
                                           <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                                           <Component id="jScrollPane18" pref="153" max="32767" attributes="0"/>
                                           <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox13" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="tipoDoa" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -1523,7 +1535,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jScrollPane16" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox13" min="-2" max="-2" attributes="0"/>
+                              <Component id="tipoDoa" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -1575,7 +1587,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTextPane" name="jTextPane10">
+                    <Component class="javax.swing.JTextPane" name="quantidadeDon">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1586,7 +1598,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTextPane" name="jTextPane11">
+                    <Component class="javax.swing.JTextPane" name="valorDon">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1605,7 +1617,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTextArea" name="jTextArea2">
+                    <Component class="javax.swing.JTextArea" name="DescricaoDon">
                       <Properties>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="rows" type="int" value="5"/>
@@ -1638,7 +1650,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTextPane" name="jTextPane12">
+                    <Component class="javax.swing.JTextPane" name="nomeDoa">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1665,7 +1677,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTextPane" name="jTextPane14">
+                    <Component class="javax.swing.JTextPane" name="biDoa">
                     </Component>
                   </SubComponents>
                 </Container>
@@ -1684,11 +1696,11 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTextPane" name="jTextPane15">
+                    <Component class="javax.swing.JTextPane" name="nifDoa">
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JComboBox" name="jComboBox13">
+                <Component class="javax.swing.JComboBox" name="tipoDoa">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="2">
@@ -1697,6 +1709,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tipoDoaActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton24">
                   <Properties>
