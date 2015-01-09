@@ -25,6 +25,7 @@ public class AdicionarDonativo extends javax.swing.JDialog {
         cmbDoadores();
     }
     private void cmbDoadores(){
+        cmbDoador.removeAllItems();
         for (int i : habitat.getDoadores().keySet()) {
             cmbDoador.addItem(habitat.getDoadores().get(i).getNome());
         }

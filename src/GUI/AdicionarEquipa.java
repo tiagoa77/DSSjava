@@ -47,15 +47,18 @@ public class AdicionarEquipa extends javax.swing.JDialog {
         listVoluntarios.setModel(voluntariosList);
     }
 
-    public void updateVoluntarios(int id_equipa) throws SQLException {
-        PreparedStatement pst = null;
+    public void atualizaVoluntarios(int id_equipa){
+        try{
         String sql;
         for (int i : this.membros.keySet()) {
-            sql = "UPDATE test.voluntário SET Equipa = " + id_equipa + " where idVoluntário=" + i;
-            pst = ConexaoBD.getConexao().prepareCall(sql);
+            sql = "UPDATE voluntário SET "+ 
+                  "Equipa = " + id_equipa + 
+                  " where idVoluntário=" + i;
+            PreparedStatement pst = ConexaoBD.getConexao().prepareStatement(sql);
             pst.executeUpdate();
             pst.close();
         }
+        } catch (SQLException e) { }
     }
 
         @SuppressWarnings("unchecked")
@@ -253,13 +256,13 @@ public class AdicionarEquipa extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Introduza o país");
         }
 
-        int id = habitat.getEquipas().size() + 1;
+        int id = habitat.getEquipas().size()+1;
         
         Equipa nova = new Equipa(id, nomeEquipa, pais);
-        habitat.getEquipas().put(id, nova);
         
         if (habitat.addEquipa(nova, nova.getId()) == 1) {
             JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
+            atualizaVoluntarios(id);
             this.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Já existe uma equipa com esse nome");

@@ -155,17 +155,16 @@ public class VoluntarioDAO implements Map<Integer, Voluntario> {
         Voluntario v = null;
         try {
             int id = (Integer) key;
-            //String sql = "delete from test.Voluntario where idVoluntario="+id+" and Equipa= "+this.id;
             String sql = "delete from Voluntário where idVoluntário=" + id;
-            Statement stm = ConexaoBD.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-
-            ConexaoBD.fecharCursor(rs, stm);
+            PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+            stm.executeUpdate();
+            stm.close();
         } catch (SQLException e) {
         }
         return v;
     }
 
+    
     @Override
     public Set<Integer> keySet() {
         Set<Integer> res = new TreeSet<>();

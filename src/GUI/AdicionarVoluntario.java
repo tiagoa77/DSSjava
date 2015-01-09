@@ -28,13 +28,15 @@ public class AdicionarVoluntario extends javax.swing.JDialog {
         //super(parent, modal);
         this.habitat=h;
         initComponents();
-        for (int i : habitat.getEquipas().keySet()) {
-            cmbEquipa.addItem(habitat.getEquipas().get(i).getNome());
-            //System.out.println("KEYSET EUIPAS:" + i);
-        }
+        cmbEquipa();
     }
     
-    
+    public void cmbEquipa(){
+        cmbEquipa.removeAllItems();
+        for (int i : habitat.getEquipas().keySet()) {
+            cmbEquipa.addItem(habitat.getEquipas().get(i).getNome());
+        }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -357,11 +359,7 @@ public class AdicionarVoluntario extends javax.swing.JDialog {
         // TODO add your handling code here:
         AdicionarEquipa a = new AdicionarEquipa(habitat);
         a.setVisible(true);
-        try {
-            a.updateVoluntarios(10);
-        } catch (SQLException ex) {
-            Logger.getLogger(AdicionarVoluntario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        cmbEquipa();
         
         
     }//GEN-LAST:event_jButton2ActionPerformed

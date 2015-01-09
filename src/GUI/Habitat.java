@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.swing.DefaultListModel;
@@ -433,11 +434,26 @@ public final class Habitat extends javax.swing.JFrame {
     
     private void atualizaDonativo(int key,Donativo don){
         try {
-            String sql = "UPDATE donativo SET" +
+            String sql = "UPDATE Donativo SET" +
                          " Descricao = '" +don.getDescricao()+
                          "',Quantidade = " +don.getQuantidade()+
                          ",Valor = " +don.getValor()+
                          " WHERE idDonativo ="+key;
+            PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+            stm.executeUpdate();
+            stm.close();
+        } catch (SQLException e) { }
+    }
+    
+    private void atualizaVoluntario(int key,Voluntario v){
+        try {
+            String sql = "UPDATE Voluntário SET" +
+                         " CodPostal = '" +v.getCodPostal()+
+                         "',Profissao = '" +v.getProfissao()+
+                         "',Localidade = '" +v.getLocalidade()+
+                         "',Nome = '" +v.getNomeVoluntario()+
+                         "',Rua = '" +v.getRua()+
+                         "' WHERE idVoluntário ="+key;
             PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
             stm.executeUpdate();
             stm.close();
@@ -1064,7 +1080,7 @@ public final class Habitat extends javax.swing.JFrame {
                             .addComponent(jCheckBoxIndisponivel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanelInformacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         VoluntariosLayout.setVerticalGroup(
             VoluntariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1082,9 +1098,9 @@ public final class Habitat extends javax.swing.JFrame {
                     .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
                     .addComponent(jPanelInformacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(VoluntariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonAdicionar)
-                    .addComponent(jButtonRemover))
+                .addGroup(VoluntariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -1724,19 +1740,19 @@ public final class Habitat extends javax.swing.JFrame {
         //Voluntarios
         this.jButtonEditarVoluntario.setVisible(false);
         this.jButtonConfirmarEditar.setVisible(true);
-        jTextPaneNome.setEditable(true);
-        jTextPaneLocalidade.setEditable(true);
-        jTextPaneRua.setEditable(true);
-        jTextPaneCod.setEditable(true);
-        jTextPaneEquipa.setEditable(true);
-        jTextPaneProf.setEditable(true);
         
-        this.jTextPaneNome.setText(this.jTextPaneNome.getText());
-        this.jTextPaneLocalidade.setText(this.jTextPaneLocalidade.getText());
-        this.jTextPaneDatNasc.setText(this.jTextPaneDatNasc.getText());
-        this.jTextPaneProf.setText(this.jTextPaneProf.getText());
-        this.jTextPaneRua.setText(this.jTextPaneRua.getText());
-        this.jTextPaneCod.setText(this.jTextPaneCod.getText());
+        this.jTextPaneNome.setEditable(true);
+        this.jTextPaneLocalidade.setEditable(true);
+        this.jTextPaneRua.setEditable(true);
+        this.jTextPaneCod.setEditable(true);
+        this.jTextPaneProf.setEditable(true);
+        
+        //this.jTextPaneNome.setText(this.jTextPaneNome.getText());
+        //this.jTextPaneLocalidade.setText(this.jTextPaneLocalidade.getText());
+        //this.jTextPaneDatNasc.setText(this.jTextPaneDatNasc.getText());
+        //this.jTextPaneProf.setText(this.jTextPaneProf.getText());
+        //this.jTextPaneRua.setText(this.jTextPaneRua.getText());
+        //this.jTextPaneCod.setText(this.jTextPaneCod.getText());
     }//GEN-LAST:event_jButtonEditarVoluntarioActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
@@ -1758,14 +1774,27 @@ public final class Habitat extends javax.swing.JFrame {
         //Voluntarios
         this.jButtonConfirmarEditar.setVisible(false);
         this.jButtonEditarVoluntario.setVisible(true);
-        jTextPaneNome.setEditable(false);
-        jTextPaneLocalidade.setEditable(false);
-        jTextPaneRua.setEditable(false);
-        jTextPaneCod.setEditable(false);
-        jTextPaneEquipa.setEditable(false);
-        jTextPaneProf.setEditable(false);
-        jTextPaneDatNasc.setEditable(false);
-
+        
+        this.jTextPaneNome.setEditable(false);
+        this.jTextPaneLocalidade.setEditable(false);
+        this.jTextPaneRua.setEditable(false);
+        this.jTextPaneCod.setEditable(false);
+        this.jTextPaneEquipa.setEditable(false);
+        this.jTextPaneProf.setEditable(false);
+        this.jTextPaneDatNasc.setEditable(false);
+        
+        String aux = seleccionaVoluntario();
+        int id = this.habitat.getVoluntario(aux).getId();
+        
+        String cod = this.jTextPaneCod.getText();
+        String prof = this.jTextPaneProf.getText();
+        String loc = this.jTextPaneLocalidade.getText();
+        String nome = this.jTextPaneNome.getText();
+        String rua = this.jTextPaneRua.getText();
+        
+        Voluntario v = new Voluntario(id,cod,prof,loc,nome,rua);
+        
+        atualizaVoluntario(id, v);
 
     }//GEN-LAST:event_jButtonConfirmarEditarActionPerformed
 
@@ -1867,7 +1896,7 @@ public final class Habitat extends javax.swing.JFrame {
         if (aux != null) {
             Voluntario v = this.habitat.getVoluntario(aux);
             this.jTextPaneNome.setText(v.getNomeVoluntario());
-            DateFormat df = new SimpleDateFormat("MM//dd/yyy");
+            DateFormat df = new SimpleDateFormat("MM/dd/yyy");
             String data = df.format(v.getDataNascimento());
             this.jTextPaneDatNasc.setText(data);
             this.jTextPaneLocalidade.setText(v.getLocalidade());
@@ -1877,7 +1906,6 @@ public final class Habitat extends javax.swing.JFrame {
             String equipa = this.habitat.getEquipas().get(v.getId_equipa()).getNome();
             this.jTextPaneEquipa.setText(equipa);
         }
-
     }//GEN-LAST:event_listaVoluntariosValueChanged
 
 
@@ -1891,7 +1919,6 @@ public final class Habitat extends javax.swing.JFrame {
             }
         }
         this.habitat.getVoluntarios().remove(key);
-        //System.out.println("KEY :"+key);
         listaVoluntarios.clearSelection();
         listaVoluntarios();
         this.jTextPaneNome.setText(null);

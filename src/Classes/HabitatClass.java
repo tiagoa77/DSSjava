@@ -296,8 +296,8 @@ public class HabitatClass {
     }
 
     public int addEquipa(Equipa e, int id) {
-        for (Integer i : equipas.keySet()) {
-            if (equipas.get(i).getNome().equals(e.getNome())) {
+        for (Integer i : this.equipas.keySet()) {
+            if (this.equipas.get(i).equals(e)) {
                 return -1;
             }
         }
