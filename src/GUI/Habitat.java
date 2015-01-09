@@ -368,7 +368,7 @@ public final class Habitat extends javax.swing.JFrame {
     public void listaMateriais() {
         DefaultListModel<String> str4 = new DefaultListModel<>();
         for (int i : this.habitat.getMateriais().keySet()) {
-            System.out.println(i);
+            //System.out.println(i);
             str4.addElement(this.habitat.getMateriais().get(i).getId() + " " + this.habitat.getMateriais().get(i).getDescricao());
         }
         listMateriais.setModel(str4);
@@ -1908,7 +1908,7 @@ public final class Habitat extends javax.swing.JFrame {
             }
         }
         this.habitat.getVoluntarios().remove(key);
-        System.out.println("KEY :"+key);
+        //System.out.println("KEY :"+key);
         listaVoluntarios.clearSelection();
         listaVoluntarios();
         this.jTextPaneNome.setText(null);

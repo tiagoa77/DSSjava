@@ -7,6 +7,9 @@ package GUI;
 
 import Classes.HabitatClass;
 import Classes.Material;
+import ClassesDAO.ConexaoBD;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,15 +17,31 @@ import javax.swing.JOptionPane;
  * @author Tiago
  */
 public class AdicionarMaterial extends javax.swing.JDialog {
+
     private final HabitatClass habitat;
+
     /**
      * Creates new form AdicionarMaterial
      */
     public AdicionarMaterial(HabitatClass h) {
-        this.habitat=h;
+        this.habitat = h;
         initComponents();
     }
+    
+    public void updateStock(double stock, int id){
+        PreparedStatement pst = null;
+        
+        try{
+            
+            String sql;
+            sql = "Update Material set Stock="+stock+" where idMaterial="+id;
+            pst = ConexaoBD.getConexao().prepareCall(sql);
+            pst.executeUpdate();
+            
+        }catch(SQLException e){ }
+}
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -161,16 +180,32 @@ public class AdicionarMaterial extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int id = this.habitat.getMateriais().size()+1;
+        boolean bool = false;
+        int key = 0;
         String desc = txtDescricao.getText();
         Double quant = Double.parseDouble(txtQuantidade.getText());
-        Material novo = new Material(id,desc,quant);
-        habitat.addMaterial(novo,novo.getId());
-        JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
-        this.setVisible(false);
+        
+        for(int i: this.habitat.getMateriais().keySet())
+            if(this.habitat.getMateriais().get(i).getDescricao().equals(desc)){
+                bool=true;
+                key = i;
+            }
+        if (!bool) {
+            int id = this.habitat.getMateriais().size() + 1;
+            Material novo = new Material(id, desc, quant);
+            habitat.addMaterial(novo, novo.getId());
+            JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
+            this.setVisible(false);
+        }else{
+            double total=quant+this.habitat.getMateriais().get(key).getStock();
+            System.out.println(total);
+            updateStock(total, key);
+            JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
+            this.setVisible(false);
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

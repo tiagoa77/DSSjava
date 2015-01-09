@@ -6,10 +6,6 @@ package Classes;
  * and open the template in the editor.
  */
 
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  *
  * @author Sandra
@@ -84,9 +80,6 @@ public void setStock(Double quant){
 public void setId(int id){
     this.id = id;
 }
-
-
-
 
 public Material clone() {
     return new Material(this);
