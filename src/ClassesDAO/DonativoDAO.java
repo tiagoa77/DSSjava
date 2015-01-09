@@ -36,7 +36,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
         int res = 0;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM DONATIVO where doador="+this.idDoador;
+            String sql = "SELECT * FROM DONATIVO";
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
@@ -52,7 +52,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
         boolean res = false;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Donativo where doador=" + this.idDoador;
+            String sql = "SELECT * FROM Donativo";
             ResultSet rs = stm.executeQuery(sql);
             if(!rs.next())
                 res=true;
@@ -67,7 +67,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
         boolean res = false;
         try {
             int id = (Integer) key;
-            String sql = "SELECT * FROM Donativo WHERE doador="+ this.idDoador;
+            String sql = "SELECT * FROM Donativo WHERE idDonativo="+id;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -84,7 +84,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
         try {
             int id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM test.Donativo WHERE idDonativo=" +id;
+            String sql = "SELECT * FROM Donativo WHERE idDonativo=" +id;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
@@ -95,7 +95,7 @@ public class DonativoDAO implements Map<Integer,Donativo> {
                 int Doador = rs.getInt(6);
                 int Evento = rs.getInt(7);
                                 
-                v = new Donativo(id,Tipo,Descricao,Valor,Quantidade,Doador,Evento);
+                v = new Donativo(id,Tipo,Descricao,Valor,Quantidade,Doador);
             }            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
@@ -132,11 +132,10 @@ public class DonativoDAO implements Map<Integer,Donativo> {
         Donativo don = null;
         try {
             int id = (Integer) key;
-            String sql = "delete from donativo where idDonativo="+id+" and Doador= "+this.idDoador;
-            Statement stm = ConexaoBD.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            
-            ConexaoBD.fecharCursor(rs, stm);
+            String sql = "delete from donativo where idDonativo="+id;
+            PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+            stm.executeUpdate();
+            stm.close();
         } catch (SQLException e) {
         }
         return don;

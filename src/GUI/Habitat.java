@@ -14,6 +14,7 @@ import Classes.Material;
 import Classes.Projeto;
 import Classes.Voluntario;
 import ClassesDAO.ConexaoBD;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,7 +35,7 @@ public final class Habitat extends javax.swing.JFrame {
     /**
      * Creates new form Projectos
      *
-     
+     *
      */
     public Habitat() {
         this.habitat = new HabitatClass();
@@ -78,7 +79,6 @@ public final class Habitat extends javax.swing.JFrame {
         nomeDoa.setEditable(false);
         biDoa.setEditable(false);
         nifDoa.setEditable(false);
-        tipoDoa.disable();
         DescricaoDon.setEditable(false);
 
     }
@@ -90,8 +90,8 @@ public final class Habitat extends javax.swing.JFrame {
         }
         listaVoluntarios.setModel(str);
     }
-    
-    public Set<Integer> keysetVoluntariosDisponiveis(){
+
+    public Set<Integer> keysetVoluntariosDisponiveis() {
         Set<Integer> res = new TreeSet<>();
         try {
             String sql = "SELECT * FROM Voluntário WHERE Disponibilidade=1";
@@ -106,8 +106,8 @@ public final class Habitat extends javax.swing.JFrame {
         }
         return res;
     }
-    
-    public Set<Integer> keysetVoluntariosIndisponiveis(){
+
+    public Set<Integer> keysetVoluntariosIndisponiveis() {
         Set<Integer> res = new TreeSet<>();
         try {
             String sql = "SELECT * FROM Voluntário WHERE Disponibilidade=0";
@@ -122,8 +122,8 @@ public final class Habitat extends javax.swing.JFrame {
         }
         return res;
     }
-    
-    public Set<Integer> keysetEventosRealizados(){
+
+    public Set<Integer> keysetEventosRealizados() {
         Set<Integer> res = new TreeSet<>();
         try {
             String sql = "SELECT * FROM Evento WHERE DataRealizacao <  NOW();";
@@ -138,8 +138,8 @@ public final class Habitat extends javax.swing.JFrame {
         }
         return res;
     }
-    
-    public Set<Integer> keysetEventosARealizar(){
+
+    public Set<Integer> keysetEventosARealizar() {
         Set<Integer> res = new TreeSet<>();
         try {
             String sql = "SELECT * FROM Evento WHERE DataRealizacao >  NOW();";
@@ -154,8 +154,8 @@ public final class Habitat extends javax.swing.JFrame {
         }
         return res;
     }
-    
-    public Set<Integer> keysetDonativoMaterial(){
+
+    public Set<Integer> keysetDonativoMaterial() {
         Set<Integer> res = new TreeSet<>();
         try {
             String sql = "SELECT * FROM Donativo WHERE Tipo='Material';";
@@ -170,8 +170,8 @@ public final class Habitat extends javax.swing.JFrame {
         }
         return res;
     }
-    
-    public Set<Integer> keysetDonativoMonetario(){
+
+    public Set<Integer> keysetDonativoMonetario() {
         Set<Integer> res = new TreeSet<>();
         try {
             String sql = "SELECT * FROM Donativo WHERE Tipo='Monetario';";
@@ -186,8 +186,8 @@ public final class Habitat extends javax.swing.JFrame {
         }
         return res;
     }
-    
-    public Set<Integer> keysetDonativoMaodeObra(){
+
+    public Set<Integer> keysetDonativoMaodeObra() {
         Set<Integer> res = new TreeSet<>();
         try {
             String sql = "SELECT * FROM Donativo WHERE Tipo='Mão de Obra';";
@@ -202,9 +202,7 @@ public final class Habitat extends javax.swing.JFrame {
         }
         return res;
     }
-    
-    
-    
+
     public void listaVoluntariosDisponiveis() {
         DefaultListModel<String> str = new DefaultListModel<>();
         for (int i : keysetVoluntariosDisponiveis()) {
@@ -212,7 +210,7 @@ public final class Habitat extends javax.swing.JFrame {
         }
         listaVoluntarios.setModel(str);
     }
-    
+
     public void listaVoluntariosIndisponiveis() {
         DefaultListModel<String> str = new DefaultListModel<>();
         for (int i : keysetVoluntariosIndisponiveis()) {
@@ -220,31 +218,32 @@ public final class Habitat extends javax.swing.JFrame {
         }
         listaVoluntarios.setModel(str);
     }
-    
-     public void listaDonativosMaterial() {
+
+    public void listaDonativosMaterial() {
         DefaultListModel<Integer> str = new DefaultListModel<>();
         for (int i : keysetDonativoMaterial()) {
             str.addElement(this.habitat.getDonativos().get(i).getId());
         }
         listaDonativos.setModel(str);
     }
-     
-      public void listaDonativosMonetario() {
+
+    public void listaDonativosMonetario() {
         DefaultListModel<Integer> str = new DefaultListModel<>();
         for (int i : keysetDonativoMonetario()) {
             str.addElement(this.habitat.getDonativos().get(i).getId());
         }
         listaDonativos.setModel(str);
     }
-      
-       public void listaDonativosMaodeObra() {
+
+    public void listaDonativosMaodeObra() {
         DefaultListModel<Integer> str = new DefaultListModel<>();
         for (int i : keysetDonativoMaodeObra()) {
             str.addElement(this.habitat.getDonativos().get(i).getId());
         }
         listaDonativos.setModel(str);
     }
-       public void listaDonativosMaodeObraeMonetario() {
+
+    public void listaDonativosMaodeObraeMonetario() {
         DefaultListModel<Integer> str = new DefaultListModel<>();
         for (int i : keysetDonativoMaodeObra()) {
             str.addElement(this.habitat.getDonativos().get(i).getId());
@@ -253,9 +252,9 @@ public final class Habitat extends javax.swing.JFrame {
             str.addElement(this.habitat.getDonativos().get(i).getId());
         }
         listaDonativos.setModel(str);
-       }
-       
-        public void listaDonativosMaodeObraeMaterial() {
+    }
+
+    public void listaDonativosMaodeObraeMaterial() {
         DefaultListModel<Integer> str = new DefaultListModel<>();
         for (int i : keysetDonativoMaodeObra()) {
             str.addElement(this.habitat.getDonativos().get(i).getId());
@@ -264,9 +263,9 @@ public final class Habitat extends javax.swing.JFrame {
             str.addElement(this.habitat.getDonativos().get(i).getId());
         }
         listaDonativos.setModel(str);
-       }
-        
-        public void listaDonativosMonetarioeMaterial() {
+    }
+
+    public void listaDonativosMonetarioeMaterial() {
         DefaultListModel<Integer> str = new DefaultListModel<>();
         for (int i : keysetDonativoMonetario()) {
             str.addElement(this.habitat.getDonativos().get(i).getId());
@@ -275,8 +274,8 @@ public final class Habitat extends javax.swing.JFrame {
             str.addElement(this.habitat.getDonativos().get(i).getId());
         }
         listaDonativos.setModel(str);
-       }
-        
+    }
+
     public void listaEventosRealizados() {
         DefaultListModel<String> str = new DefaultListModel<>();
         for (int i : keysetEventosRealizados()) {
@@ -284,7 +283,7 @@ public final class Habitat extends javax.swing.JFrame {
         }
         listaEventos.setModel(str);
     }
-    
+
     public void listaEventosARealizar() {
         DefaultListModel<String> str = new DefaultListModel<>();
         for (int i : keysetEventosARealizar()) {
@@ -292,52 +291,52 @@ public final class Habitat extends javax.swing.JFrame {
         }
         listaEventos.setModel(str);
     }
-    
-    private void updateListaVoluntarios()  {
+
+    private void updateListaVoluntarios() {
         if (jCheckBoxDisponivel.isSelected() && jCheckBoxIndisponivel.isSelected()) {
             listaVoluntarios();
-        }else if(jCheckBoxDisponivel.isSelected()){
+        } else if (jCheckBoxDisponivel.isSelected()) {
             listaVoluntariosDisponiveis();
-        }else if(jCheckBoxIndisponivel.isSelected()){
+        } else if (jCheckBoxIndisponivel.isSelected()) {
             listaVoluntariosIndisponiveis();
-        }else{
+        } else {
             listaVoluntarios();
         }
-        
+
     }
-    
-    private void updateListaDonativos()  {
-        if (jCheckBoxMaterial.isSelected() && jCheckBoxMonetario.isSelected()&& jCheckBoxMaodeObra.isSelected()) {
+
+    private void updateListaDonativos() {
+        if (jCheckBoxMaterial.isSelected() && jCheckBoxMonetario.isSelected() && jCheckBoxMaodeObra.isSelected()) {
             listaDonativos();
-        }else if(jCheckBoxMaterial.isSelected()){
+        } else if (jCheckBoxMaterial.isSelected()) {
             listaDonativosMaterial();
-        }else if(jCheckBoxMonetario.isSelected()){
+        } else if (jCheckBoxMonetario.isSelected()) {
             listaDonativosMonetario();
-         }else if(jCheckBoxMaodeObra.isSelected()){
+        } else if (jCheckBoxMaodeObra.isSelected()) {
             listaDonativosMaodeObra();
-         }else if(jCheckBoxMaodeObra.isSelected() && jCheckBoxMonetario.isSelected()){
+        } else if (jCheckBoxMaodeObra.isSelected() && jCheckBoxMonetario.isSelected()) {
             listaDonativosMaodeObraeMonetario();
-        }else if(jCheckBoxMaodeObra.isSelected() && jCheckBoxMaterial.isSelected()){
+        } else if (jCheckBoxMaodeObra.isSelected() && jCheckBoxMaterial.isSelected()) {
             listaDonativosMaodeObraeMaterial();
-        }else if(jCheckBoxMonetario.isSelected() && jCheckBoxMaterial.isSelected()){
+        } else if (jCheckBoxMonetario.isSelected() && jCheckBoxMaterial.isSelected()) {
             listaDonativosMonetarioeMaterial();
-        }else{
+        } else {
             listaDonativos();
         }
-        
+
     }
-    
-    private void updateListaEventos()  {
+
+    private void updateListaEventos() {
         if (jCheckBoxRealizados.isSelected() && jCheckBoxARealizar.isSelected()) {
             listaEventos();
-        }else if(jCheckBoxRealizados.isSelected()){
+        } else if (jCheckBoxRealizados.isSelected()) {
             listaEventosRealizados();
-        }else if(jCheckBoxARealizar.isSelected()){
+        } else if (jCheckBoxARealizar.isSelected()) {
             listaEventosARealizar();
-        }else{
+        } else {
             listaEventos();
         }
-        
+
     }
 
     public void listaProjectos() {
@@ -346,6 +345,7 @@ public final class Habitat extends javax.swing.JFrame {
             str1.addElement(this.habitat.getProjetos().get(i).getId());
         }
         listaProjectos.setModel(str1);
+        //listaProjectos.setSelectedIndex(0);
     }
 
     public void listaEventos() {
@@ -354,24 +354,26 @@ public final class Habitat extends javax.swing.JFrame {
             str2.addElement(this.habitat.getEventos().get(i).getDescricao());
         }
         listaEventos.setModel(str2);
+        //listaEventos.setSelectedIndex(0);
     }
 
     public void listaDonativos() {
         DefaultListModel<Integer> str3 = new DefaultListModel<>();
         for (int i : this.habitat.getDonativos().keySet()) {
             str3.addElement(this.habitat.getDonativos().get(i).getId());
-            
+
         }
         listaDonativos.setModel(str3);
+        listaDonativos.setSelectedIndex(0);
     }
-    
+
     public void listaMateriais() {
         DefaultListModel<String> str4 = new DefaultListModel<>();
         for (int i : this.habitat.getMateriais().keySet()) {
-            //System.out.println(i);
             str4.addElement(this.habitat.getMateriais().get(i).getId() + " " + this.habitat.getMateriais().get(i).getDescricao());
         }
         listMateriais.setModel(str4);
+        listMateriais.setSelectedIndex(0);
     }
 
     public String seleccionaVoluntario() {
@@ -384,7 +386,7 @@ public final class Habitat extends javax.swing.JFrame {
         //listaVoluntarios.clearSelection();
         return s;
     }
-    
+
     public String seleccionaEvento() {
         String s = null;
 
@@ -395,7 +397,7 @@ public final class Habitat extends javax.swing.JFrame {
         //listaVoluntarios.clearSelection();
         return s;
     }
-    
+
     public String seleccionaProjeto() {
 
         String aux = "";
@@ -406,7 +408,7 @@ public final class Habitat extends javax.swing.JFrame {
 
         return aux;
     }
-    
+
     public String seleccionaMaterial() {
         String s = null;
 
@@ -417,7 +419,7 @@ public final class Habitat extends javax.swing.JFrame {
         //listMateriais.clearSelection();
         return s;
     }
-    
+
     public String seleccionaDonativo() {
         String s = null;
 
@@ -428,12 +430,20 @@ public final class Habitat extends javax.swing.JFrame {
         //listaEventos.clearSelection();
         return s;
     }
+    
+    private void atualizaDonativo(int key,Donativo don){
+        try {
+            String sql = "UPDATE donativo SET" +
+                         " Descricao = '" +don.getDescricao()+
+                         "',Quantidade = " +don.getQuantidade()+
+                         ",Valor = " +don.getValor()+
+                         " WHERE idDonativo ="+key;
+            PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+            stm.executeUpdate();
+            stm.close();
+        } catch (SQLException e) { }
+    }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -552,9 +562,10 @@ public final class Habitat extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         jScrollPane21 = new javax.swing.JScrollPane();
         nifDoa = new javax.swing.JTextPane();
-        tipoDoa = new javax.swing.JComboBox();
         jButton24 = new javax.swing.JButton();
         jButton25 = new javax.swing.JButton();
+        jScrollPane26 = new javax.swing.JScrollPane();
+        tipoDoa = new javax.swing.JTextPane();
         jLabel29 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         Stock = new javax.swing.JPanel();
@@ -578,6 +589,7 @@ public final class Habitat extends javax.swing.JFrame {
         txtDescricao = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         Projectos.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1073,7 +1085,7 @@ public final class Habitat extends javax.swing.JFrame {
                 .addGroup(VoluntariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonAdicionar)
                     .addComponent(jButtonRemover))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         PainelPrincipal.addTab("Voluntários", Voluntarios);
@@ -1308,6 +1320,11 @@ public final class Habitat extends javax.swing.JFrame {
 
         jButton11.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton11.setText("Remover");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jCheckBoxMaterial.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBoxMaterial.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -1377,13 +1394,6 @@ public final class Habitat extends javax.swing.JFrame {
 
         jScrollPane21.setViewportView(nifDoa);
 
-        tipoDoa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Individual", "Instituição" }));
-        tipoDoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipoDoaActionPerformed(evt);
-            }
-        });
-
         jButton24.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton24.setText("Editar");
         jButton24.addActionListener(new java.awt.event.ActionListener() {
@@ -1399,6 +1409,8 @@ public final class Habitat extends javax.swing.JFrame {
                 jButton25ActionPerformed(evt);
             }
         });
+
+        jScrollPane26.setViewportView(tipoDoa);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1417,30 +1429,26 @@ public final class Habitat extends javax.swing.JFrame {
                     .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addGap(162, 162, 162))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                                .addComponent(jLabel27)
-                                .addGap(142, 142, 142))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel28)
-                                .addComponent(jScrollPane20, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                                .addComponent(jScrollPane21))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel25)
-                                .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                                .addComponent(jLabel26)
-                                .addComponent(tipoDoa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(36, 36, 36))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(264, Short.MAX_VALUE)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                            .addComponent(jLabel24)
+                            .addGap(126, 126, 126))
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel28)
+                            .addComponent(jScrollPane20)
+                            .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane26, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel27))
+                .addGap(37, 37, 37))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(234, 234, 234)
                 .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 28, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1462,11 +1470,11 @@ public final class Habitat extends javax.swing.JFrame {
                     .addComponent(jLabel21)
                     .addComponent(jLabel26))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tipoDoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(jLabel27))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1525,7 +1533,7 @@ public final class Habitat extends javax.swing.JFrame {
                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         DonativosLayout.setVerticalGroup(
             DonativosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1712,7 +1720,7 @@ public final class Habitat extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     private void jButtonEditarVoluntarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarVoluntarioActionPerformed
-        // TODO add your handling code here:
+        
         //Voluntarios
         this.jButtonEditarVoluntario.setVisible(false);
         this.jButtonConfirmarEditar.setVisible(true);
@@ -1722,7 +1730,7 @@ public final class Habitat extends javax.swing.JFrame {
         jTextPaneCod.setEditable(true);
         jTextPaneEquipa.setEditable(true);
         jTextPaneProf.setEditable(true);
-
+        
         this.jTextPaneNome.setText(this.jTextPaneNome.getText());
         this.jTextPaneLocalidade.setText(this.jTextPaneLocalidade.getText());
         this.jTextPaneDatNasc.setText(this.jTextPaneDatNasc.getText());
@@ -1807,34 +1815,6 @@ public final class Habitat extends javax.swing.JFrame {
         dataEvento.setEditable(false);
     }//GEN-LAST:event_jButton23ActionPerformed
 
-    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-        // TODO add your handling code here:
-        //Donativos
-        this.jButton24.setVisible(false);
-        this.jButton25.setVisible(true);
-        quantidadeDon.setEditable(true);
-        valorDon.setEditable(true);
-        nomeDoa.setEditable(true);
-        biDoa.setEditable(true);
-        nifDoa.setEditable(true);
-        tipoDoa.enable();
-        DescricaoDon.setEditable(true);
-    }//GEN-LAST:event_jButton24ActionPerformed
-
-    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
-        // TODO add your handling code here:
-        //Donativos
-        this.jButton25.setVisible(false);
-        this.jButton24.setVisible(true);
-        quantidadeDon.setEditable(false);
-        valorDon.setEditable(false);
-        nomeDoa.setEditable(false);
-        biDoa.setEditable(false);
-        nifDoa.setEditable(false);
-        tipoDoa.disable();
-        DescricaoDon.setEditable(false);
-    }//GEN-LAST:event_jButton25ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
 
@@ -1854,12 +1834,16 @@ public final class Habitat extends javax.swing.JFrame {
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
-        new AdicionarEvento(habitat).setVisible(true);
+        AdicionarEvento a = new AdicionarEvento(habitat);
+        a.setVisible(true);
+        listaEventos();
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-        new AdicionarDonativo(habitat).setVisible(true);
+        AdicionarDonativo a = new AdicionarDonativo(habitat);
+        a.setVisible(true);
+        listaDonativos();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
@@ -1880,9 +1864,8 @@ public final class Habitat extends javax.swing.JFrame {
     private void listaVoluntariosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaVoluntariosValueChanged
         // TODO add your handling code here:
         String aux = seleccionaVoluntario();
-        Voluntario v = this.habitat.getVoluntario(aux);
-
-        if (aux != null && v != null) {
+        if (aux != null) {
+            Voluntario v = this.habitat.getVoluntario(aux);
             this.jTextPaneNome.setText(v.getNomeVoluntario());
             DateFormat df = new SimpleDateFormat("MM//dd/yyy");
             String data = df.format(v.getDataNascimento());
@@ -1896,15 +1879,15 @@ public final class Habitat extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_listaVoluntariosValueChanged
-   
+
 
     private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
         // TODO add your handling code here:
         String aux = seleccionaVoluntario();
-        int key=0;
+        int key = 0;
         for (int i : this.habitat.getVoluntarios().keySet()) {
             if (this.habitat.getVoluntarios().get(i).getNomeVoluntario().equals(aux)) {
-                key=i;
+                key = i;
             }
         }
         this.habitat.getVoluntarios().remove(key);
@@ -1918,7 +1901,6 @@ public final class Habitat extends javax.swing.JFrame {
         this.jTextPaneProf.setText(null);
         this.jTextPaneCod.setText(null);
         this.jTextPaneEquipa.setText(null);
-        
 
 
     }//GEN-LAST:event_jButtonRemoverActionPerformed
@@ -1936,7 +1918,6 @@ public final class Habitat extends javax.swing.JFrame {
         String id = aux.split(" ")[0];
         int i = Integer.parseInt(id);
         Material m = this.habitat.getMateriais().get(i);
-        
 
         if (aux != null && m != null) {
             String quant = Double.toString(m.getStock());
@@ -1953,49 +1934,40 @@ public final class Habitat extends javax.swing.JFrame {
         int id = Integer.parseInt(aux);
         Projeto p = this.habitat.getProjetos().get(id);
         Familia f = this.habitat.getFamilias().get(p.getId_Familia());
- 
-        
+
         if (aux != null && p != null) {
-            
+
             //this.NomeFamilia.setText("aaa");
             this.NomeFamilia.setText(f.getNome());
             this.Estado.setSelectedItem(p.getestado());
-           
+
             DefaultListModel<String> str = new DefaultListModel<>();
-                for (Voluntario v : p.getVoluntarios()) {
-                     str.addElement(v.getNomeVoluntario());
+            for (Voluntario v : p.getVoluntarios()) {
+                str.addElement(v.getNomeVoluntario());
             }
-                listaVoluntariosProj.setModel(str);
-            }
+            listaVoluntariosProj.setModel(str);
+        }
     }//GEN-LAST:event_listaProjectosValueChanged
 
     private void listaEventosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaEventosValueChanged
         // TODO add your handling code here:
         String aux = seleccionaEvento();
         Evento e = this.habitat.getEvento(aux);
-        
-        
-        
-        if (aux!=null && e != null) {
+
+        if (aux != null && e != null) {
             this.dataEvento.setText(e.getData().toString());
-            for(Donativo d : e.getDonativos())
-             
+            for (Donativo d : e.getDonativos()) {
+            }
         }
-        
-        
-            
-           
     }//GEN-LAST:event_listaEventosValueChanged
 
     private void listaDonativosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaDonativosValueChanged
         // TODO add your handling code here:
         String aux = seleccionaDonativo();
-        int id = Integer.parseInt(aux);
-        Donativo d = this.habitat.getDonativos().get(id);
-        int idDoador = d.getId_doador();
-        Doador doa= this.habitat.getDoador(idDoador);
         
-        if (aux != null && d != null) {
+        if (aux != null) {
+            Donativo d = this.habitat.getDonativos().get(Integer.parseInt(aux));
+            Doador doa = this.habitat.getDoadores().get(d.getId_doador());
             String quant = Double.toString(d.getQuantidade());
             String valor = Float.toString(d.getValor());
             this.quantidadeDon.setText(quant);
@@ -2003,14 +1975,10 @@ public final class Habitat extends javax.swing.JFrame {
             this.DescricaoDon.setText(d.getDescricao());
             this.nomeDoa.setText(doa.getNome());
             this.biDoa.setText(doa.getBi());
+            this.tipoDoa.setText(doa.getTipo());
             this.nifDoa.setText(doa.getNif());
-            this.tipoDoa.setSelectedItem(doa.getTipo());
         }
     }//GEN-LAST:event_listaDonativosValueChanged
-
-    private void tipoDoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoDoaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipoDoaActionPerformed
 
     private void jCheckBoxRealizadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxRealizadosActionPerformed
         // TODO add your handling code here:
@@ -2026,6 +1994,53 @@ public final class Habitat extends javax.swing.JFrame {
         // TODO add your handling code here:
         updateListaDonativos();
     }//GEN-LAST:event_jCheckBoxMaodeObraActionPerformed
+    
+    private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
+        // TODO add your handling code here:
+        //Donativos
+        this.jButton25.setVisible(false);
+        this.jButton24.setVisible(true);
+        this.quantidadeDon.setEditable(false);
+        this.valorDon.setEditable(false);
+        this.DescricaoDon.setEditable(false);
+        
+        String aux = seleccionaDonativo();
+        int id = Integer.parseInt(aux);
+        
+        Double q = Double.parseDouble(this.quantidadeDon.getText());
+        Float f = Float.parseFloat(this.valorDon.getText());
+
+        Donativo don = new Donativo(id,this.DescricaoDon.getText(),f,q);
+        
+        atualizaDonativo(id, don);
+    }//GEN-LAST:event_jButton25ActionPerformed
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        // TODO add your handling code here:
+        //Donativos
+        this.jButton24.setVisible(false);
+        this.jButton25.setVisible(true);
+        this.quantidadeDon.setEditable(true);
+        this.valorDon.setEditable(true);
+        this.DescricaoDon.setEditable(true);
+    }//GEN-LAST:event_jButton24ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        String aux = seleccionaDonativo();
+        int id = Integer.parseInt(aux);
+
+        this.habitat.getDonativos().remove(id);
+        listaDonativos.clearSelection();
+        listaDonativos();
+        this.quantidadeDon.setText(null);
+        this.valorDon.setText(null);
+        this.nomeDoa.setText(null);
+        this.biDoa.setText(null);
+        this.nifDoa.setText(null);
+        this.tipoDoa.setText(null);
+        this.DescricaoDon.setText(null);
+    }//GEN-LAST:event_jButton11ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2130,6 +2145,7 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane23;
     private javax.swing.JScrollPane jScrollPane24;
     private javax.swing.JScrollPane jScrollPane25;
+    private javax.swing.JScrollPane jScrollPane26;
     private javax.swing.JScrollPane jScrollPane27;
     private javax.swing.JScrollPane jScrollPane28;
     private javax.swing.JScrollPane jScrollPane29;
@@ -2161,7 +2177,7 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JTextPane nifDoa;
     private javax.swing.JTextPane nomeDoa;
     private javax.swing.JTextPane quantidadeDon;
-    private javax.swing.JComboBox tipoDoa;
+    private javax.swing.JTextPane tipoDoa;
     private javax.swing.JTextPane txtDescricao;
     private javax.swing.JTextPane txtDoador;
     private javax.swing.JTextPane txtProjeto;

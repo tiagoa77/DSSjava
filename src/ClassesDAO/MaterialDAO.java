@@ -92,10 +92,10 @@ public class MaterialDAO implements Map<Integer, Material>{
             if(rs.next()) {
                 double Quantidade = rs.getInt(2);
                 String Descricao = rs.getString(3);
-                //int projecto = rs.getInt(4);
-                //int donativo = rs.getInt(5);
+                int projecto = rs.getInt(4);
+                int donativo = rs.getInt(5);
                                 
-                v = new Material(id,Descricao,Quantidade);
+                v = new Material(id,Descricao,Quantidade,projecto,donativo);
             }            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {

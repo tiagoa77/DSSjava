@@ -80,7 +80,7 @@ public class DoadorDAO implements Map<Integer,Doador>{
         try {
             Integer id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM doador WHERE idDador= "+id;
+            String sql = "SELECT * FROM doador WHERE idDoador= "+id;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
@@ -89,8 +89,8 @@ public class DoadorDAO implements Map<Integer,Doador>{
                 String nome = rs.getString(3);
                 String bi = rs.getString(4);
                 String nif = rs.getString(5);
+                d = new Doador(idDoador,tipo, nome, nif, bi);
             }           
-            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
         }
@@ -113,8 +113,8 @@ public class DoadorDAO implements Map<Integer,Doador>{
             pst.setString(2, value.getTipo());
             pst.setString(3, value.getNome());
             pst.setString(4, value.getBi());
-            pst.setString(4, value.getNif());
-            pst.execute();
+            pst.setString(5, value.getNif());
+            pst.executeUpdate();
             
         }catch(SQLException e){ }
         d=value;
@@ -140,7 +140,7 @@ public class DoadorDAO implements Map<Integer,Doador>{
     public Set<Integer> keySet() {
         Set<Integer> res = new TreeSet<>();
         try {
-            String sql = "SELECT idDpador FROM test.doador";
+            String sql = "SELECT idDoador FROM doador";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
@@ -157,12 +157,12 @@ public class DoadorDAO implements Map<Integer,Doador>{
     public Collection<Doador> values() {
         Collection<Doador> res = new HashSet<>();
         try {
-            String sql = "SELECT nome FROM doador";
+            String sql = "SELECT * FROM doador";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next())
-                res.add(this.get(rs.getString(3)));
+                res.add(this.get(rs.getInt(1)));
             
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {

@@ -32,8 +32,14 @@ public Material(int id,String desc, Double quant) {
     this.desc = desc;
     this.stock = quant;
     this.id = id;
-    //this.id_donativo=id_donativo;
-    //this.id_projecto=id_projecto;
+}
+
+public Material(int id,String desc, Double quant,int id_donativo,int id_projeto) {
+    this.desc = desc;
+    this.stock = quant;
+    this.id = id;
+    this.id_donativo=id_donativo;
+    this.id_projecto=id_projeto;
 }
 
 

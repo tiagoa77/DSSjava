@@ -39,7 +39,15 @@ public class Doador {
         this.donativos=new DonativoDAO(this.id);
     }
     public Doador(String t, String n, String nif, String b){
-        this.id = this.id +1;
+        this.tipo = t;
+        this.nome = n;
+        this.nif= nif;
+        this.bi = b;
+        this.donativos=new DonativoDAO(this.id);
+    }
+    
+    public Doador(int id,String t, String n, String nif, String b){
+        this.id = id;
         this.tipo = t;
         this.nome = n;
         this.nif= nif;

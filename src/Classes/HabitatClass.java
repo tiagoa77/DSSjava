@@ -356,12 +356,12 @@ public class HabitatClass {
     }
 
     public int addDoador(Doador d, int id) {
-        for (Integer i : doadores.keySet()) {
-            if (doadores.get(i).equals(d)) {
+        for (Integer i : this.doadores.keySet()) {
+            if (this.doadores.get(i).equals(d)) {
                 return -1;
             }
         }
-        doadores.put(id, d.clone());
+        this.doadores.put(id, d.clone());
         return 1;
     }
 
@@ -459,7 +459,7 @@ public class HabitatClass {
         }
         return null;
     }
-
+    
     public Voluntario getVoluntario(String nome) {
         for (int i : voluntarios.keySet()) {
             if (voluntarios.get(i).getNomeVoluntario().equals(nome)) {
