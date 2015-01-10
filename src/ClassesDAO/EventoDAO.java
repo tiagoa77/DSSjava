@@ -127,10 +127,14 @@ public class EventoDAO implements Map<Integer,Evento> {
         Evento evt = null;
         try {
             int id = (Integer) key;
-            String sql = "delete from Evento where idEvento=" + id;
+            String sql = "update donativo set Evento=null where Evento="+id;
+            String sql2 = "delete from Evento where idEvento=" + id;
             PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+            PreparedStatement stm2 = ConexaoBD.getConexao().prepareStatement(sql2);
             stm.executeUpdate();
+            stm2.executeUpdate();
             stm.close();
+            stm2.close();
         } catch (SQLException e) {
         }
         return evt;

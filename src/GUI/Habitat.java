@@ -72,9 +72,6 @@ public final class Habitat extends javax.swing.JFrame {
         jTextPaneDatNasc.setEditable(false);
 
         //Eventos
-        this.jButton22.setVisible(true);
-        this.jButton23.setVisible(false);
-        dataEvento.setEditable(false);
 
         //Donativos
         this.jButton24.setVisible(true);
@@ -428,7 +425,8 @@ public final class Habitat extends javax.swing.JFrame {
             s = listaEventos.getSelectedValue().toString();
         }
         Evento e = this.habitat.getEvento(s);
-        listaDonativosEventos(e.getId());
+        if(s!=null)
+            listaDonativosEventos(e.getId());
         return s;
     }
 
@@ -581,8 +579,6 @@ public final class Habitat extends javax.swing.JFrame {
         jScrollPane23 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton15 = new javax.swing.JButton();
-        jButton22 = new javax.swing.JButton();
-        jButton23 = new javax.swing.JButton();
         jScrollPane29 = new javax.swing.JScrollPane();
         dataEvento = new javax.swing.JTextPane();
         Donativos = new javax.swing.JPanel();
@@ -1216,6 +1212,17 @@ public final class Habitat extends javax.swing.JFrame {
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
                 {null, null, null}
             },
             new String [] {
@@ -1247,22 +1254,6 @@ public final class Habitat extends javax.swing.JFrame {
             }
         });
 
-        jButton22.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jButton22.setText("Editar");
-        jButton22.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton22ActionPerformed(evt);
-            }
-        });
-
-        jButton23.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jButton23.setText("Concluído");
-        jButton23.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton23ActionPerformed(evt);
-            }
-        });
-
         jScrollPane29.setViewportView(dataEvento);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
@@ -1270,24 +1261,16 @@ public final class Habitat extends javax.swing.JFrame {
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane29, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel31)
+                    .addComponent(jLabel32)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane29, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel31)
-                            .addComponent(jLabel32)
-                            .addGroup(jPanel13Layout.createSequentialGroup()
-                                .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton15)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton15)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1300,13 +1283,9 @@ public final class Habitat extends javax.swing.JFrame {
                 .addComponent(jLabel32)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton15))
-                .addGap(105, 105, 105)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton22)
-                    .addComponent(jButton23))
-                .addGap(38, 38, 38))
+                    .addComponent(jButton15)
+                    .addComponent(jScrollPane23, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout EventosLayout = new javax.swing.GroupLayout(Eventos);
@@ -1799,7 +1778,11 @@ public final class Habitat extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEditarVoluntarioActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        // TODO add your handling code here:
+        Evento e = this.habitat.getEvento(seleccionaEvento());
+        int id = e.getId();
+        AdicionarDonativoEvento a = new AdicionarDonativoEvento(habitat,id);
+        a.setVisible(true);
+        listaDonativosEventos(id); 
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jCheckBoxMonetarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMonetarioActionPerformed
@@ -1869,23 +1852,6 @@ public final class Habitat extends javax.swing.JFrame {
         jTextPane2.setEditable(false);
 
     }//GEN-LAST:event_jButton21ActionPerformed
-
-    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-        // TODO add your handling code here:
-
-        //Eventos
-        this.jButton22.setVisible(false);
-        this.jButton23.setVisible(true);
-        dataEvento.setEditable(true);
-    }//GEN-LAST:event_jButton22ActionPerformed
-
-    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        // TODO add your handling code here:
-        //Eventos
-        this.jButton23.setVisible(false);
-        this.jButton22.setVisible(true);
-        dataEvento.setEditable(false);
-    }//GEN-LAST:event_jButton23ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -2115,11 +2081,13 @@ public final class Habitat extends javax.swing.JFrame {
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         String aux = seleccionaEvento();
-        int id = Integer.parseInt(aux);
+        int id = this.habitat.getEvento(aux).getId();
 
         this.habitat.getEventos().remove(id);
         listaEventos.clearSelection();
         listaEventos();
+        this.dataEvento.setText(null);
+        this.jTable1.removeAll();
     }//GEN-LAST:event_jButton14ActionPerformed
 
 
@@ -2145,8 +2113,6 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton3;

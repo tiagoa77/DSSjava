@@ -70,6 +70,16 @@ public class Donativo {
        this.id_doador=id_doador;
     }
     
+    public Donativo(int i,String t, String d, float v, double q,int id_doador,int id_evento){
+       this.id = i;
+       this.tipo=t;
+       this.descricao = d;
+       this.valor = v;
+       this.quantidade = q; 
+       this.id_doador=id_doador;
+       this.id_evento=id_evento;
+    }
+    
     public Donativo(int i, String d, float v, double q){
        this.id = i;
        this.descricao = d;

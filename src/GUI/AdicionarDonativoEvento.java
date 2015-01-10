@@ -7,29 +7,49 @@ package GUI;
 
 import Classes.Doador;
 import Classes.Donativo;
+import Classes.Evento;
 import Classes.HabitatClass;
+import ClassesDAO.ConexaoBD;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Tiago
  */
-public class AdicionarDonativo extends javax.swing.JDialog {
+public class AdicionarDonativoEvento extends javax.swing.JDialog {
     private final HabitatClass habitat;
+    private final int idEvento;
+
     /**
-     * Creates new form AdicionarDonativo
+     * Creates new form AdicionarDonativoEvento
      */
-    public AdicionarDonativo(HabitatClass h) {
+    public AdicionarDonativoEvento(HabitatClass h, int idEvento) {
         this.habitat=h;
         initComponents();
+        this.idEvento=idEvento;
         cmbDoadores();
     }
+    
     private void cmbDoadores(){
         cmbDoador.removeAllItems();
         for (int i : habitat.getDoadores().keySet()) {
             cmbDoador.addItem(habitat.getDoadores().get(i).getNome());
         }
     }
+    
+    public void atualizaDonativoEvento(Donativo d, int idEvento){
+        try {
+            String sql = "UPDATE Donativo SET" +
+                         " Evento =" + idEvento+
+                         " WHERE idDonativo ="+d.getId();
+            PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+            stm.executeUpdate();
+            stm.close();
+        } catch (SQLException e) { }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,7 +78,6 @@ public class AdicionarDonativo extends javax.swing.JDialog {
         buttAddDoador = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setModal(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -239,17 +258,19 @@ public class AdicionarDonativo extends javax.swing.JDialog {
         // TODO add your handling code here:
         String tipo = cmbMaterial.getSelectedItem().toString();
         String nomedoador = cmbDoador.getSelectedItem().toString();
-        
+
         Doador doador = habitat.getDoador(nomedoador);
         String quantidade = txtQuantidade.getText();
         String valor = txtValor.getText();
         String desc = txtDescricao.getText();
         int id=this.habitat.getDonativos().size()+1;
-        Donativo novo = new Donativo(id,tipo,desc,Float.parseFloat(valor),Double.parseDouble(quantidade),doador.getId());
+        Donativo novo = new Donativo(id,tipo,desc,Float.parseFloat(valor),Double.parseDouble(quantidade),doador.getId(),this.idEvento);
+        
         
         if(habitat.addDonativo(novo,novo.getId())==1){
             JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
             this.setVisible(false);
+            atualizaDonativoEvento(novo,this.idEvento);
         }
         else
         JOptionPane.showMessageDialog(null, "Erro");
@@ -265,11 +286,6 @@ public class AdicionarDonativo extends javax.swing.JDialog {
         a.setVisible(true);
         cmbDoadores();
     }//GEN-LAST:event_buttAddDoadorActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttAddDoador;
