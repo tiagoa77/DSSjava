@@ -54,6 +54,7 @@ public class AdicionarMembro extends javax.swing.JDialog {
         jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setModal(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

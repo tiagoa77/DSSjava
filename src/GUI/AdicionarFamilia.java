@@ -56,6 +56,7 @@ public class AdicionarFamilia extends javax.swing.JDialog {
         jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setModal(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

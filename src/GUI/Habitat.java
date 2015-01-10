@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Classes.Candidatura;
 import Classes.Doador;
 import Classes.Donativo;
 import Classes.Evento;
@@ -22,6 +23,8 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.swing.DefaultListModel;
@@ -91,6 +94,7 @@ public final class Habitat extends javax.swing.JFrame {
             str.addElement(this.habitat.getVoluntarios().get(i).getNomeVoluntario());
         }
         listaVoluntarios.setModel(str);
+        listaVoluntarios.setSelectedIndex(0);
     }
 
     public Set<Integer> keysetVoluntariosDisponiveis() {
@@ -365,7 +369,7 @@ public final class Habitat extends javax.swing.JFrame {
             str1.addElement(this.habitat.getProjetos().get(i).getId());
         }
         listaProjectos.setModel(str1);
-        //listaProjectos.setSelectedIndex(0);
+        listaProjectos.setSelectedIndex(0);
     }
 
     public void listaEventos() {
@@ -432,7 +436,7 @@ public final class Habitat extends javax.swing.JFrame {
 
     public String seleccionaProjeto() {
 
-        String aux = "";
+        String aux = null;
 
         if (listaProjectos.getSelectedIndex() != -1) {
             aux = listaProjectos.getSelectedValue().toString();
@@ -491,8 +495,72 @@ public final class Habitat extends javax.swing.JFrame {
         } catch (SQLException e) { }
     }
     
-    private void familiaDoProjeto(int idProjeto){
-        
+    
+    
+    private Familia familiaDoProjeto(int idProjeto){
+        Familia f = null;
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "select * from candidatura,família where projeto="+idProjeto;
+            ResultSet rs = stm.executeQuery(sql);
+            
+            if(rs.next()) {
+                int id = rs.getInt(5);
+                String nome = rs.getString(6);
+                String cod = rs.getString(7);
+                String rua = rs.getString(8);
+                String localidade = rs.getString(9);
+                int idFamilia = rs.getInt(10);
+                             
+                f = new Familia(idFamilia, nome, cod, localidade, rua);
+            }            
+        } catch (SQLException e) {}
+        return f;
+    }
+    
+    private Map<Integer,Voluntario> voluntariosProjeto(int idProjeto,int idFamilia){
+        Map<Integer,Voluntario> voluntarios = new HashMap<>();
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "Select * from candidatura c,voluntário f "
+                       + "where c.projeto="+idProjeto
+                       + " and família="+idFamilia;
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()) {
+                int id = rs.getInt(6);
+                String nome = rs.getString(7);
+                String prof = rs.getString(10);
+                String cod = rs.getString(12);
+                String rua = rs.getString(13);
+                String loc = rs.getString(14);
+                Voluntario v = new Voluntario(id, cod, prof, loc ,nome, rua);
+                voluntarios.put(id, v);
+            }            
+        } catch (SQLException e) {}
+        for(int i : voluntarios.keySet())
+            System.out.println(voluntarios.get(i).toString());
+        return voluntarios;
+    }
+    
+    private Candidatura candidaturaDoProjeto(int idProjeto){
+        Candidatura c = null;
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "select * from candidatura where projeto="+idProjeto;
+            ResultSet rs = stm.executeQuery(sql);
+            
+            if(rs.next()) {
+                int id = rs.getInt(1);
+                String des = rs.getString(2);
+                String estado = rs.getString(3);
+                int id_projecto = rs.getInt(4);
+                int id_familia = rs.getInt(5);
+                             
+                c = new Candidatura(id, des, estado, id_projecto, id_familia);
+            }            
+        } catch (SQLException e) {}
+        return c;
     }
     
     @SuppressWarnings("unchecked")
@@ -722,6 +790,11 @@ public final class Habitat extends javax.swing.JFrame {
 
         jButton4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton4.setText("Ver lista de Tarefas");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton20.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton20.setText("Editar");
@@ -744,6 +817,11 @@ public final class Habitat extends javax.swing.JFrame {
 
         jButton5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton5.setText("Ver Família");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jScrollPane3.setViewportView(jTextPane2);
 
@@ -1783,6 +1861,7 @@ public final class Habitat extends javax.swing.JFrame {
         AdicionarDonativoEvento a = new AdicionarDonativoEvento(habitat,id);
         a.setVisible(true);
         listaDonativosEventos(id); 
+        listaDonativos();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jCheckBoxMonetarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMonetarioActionPerformed
@@ -1968,13 +2047,13 @@ public final class Habitat extends javax.swing.JFrame {
     private void listaProjectosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaProjectosValueChanged
         // TODO add your handling code here:
         String aux = seleccionaProjeto();
-        int id = Integer.parseInt(aux);
-        Projeto p = this.habitat.getProjetos().get(id);
-        Familia f = this.habitat.getFamilias().get(p.getId_Familia());
+        int idProjeto = Integer.parseInt(aux);
+        
 
-        if (aux != null && p != null) {
-
-            //this.NomeFamilia.setText("aaa");
+        if (aux != null) {
+            Candidatura c = candidaturaDoProjeto(idProjeto);
+            Projeto p = this.habitat.getProjetos().get(c.getIdprojecto());
+            Familia f = this.familiaDoProjeto(c.getIdfamilia());
             this.NomeFamilia.setText(f.getNome());
             this.Estado.setSelectedItem(p.getestado());
 
@@ -2089,6 +2168,14 @@ public final class Habitat extends javax.swing.JFrame {
         this.dataEvento.setText(null);
         this.jTable1.removeAll();
     }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

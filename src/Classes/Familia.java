@@ -1,7 +1,8 @@
 package Classes;
 
 
-import java.util.ArrayList;
+import ClassesDAO.MembroDAO;
+import java.util.Map;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,17 +17,16 @@ import java.util.ArrayList;
 public class Familia {
     private int idFamilia;
     private String nome;
-    private ArrayList<Membro> membros;
     private String codPostal;
     private String localidade;
     private String rua;
+    private Map<Integer,Membro> membros;
    
     
     public Familia(Familia f){
         this.idFamilia=f.getIdFamilia();
         this.nome = f.getNome();
-        this.membros = f.getMembros();
-        
+        this.membros = new MembroDAO();
         this.codPostal = f.getCodPostal();
         this.localidade = f.getLocalidade();
         this.rua = f.getRua();
@@ -34,17 +34,14 @@ public class Familia {
     public Familia(){
         this.idFamilia=0;
         this.nome = "";
-        this.membros = new ArrayList<Membro>();
-        
         this.codPostal = "";
         this.localidade = "";
         this.rua = "";
     }
-    public Familia(int id, String n, ArrayList<Membro> ms, String c, String l, String r){
+    public Familia(int id, String n, String c, String l, String r){
         this.idFamilia=id;
         this.nome = n;
-        this.membros = ms;
-        
+        this.membros = new MembroDAO();
         this.codPostal = c;
         this.localidade = l;
         this.rua = r;
@@ -72,10 +69,16 @@ public class Familia {
     public void setRua(String r){
         this.rua = r;
     }
-    
-    public void setMembros(ArrayList<Membro> membros){
+
+    public Map<Integer, Membro> getMembros() {
+        return membros;
+    }
+
+    public void setMembros(Map<Integer, Membro> membros) {
         this.membros = membros;
     }
+    
+    
     public String getCodPostal(){
         return this.codPostal;
     }
@@ -89,32 +92,18 @@ public class Familia {
         return this.rua;
     }
    
-    public ArrayList<Membro> getMembros(){
-        return this.membros;
-    }
     
-    public int addMembro (Membro mem){
-        for(Membro m: membros){
-            if (m.getNif().equals(mem.getNif()))
+    public int addMembro(Membro mem,int id){
+        for(int i: membros.keySet()){
+            if (this.membros.get(i).getNif().equals(mem.getNif()))
                 return -1;
         }
             
-        membros.add(mem);
+        membros.put(id,mem);
         return 1;
            
     }
-    
-    public int remMembro (Membro mem){
-        for(Membro m: membros){
-            if (m.getNif().equals(mem.getNif())){
-                membros.remove(mem);
-                return 1;
-            }
-        }
-            
-        return -1;
-           
-    }
+   
     public boolean Equals(Object o){
         if (this == o)
             return true;
@@ -135,8 +124,8 @@ public class Familia {
         s.append("Rua: ").append(rua).append("\n");
         s.append("Código Postal: ").append(codPostal).append("\n");
         s.append("Membros :\n");
-        for(Membro m :membros)
-            s.append(m.getNome());
+        for(int i :this.membros.keySet())
+            s.append(this.membros.get(i).getNome());
         
         return s.toString();
     }
