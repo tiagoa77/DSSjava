@@ -561,7 +561,7 @@ public final class Habitat extends javax.swing.JFrame {
     }
     
     private Set<String> voluntariosDoProjeto(int idProjeto){
-        Set<String> voluntarios  = null;
+        Set<String> voluntarios  = new TreeSet<>();
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
             String sql = "select Nome from Candidatura,Projeto,voluntário where Projeto=idProjeto and Projeto="+idProjeto;
@@ -573,6 +573,21 @@ public final class Habitat extends javax.swing.JFrame {
             }            
         } catch (SQLException e) {}
         return voluntarios;
+    }
+    
+    private Set<Integer> tarefasDoProjeto(int idProjeto){
+        Set<Integer> tarefas  = new TreeSet<>();
+        try {
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            String sql = "SELECT  FROM Tarefa,projetotarefavoluntário WHERE idTarefa=Tarefa and Projeto="+idProjeto;
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next()) {
+                int idTarefa = rs.getInt(1);
+                tarefas.add(idTarefa);
+            }            
+        } catch (SQLException e) {}
+        return tarefas;
     }
     
     
