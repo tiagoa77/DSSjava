@@ -8,6 +8,10 @@ package GUI;
 import Classes.Familia;
 import Classes.HabitatClass;
 import Classes.Projeto;
+import Classes.Tarefa;
+import Classes.Voluntario;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.DefaultListModel;
 
 /**
@@ -16,6 +20,8 @@ import javax.swing.DefaultListModel;
  */
 public class AdicionarProjeto extends javax.swing.JDialog {
     private final HabitatClass habitat;
+    private final Map<Integer,Tarefa> tars;
+    private final Map<Integer,Voluntario> volunts;
     private final DefaultListModel<String> listVolutarios;
     private final DefaultListModel<String> listTarefas;
     /**
@@ -26,6 +32,8 @@ public class AdicionarProjeto extends javax.swing.JDialog {
         initComponents();
         cmbFamilia();
         cmbVoluntario();
+        this.tars=new HashMap<>();
+        this.volunts=new HashMap<>();
         this.listVolutarios=new DefaultListModel<>();
         this.listTarefas=new DefaultListModel<>();
         //for(int i : this.habitat.getTarefas().keySet())
@@ -34,6 +42,7 @@ public class AdicionarProjeto extends javax.swing.JDialog {
         listaVoluntarios.setModel(listVolutarios);
         listaTarefas.setModel(listTarefas);
     }
+    
 
     private void cmbFamilia(){
         cmbFamila.removeAllItems();
@@ -47,6 +56,11 @@ public class AdicionarProjeto extends javax.swing.JDialog {
         for (int i : this.habitat.getVoluntarios().keySet()) {
             cmbVoluntario.addItem(this.habitat.getVoluntarios().get(i).getNomeVoluntario());
         }
+    }
+    
+    private void listaTarefa(){
+        for(int i : this.habitat.getTarefas().keySet())
+            listTarefas.addElement(this.tars.get(i).getDescricao());
     }
     
     @SuppressWarnings("unchecked")
@@ -117,6 +131,11 @@ public class AdicionarProjeto extends javax.swing.JDialog {
             }
         });
 
+        listaTarefas.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaTarefasValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(listaTarefas);
 
         jButton3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -245,34 +264,46 @@ public class AdicionarProjeto extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        int id = this.habitat.getProjetos().size();
         Projeto novo = new Projeto();
         Familia f = new Familia();
-
+        
         for(Familia fam : habitat.getFamilias().values()){
             if(fam.getNome().equals(cmbFamila.getSelectedItem().toString()))
             f = fam.clone();
         }
-
+        
+        novo = new Projeto(id,tars, volunts);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new AdicionarFamilia(habitat).setVisible(true);
+        AdicionarFamilia a = new AdicionarFamilia(habitat);
+        a.setVisible(true);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        new AdicionarTarefa(habitat).setVisible(true);
+        AdicionarTarefa a = new AdicionarTarefa(habitat);
+        a.setVisible(true);
+        listaTarefa();
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         String s = cmbVoluntario.getSelectedItem().toString();
         listVolutarios.addElement(s);
+        cmbVoluntario.removeItem(s);
         
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void listaTarefasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaTarefasValueChanged
+
+        
+    }//GEN-LAST:event_listaTarefasValueChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cmbFamila;

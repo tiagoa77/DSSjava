@@ -6,6 +6,9 @@ package Classes;
  * and open the template in the editor.
  */
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -15,26 +18,38 @@ public class Projeto {
 
     private String estado;
     private int id = 0;
+    private Date dataAprov;
     private int id_familia;
-    private ArrayList<Tarefa> tarefas; // MUDAR PARA MAPS
-    private ArrayList<Voluntario> voluntarios; //MUDAR PARA MAPS
+    private Map<Integer,Tarefa> tarefas; // MUDAR PARA MAPS
+    private Map<Integer,Voluntario> voluntarios; //MUDAR PARA MAPS
 
     public Projeto() {
         this.estado = "";
-        this.tarefas = new ArrayList<Tarefa>();
-        this.voluntarios = new ArrayList<Voluntario>();
+        this.dataAprov=new Date();
+        this.tarefas = new HashMap<>();
+        this.voluntarios = new HashMap<>();
     }
-
-    public Projeto(String n, int f, ArrayList<Tarefa> tarefa, ArrayList<Voluntario> v) {
+    
+    public Projeto(int id,Map<Integer,Tarefa> tarefas, Map<Integer,Voluntario> voluntarios) {
+        this.id = id;
+        this.tarefas=tarefas;
+        this.voluntarios=voluntarios;
+    }
+    
+    public Projeto(int id, Date d,Map<Integer,Tarefa> tarefas, Map<Integer,Voluntario> voluntarios) {
+        this.id = id;
+        this.dataAprov=d;
+        this.tarefas=tarefas;
+        this.voluntarios=voluntarios;
+    }
+    
+    public Projeto(int id,String n, int f, Map<Integer,Tarefa> tarefas, Map<Integer,Voluntario> voluntarios) {
+        this.id = id;
         this.estado = n;
-        this.id = id + 1;
+        //this.id = id + 1;
         this.id_familia = f;
-        for (Tarefa t : tarefa) {
-            tarefas.add(t.clone());
-        }
-        for (Voluntario v1 : v) {
-            voluntarios.add(v1.clone());
-        }
+        this.tarefas=tarefas;
+        this.voluntarios=voluntarios;
     }
 
     public Projeto(Projeto p) {
@@ -43,6 +58,10 @@ public class Projeto {
         this.id_familia = p.getId_Familia();
         this.tarefas = p.getTarefas();
         this.voluntarios = p.getVoluntarios();
+    }
+
+    public Date getDataAprov() {
+        return dataAprov;
     }
 
     public String getestado() {
@@ -57,13 +76,15 @@ public class Projeto {
         return this.id_familia;
     }
 
-    public ArrayList<Tarefa> getTarefas() {
-        return this.tarefas;
+    public Map<Integer, Tarefa> getTarefas() {
+        return tarefas;
     }
 
-    public ArrayList<Voluntario> getVoluntarios() {
-        return this.voluntarios;
+    public Map<Integer, Voluntario> getVoluntarios() {
+        return voluntarios;
     }
+
+    
 
     public void setestado(String estado) {
         this.estado = estado;
@@ -77,18 +98,16 @@ public class Projeto {
         this.id_familia = f;
     }
 
-    public void setTarefas(ArrayList<Tarefa> f) {
-        for (Tarefa t : f) {
-            tarefas.add(t.clone());
-        }
+    public void setTarefas(Map<Integer, Tarefa> tarefas) {
+        this.tarefas = tarefas;
     }
 
-    public void setVoluntarios(ArrayList<Voluntario> v) {
-        for (Voluntario t : v) {
-            voluntarios.add(t.clone());
-        }
+    public void setVoluntarios(Map<Integer, Voluntario> voluntarios) {
+        this.voluntarios = voluntarios;
     }
 
+    
+/*
     public int addTarefa(Tarefa tar) {
         for (Tarefa t : this.tarefas) {
             if (tar.getId()==t.getId()) {
@@ -98,7 +117,7 @@ public class Projeto {
         tarefas.add(tar);
         return 1;
     }
-
+*/
     public Projeto clone() {
         return new Projeto(this);
     }
@@ -109,13 +128,6 @@ public class Projeto {
         sb.append("Id").append(id).append("\n");
         sb.append("Familia: ").append(id_familia).append("\n");
         sb.append("Tarefas");
-        for (Tarefa t1 : tarefas) {
-            sb.append(t1.getId()).append("\n");
-        }
-        sb.append("Voluntarios");
-        for (Voluntario v1 : voluntarios) {
-            sb.append(v1.getNomeVoluntario()).append("\n");
-        }
         return sb.toString();
     }
 

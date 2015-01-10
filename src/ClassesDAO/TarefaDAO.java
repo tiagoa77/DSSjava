@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
@@ -79,7 +80,7 @@ public class TarefaDAO implements Map<Integer,Tarefa>{
         try {
             int id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM test.Tarefa where idMaterial=" +id;
+            String sql = "SELECT * FROM Tarefa where idTarefa=" +id;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
@@ -149,7 +150,19 @@ public class TarefaDAO implements Map<Integer,Tarefa>{
 
     @Override
     public Set<Integer> keySet() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Integer> res = new TreeSet<>();
+        try {
+            String sql = "SELECT idTarefa FROM Tarefa";
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next())
+                res.add(rs.getInt(1));
+            
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override

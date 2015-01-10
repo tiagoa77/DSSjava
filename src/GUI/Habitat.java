@@ -60,8 +60,7 @@ public final class Habitat extends javax.swing.JFrame {
         this.jButton21.setVisible(false);
         this.jButton3.setVisible(false);
         NomeFamilia.setEditable(false);
-        Estado.disable();
-        jTextPane2.setEditable(false);
+        txtDataApro.setEditable(false);
         //Voluntarios
         this.jButtonEditarVoluntario.setVisible(true);
         this.jButtonConfirmarEditar.setVisible(false);
@@ -544,15 +543,15 @@ public final class Habitat extends javax.swing.JFrame {
         Candidatura c = null;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "select * from candidatura where projeto="+idProjeto;
+            String sql = "select * from projeto,candidatura where idProjeto=Projeto and projeto="+idProjeto;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
-                int id = rs.getInt(1);
-                String des = rs.getString(2);
-                String estado = rs.getString(3);
-                int id_projecto = rs.getInt(4);
-                int id_familia = rs.getInt(5);
+                int id = rs.getInt(3);
+                String des = rs.getString(4);
+                String estado = rs.getString(5);
+                int id_projecto = rs.getInt(6);
+                int id_familia = rs.getInt(7);
                              
                 c = new Candidatura(id, des, estado, id_projecto, id_familia);
             }            
@@ -575,20 +574,6 @@ public final class Habitat extends javax.swing.JFrame {
         return voluntarios;
     }
     
-    private Set<Integer> tarefasDoProjeto(int idProjeto){
-        Set<Integer> tarefas  = new TreeSet<>();
-        try {
-            Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT  FROM Tarefa,projetotarefavoluntário WHERE idTarefa=Tarefa and Projeto="+idProjeto;
-            ResultSet rs = stm.executeQuery(sql);
-            
-            while(rs.next()) {
-                int idTarefa = rs.getInt(1);
-                tarefas.add(idTarefa);
-            }            
-        } catch (SQLException e) {}
-        return tarefas;
-    }
     
     
     
@@ -621,10 +606,11 @@ public final class Habitat extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
         jButton21 = new javax.swing.JButton();
-        Estado = new javax.swing.JComboBox();
         jButton5 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
+        txtDataApro = new javax.swing.JTextPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtEstado = new javax.swing.JTextPane();
         jLabel9 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         Voluntarios = new javax.swing.JPanel();
@@ -838,9 +824,6 @@ public final class Habitat extends javax.swing.JFrame {
             }
         });
 
-        Estado.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        Estado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Em curso", "Pendente", "Rejeitado", "Terminado" }));
-
         jButton5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton5.setText("Ver Família");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -849,7 +832,9 @@ public final class Habitat extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane3.setViewportView(jTextPane2);
+        jScrollPane3.setViewportView(txtDataApro);
+
+        jScrollPane4.setViewportView(txtEstado);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -865,7 +850,6 @@ public final class Habitat extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane2)
-                            .addComponent(Estado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -878,7 +862,8 @@ public final class Habitat extends javax.swing.JFrame {
                                                 .addComponent(jLabel5))
                                             .addGap(104, 104, 104)))
                                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
@@ -910,8 +895,8 @@ public final class Habitat extends javax.swing.JFrame {
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1933,8 +1918,8 @@ public final class Habitat extends javax.swing.JFrame {
         jButton20.setVisible(false);
         jButton3.setVisible(true);
         NomeFamilia.setEditable(true);
-        Estado.enable();
-        jTextPane2.setEditable(true);
+
+        txtDataApro.setEditable(true);
 
 
     }//GEN-LAST:event_jButton20ActionPerformed
@@ -1947,8 +1932,7 @@ public final class Habitat extends javax.swing.JFrame {
         jButton20.setVisible(true);
         jButton3.setVisible(false);
         NomeFamilia.setEditable(false);
-        Estado.disable();
-        jTextPane2.setEditable(false);
+        txtDataApro.setEditable(false);
 
     }//GEN-LAST:event_jButton21ActionPerformed
 
@@ -2069,13 +2053,16 @@ public final class Habitat extends javax.swing.JFrame {
         if (aux != null) {
             Candidatura c = candidaturaDoProjeto(idProjeto);
             Projeto p = this.habitat.getProjetos().get(c.getIdprojecto());
-            Familia f = this.familiaDoProjeto(c.getIdfamilia());
+            Familia f = this.habitat.getFamilias().get(c.getIdfamilia());
             this.NomeFamilia.setText(f.getNome());
-            this.Estado.setSelectedItem(p.getestado());
+            this.txtEstado.setText(c.getEstado());
+            DateFormat df = new SimpleDateFormat("MM/dd/yyy");
+            String data = df.format(p.getDataAprov());
+            this.txtDataApro.setText(data);
 
             DefaultListModel<String> str = new DefaultListModel<>();
-            for (Voluntario v : p.getVoluntarios()) {
-                str.addElement(v.getNomeVoluntario());
+            for (String i : voluntariosDoProjeto(idProjeto)) {
+                str.addElement(i);
             }
             listaVoluntariosProj.setModel(str);
         }
@@ -2186,11 +2173,18 @@ public final class Habitat extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        String aux = seleccionaProjeto();
+        int id = Integer.parseInt(aux);
+        VerFamilia v = new VerFamilia(habitat, id);
+        v.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        String aux = seleccionaProjeto();
+        int id = Integer.parseInt(aux);
+        VerTarefas v = new VerTarefas(habitat, id);
+        v.setVisible(true);
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     public void listaVoluntariosProjeto(int id) {
@@ -2221,7 +2215,6 @@ public final class Habitat extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea DescricaoDon;
     private javax.swing.JPanel Donativos;
-    private javax.swing.JComboBox Estado;
     private javax.swing.JPanel Eventos;
     private javax.swing.JTextPane NomeFamilia;
     private javax.swing.JTabbedPane PainelPrincipal;
@@ -2322,6 +2315,7 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane28;
     private javax.swing.JScrollPane jScrollPane29;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPaneCod;
@@ -2332,7 +2326,6 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPaneProf;
     private javax.swing.JScrollPane jScrollPaneRua;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextPane jTextPane2;
     private javax.swing.JTextPane jTextPaneCod;
     private javax.swing.JTextPane jTextPaneDatNasc;
     private javax.swing.JTextPane jTextPaneEquipa;
@@ -2350,8 +2343,10 @@ public final class Habitat extends javax.swing.JFrame {
     private javax.swing.JTextPane nomeDoa;
     private javax.swing.JTextPane quantidadeDon;
     private javax.swing.JTextPane tipoDoa;
+    private javax.swing.JTextPane txtDataApro;
     private javax.swing.JTextPane txtDescricao;
     private javax.swing.JTextPane txtDoador;
+    private javax.swing.JTextPane txtEstado;
     private javax.swing.JTextPane txtProjeto;
     private javax.swing.JTextPane txtQuantidade;
     private javax.swing.JTextPane valorDon;
