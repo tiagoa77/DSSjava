@@ -5,40 +5,40 @@ package Classes;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Patrícia
  */
 public class Candidatura {
+
     private String descricao;
     private String estado;
     private int id = 0;
     private int idprojecto;
     private int idfamilia;
-    
-    Candidatura(Candidatura c){
+
+    public Candidatura(Candidatura c) {
         this.descricao = c.getDescricao();
         this.estado = c.getEstado();
         this.id = c.getId();
-        this.idprojecto=c.getIdprojecto();
-        this.idfamilia=c.getIdfamilia();
+        this.idprojecto = c.getIdprojecto();
+        this.idfamilia = c.getIdfamilia();
     }
-   
-    Candidatura(String d, String e, int id, int id_projecto, int id_familia){
-        this.descricao = d;
-        this.estado = e;
-        this.id = id;
-        this.idprojecto=id_projecto;
-        this.idfamilia=id_familia;
-    }
-    
-    Candidatura(){
+
+    public Candidatura() {
         this.descricao = "";
         this.estado = "";
         this.id = this.id + 1;
-        this.idprojecto=0;
-        this.idfamilia=0;
+        this.idprojecto = 0;
+        this.idfamilia = 0;
+    }
+
+    public Candidatura(int id, String d, String e,int id_projecto, int id_familia) {
+        this.descricao = d;
+        this.estado = e;
+        this.id = id;
+        this.idprojecto = id_projecto;
+        this.idfamilia = id_familia;
     }
 
     public int getIdprojecto() {
@@ -56,46 +56,52 @@ public class Candidatura {
     public void setIdfamilia(int idfamilia) {
         this.idfamilia = idfamilia;
     }
-    
-    
-    
-    public void setDescricao(String d){
+
+    public void setDescricao(String d) {
         this.descricao = d;
     }
-    public void setEstado(String e){
+
+    public void setEstado(String e) {
         this.estado = e;
     }
-    public void setId(int id){
+
+    public void setId(int id) {
         this.id = id;
     }
-    public String getDescricao(){
+
+    public String getDescricao() {
         return this.descricao;
     }
-    public String getEstado(){
+
+    public String getEstado() {
         return this.estado;
     }
-    public int getId(){
+
+    public int getId() {
         return this.id;
     }
-   
-    public boolean Equals(Object o){
-        if (this == o)
+
+    public boolean Equals(Object o) {
+        if (this == o) {
             return true;
-        if ((o!=null) || (o.getClass()!=this.getClass()))
+        }
+        if ((o != null) || (o.getClass() != this.getClass())) {
             return false;
+        }
         Candidatura c = (Candidatura) o;
-        return this.descricao.equals(c.getDescricao())&&this.estado.equals(c.getEstado())&&this.id==c.getId();
+        return this.descricao.equals(c.getDescricao()) && this.estado.equals(c.getEstado()) && this.id == c.getId();
     }
-    
-    public Candidatura clone() { 
-        return new Candidatura(this); 
+
+    public Candidatura clone() {
+        return new Candidatura(this);
     }
+
     public String toString() {
         StringBuilder s = new StringBuilder("------ Candidatura ---------\n");
         s.append("Id: ").append(id).append("\n");
         s.append("Descrição: ").append(descricao).append("\n");
         s.append("Estado: ").append(estado).append("\n");
-        
+
         return s.toString();
-    } 
+    }
 }

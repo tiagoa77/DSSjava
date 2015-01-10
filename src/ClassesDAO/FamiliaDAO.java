@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
@@ -28,7 +29,7 @@ public class FamiliaDAO implements Map<Integer,Familia>{
         int res = 0;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM test.Familia";
+            String sql = "SELECT * FROM Família";
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
@@ -44,7 +45,7 @@ public class FamiliaDAO implements Map<Integer,Familia>{
         boolean res = false;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Familia";// where donativo=" + this.id;
+            String sql = "SELECT * FROM Família";// where donativo=" + this.id;
             ResultSet rs = stm.executeQuery(sql);
             if(!rs.next())
                 res=true;
@@ -59,7 +60,7 @@ public class FamiliaDAO implements Map<Integer,Familia>{
         boolean res = false;
         try {
             int id = (Integer) key;
-            String sql = "SELECT * FROM Familia WHERE idFamilia='"+ id+"'";
+            String sql = "SELECT * FROM Família WHERE idFamilia='"+ id+"'";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -82,18 +83,18 @@ public class FamiliaDAO implements Map<Integer,Familia>{
         try {
             int id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM test.Familia WHERE idFamilia=" +id;
+            String sql = "SELECT * FROM Família WHERE idFamilia=" +id;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
-                int i = rs.getInt(1);
-                String Nome = rs.getString(2);
-                //String membros = rs.getString(3);??
-                String codPostal = rs.getString(4);
-                String localidade = rs.getString(5);
-                String rua = rs.getString(6);
+                
+                String Nome = rs.getString(1);
+                String codPostal = rs.getString(2);
+                String rua = rs.getString(3);
+                String localidade = rs.getString(4);
+                int i = rs.getInt(5);
                                 
-                //f = new Familia(i,Nome,membros,codPostal,localidade,rua);
+                f = new Familia(id, Nome, codPostal, localidade, rua);
             }            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
@@ -110,7 +111,7 @@ public class FamiliaDAO implements Map<Integer,Familia>{
             int id_evento=0;
             id_evento=this.size()+1;
             String sql;
-            sql = "INSERT INTO Familia(idFamilia,Nome,CodPostal,Localidade,Rua) VALUES ('?','?','?','?','?')";
+            sql = "INSERT INTO Família(idFamilia,Nome,CodPostal,Localidade,Rua) VALUES (?,?,?,?,?)";
             pst = ConexaoBD.getConexao().prepareCall(sql);
             pst.setInt(1,id_evento);
             pst.setString(2, value.getNome());
@@ -129,7 +130,7 @@ public class FamiliaDAO implements Map<Integer,Familia>{
         Familia fam = null;
         try {
             int id = (Integer) key;
-            String sql = "delete from test.Familia where idFamilia='"+id+"'";
+            String sql = "delete from Família where idFamilia="+id;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
@@ -151,7 +152,19 @@ public class FamiliaDAO implements Map<Integer,Familia>{
 
     @Override
     public Set<Integer> keySet() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<Integer> res = new TreeSet<>();
+        try {
+            String sql = "SELECT idFamilia FROM Família";
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            
+            while(rs.next())
+                res.add(rs.getInt(1));
+            
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
     }
 
     @Override

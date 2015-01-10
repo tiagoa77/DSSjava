@@ -67,7 +67,7 @@ public class MembroDAO implements Map<Integer,Membro>{
         boolean res = false;
         try {
             int id = (Integer) key;
-            String sql = "SELECT * FROM Membro WHERE idMembro='"+id+"'";
+            String sql = "SELECT * FROM Membro WHERE idMembro="+id;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -90,7 +90,7 @@ public class MembroDAO implements Map<Integer,Membro>{
         try {
             Integer id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM Membro WHERE idMembro= '"+id+"'";
+            String sql = "SELECT * FROM Membro WHERE idMembro= "+id;
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
@@ -101,6 +101,8 @@ public class MembroDAO implements Map<Integer,Membro>{
                 String Nif = rs.getString(5);
                 String BI = rs.getString(6);
                 int idFamilia= rs.getInt(7);
+                
+                m = new Membro(idMembro, nome, BI, Nif, profissao, DataNascimento,idFamilia);
             }           
             
             ConexaoBD.fecharCursor(rs, stm);
@@ -118,7 +120,7 @@ public class MembroDAO implements Map<Integer,Membro>{
             int id_membro=0;
             id_membro=this.size()+1;
             String sql;
-            sql = "INSERT INTO Membro(idMembro,Nome, DataNascimento, Profissao, Nif,BI, idFamilia) VALUES ('?','?'.'?','?','?','?'.'?')";                
+            sql = "INSERT INTO Membro(idMembro,Nome, DataNascimento, Profissao, Nif,BI, idFamilia) VALUES (?,?,?,?,?,?,?)";                
                                                           
             pst = ConexaoBD.getConexao().prepareCall(sql);
             pst.setInt(1,id_membro);
@@ -127,8 +129,8 @@ public class MembroDAO implements Map<Integer,Membro>{
             pst.setString(4, value.getProfissao());
             pst.setString(5, value.getNif());
             pst.setString(6, value.getBi());
-            //pst.setString(8, value.getIdFamilia());
-            pst.execute();
+            pst.setInt(7, value.getIdFamilia());
+            pst.executeUpdate();
             
         }catch(SQLException e){ }
         m=value;

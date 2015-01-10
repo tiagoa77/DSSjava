@@ -37,7 +37,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
         int res = 0;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM test.Candidatura where Familia="+this.idfamilia+" and projecto="+this.idprojecto;
+            String sql = "SELECT * FROM Candidatura";
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {
@@ -53,7 +53,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
         boolean res = false;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM testCandidatura where Familia="+this.idfamilia+" and Projecto="+this.idprojecto;
+            String sql = "SELECT * FROM Candidatura";
             ResultSet rs = stm.executeQuery(sql);
             if(!rs.next())
                 res=true;
@@ -68,7 +68,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
         boolean res = false;
         try {
             int id = (Integer) key;
-            String sql = "SELECT * FROM test.Candidatura WHERE Familia="+ this.idfamilia+" and Projecto="+this.idprojecto;;
+            String sql = "SELECT * FROM Candidatura";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             res = rs.next();
@@ -87,7 +87,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
         try {
             int id = (Integer) key;
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM test.Candidatura WHERE Familia= "+this.idfamilia+" and Projecto="+this.idprojecto+" and id_material="+id;
+            String sql = "SELECT * FROM Candidatura";
             ResultSet rs = stm.executeQuery(sql);
             
             if(rs.next()) {
@@ -95,12 +95,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
                 String Estado = rs.getString(3);
                 int id_familia = rs.getInt(4);
                 int id_projecto = rs.getInt(5);
-                                
-                c.setId(id);
-                c.setDescricao(Descricao);
-                c.setEstado(Estado);
-                c.setIdfamilia(id_familia);
-                c.setIdprojecto(id_projecto);
+                c = new Candidatura(id,Descricao,Estado,id_projecto,id_familia);
             }            
             ConexaoBD.fecharCursor(rs, stm);
         } catch (SQLException e) {
@@ -136,7 +131,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
         Candidatura c = null;
         try {
             int id = (Integer) key;
-            String sql = "delete from test.Candidatura where idCandidatura="+id+" and Familia= "+this.idfamilia+" and projecto="+this.idprojecto;
+            String sql = "delete from Candidatura where idCandidatura="+id;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
@@ -151,7 +146,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
     public Set<Integer> keySet() {
         Set<Integer> res = new TreeSet<>();
         try {
-            String sql = "SELECT idCandidatura from test.Candidatura";
+            String sql = "SELECT idCandidatura from Candidatura";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             
@@ -168,7 +163,7 @@ public class CandidaturaDAO implements Map<Integer,Candidatura>{
     public Collection<Candidatura> values() {
         Collection<Candidatura> res = new HashSet<>();
         try {
-            String sql = "SELECT idCandidatura FROM test.Candidatura";
+            String sql = "SELECT idCandidatura FROM Candidatura";
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
             

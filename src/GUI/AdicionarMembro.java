@@ -10,8 +10,10 @@ import Classes.Membro;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,12 +22,19 @@ import javax.swing.JOptionPane;
  */
 public class AdicionarMembro extends javax.swing.JDialog {
     private final HabitatClass habitat;
+    private final int Familia;
+    private final Map<Integer,Membro> membros;
+    private final DefaultListModel<String> membro;
+    
     /**
      * Creates new form AdicionarMembro
      */
-    public AdicionarMembro(HabitatClass h) {
+    public AdicionarMembro(HabitatClass h,int idFamilia, Map<Integer,Membro> m, DefaultListModel<String> membro) {
         this.habitat=h;
+        this.Familia=idFamilia;
         initComponents();
+        this.membros = m;
+        this.membro=membro;
     }
 
     /**
@@ -204,11 +213,13 @@ public class AdicionarMembro extends javax.swing.JDialog {
             String data = jTextField2.getText();
             Date date = df.parse(data);
             
-            Membro novo = new Membro(id,nome,bi,nif,profissao,date);
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            Membro novo = new Membro(id,nome,bi,nif,profissao,sqlDate,this.Familia);
             
             if(this.habitat.addMembro(novo,novo.getId())==1){
                 JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
                 this.setVisible(false);
+                
             }
             else{
                 JOptionPane.showMessageDialog(null, "Erro");

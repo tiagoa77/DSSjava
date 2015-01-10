@@ -26,7 +26,7 @@ public class TarefaDAO implements Map<Integer,Tarefa>{
         int res = 0;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * FROM test.tarefa";
+            String sql = "SELECT * FROM tarefa";
             ResultSet rs = stm.executeQuery(sql);
 
             while (rs.next()) {

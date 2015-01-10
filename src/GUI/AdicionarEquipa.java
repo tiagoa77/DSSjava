@@ -7,15 +7,12 @@ package GUI;
 
 import Classes.Equipa;
 import Classes.HabitatClass;
-import Classes.Membro;
 import Classes.Voluntario;
 import ClassesDAO.ConexaoBD;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 

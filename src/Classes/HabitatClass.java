@@ -348,13 +348,13 @@ public class HabitatClass {
         return -1;
     }
 
-    public int addFamilia(Familia f) {
+    public int addFamilia(Familia f, int id) {
         for (int i : familias.keySet()) {
             if (familias.get(i).equals(f)) {
                 return -1;
             }
         }
-        familias.put(f.getIdFamilia(), f.clone());
+        familias.put(id, f.clone());
         return 1;
     }
 

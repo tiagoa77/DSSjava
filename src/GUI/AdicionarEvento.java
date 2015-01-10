@@ -105,7 +105,7 @@ private HabitatClass habitat;
         });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        jLabel4.setText("(DD-MM-AAAA)");
+        jLabel4.setText("(MM/dd/yyyy)");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

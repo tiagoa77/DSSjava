@@ -19,8 +19,11 @@ public class Familia {
     private String nome;
     private String codPostal;
     private String localidade;
+    private String representante;
     private String rua;
     private Map<Integer,Membro> membros;
+    
+    
    
     
     public Familia(Familia f){
@@ -38,16 +41,35 @@ public class Familia {
         this.localidade = "";
         this.rua = "";
     }
-    public Familia(int id, String n, String c, String l, String r){
+    
+    public Familia(int id,String n,String c,String l,String r){
         this.idFamilia=id;
         this.nome = n;
-        this.membros = new MembroDAO();
+        this.codPostal = c;
+        this.localidade = l;
+        this.rua = r;
+    }
+    
+    public Familia(int id, String n,Map<Integer,Membro> membros,String rep ,String c, String l, String r){
+        this.idFamilia=id;
+        this.nome = n;
+        this.representante=rep;
+        //this.membros = new MembroDAO();
+        this.membros = membros;
         this.codPostal = c;
         this.localidade = l;
         this.rua = r;
     }
     public void setCodPostal(String c){
         this.codPostal = c;
+    }
+
+    public void setRepresentante(String representante) {
+        this.representante = representante;
+    }
+
+    public String getRepresentante() {
+        return representante;
     }
 
     public int getIdFamilia() {

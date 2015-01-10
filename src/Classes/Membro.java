@@ -21,6 +21,7 @@ public class Membro {
     private String profissao;
     private String nif;
     private String bi;
+    private int idFamilia;
     
     public Membro(Membro m){
         this.id=m.getId();
@@ -29,6 +30,7 @@ public class Membro {
         this.dataNascimento = m.getDataNascimento();
         this.nif = m.getNif();
         this.profissao = m.getProfissao();
+        this.idFamilia=m.getIdFamilia();
     }
     public Membro(){
         this.id=0;
@@ -38,13 +40,25 @@ public class Membro {
         this.nif = "";
         this.profissao = "";
     }
-    public Membro(int id,String n, String b, String nif, String p, Date d){
+   
+    
+    public Membro(int id,String n, String b, String nif, String p, Date d, int idFamilia){
         this.id=id;
         this.nome = n;
         this.bi = b;
         this.dataNascimento = d;
         this.nif = nif;
         this.profissao = p;
+        this.idFamilia=idFamilia;
+        
+    }
+
+    public void setIdFamilia(int idFamilia) {
+        this.idFamilia = idFamilia;
+    }
+
+    public int getIdFamilia() {
+        return idFamilia;
     }
 
     public int getId() {
