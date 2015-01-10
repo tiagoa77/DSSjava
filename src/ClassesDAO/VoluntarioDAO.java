@@ -127,9 +127,7 @@ public class VoluntarioDAO implements Map<Integer, Voluntario> {
             sql = "INSERT INTO `voluntário`(`idVoluntário`,`Nome`,`Disponibilidade`,`Telemovel`,`Profissao`,`DataNascimento`,`CodPostal`,`Rua`,`Localidade`,`Equipa`,`Email`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             pst = ConexaoBD.getConexao().prepareCall(sql);
             pst.setInt(1, id_voluntario);
-            //System.out.println(id_voluntario);
             pst.setString(2, value.getNomeVoluntario());
-            //System.out.println(value.getNomeVoluntario());
             pst.setBoolean(3, value.getDisponibilidade());
             pst.setString(4, value.getTelemovel());
             pst.setString(5, value.getProfissao());

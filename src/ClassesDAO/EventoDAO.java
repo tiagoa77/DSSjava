@@ -109,13 +109,13 @@ public class EventoDAO implements Map<Integer,Evento> {
             int id_evento=0;
             id_evento=this.size()+1;
             String sql;
-            sql = "INSERT INTO evento(idEvento,Descricao,Local,DataRealizacao,Donativo) VALUES ('?','?','?','?','?,'?')";
+            sql = "INSERT INTO evento(idEvento,Descricao,Local,DataRealizacao) VALUES (?,?,?,?)";
             pst = ConexaoBD.getConexao().prepareCall(sql);
             pst.setInt(1,id_evento);
             pst.setString(2, value.getDescricao());
             pst.setString(3, value.getLocal());
-            pst.setDate(4, (java.sql.Date) value.getData()); //Verificar
-            pst.execute();
+            pst.setDate(4, (java.sql.Date) value.getData());
+            pst.executeUpdate();
             
         }catch(SQLException e){ }
         evt=value;
@@ -127,11 +127,10 @@ public class EventoDAO implements Map<Integer,Evento> {
         Evento evt = null;
         try {
             int id = (Integer) key;
-            String sql = "delete from test.Evento where idEvento='"+id+"'";
-            Statement stm = ConexaoBD.getConexao().createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            
-            ConexaoBD.fecharCursor(rs, stm);
+            String sql = "delete from Evento where idEvento=" + id;
+            PreparedStatement stm = ConexaoBD.getConexao().prepareStatement(sql);
+            stm.executeUpdate();
+            stm.close();
         } catch (SQLException e) {
         }
         return evt;

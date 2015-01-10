@@ -15,7 +15,9 @@ import ClassesDAO.EventoDAO;
 import ClassesDAO.FamiliaDAO;
 import ClassesDAO.FuncionarioDAO;
 import ClassesDAO.MaterialDAO;
+import ClassesDAO.MembroDAO;
 import ClassesDAO.ProjetoDAO;
+import ClassesDAO.TarefaDAO;
 import ClassesDAO.VoluntarioDAO;
 import java.util.Map;
 
@@ -35,6 +37,8 @@ public class HabitatClass {
     private Map<Integer, Doador> doadores;
     private Map<Integer, Evento> eventos;
     private Map<Integer, Material> materiais;
+    private Map<Integer,Membro> membros;
+    private Map<Integer,Tarefa> tarefas;
     private Funcionario utilizadorLigado;
 
     public HabitatClass() {
@@ -49,6 +53,8 @@ public class HabitatClass {
         this.doadores = new DoadorDAO();
         this.eventos = new EventoDAO();
         this.materiais = new MaterialDAO();
+        this.membros=new MembroDAO();
+        this.tarefas=new TarefaDAO();
         this.utilizadorLigado = new Funcionario();
         ConexaoBD.iniciarConexao();
     }
@@ -105,6 +111,11 @@ public class HabitatClass {
         this.utilizadorLigado = h.getUtilizadorLigado();
     }
 */
+
+    public Map<Integer, Membro> getMembros() {
+        return this.membros;
+    }
+    
     public Funcionario getUtilizadorLigado() {
         return this.utilizadorLigado;
     }
@@ -158,6 +169,10 @@ public class HabitatClass {
 
     public void setUtilizadorLigado(Funcionario f) {
         this.utilizadorLigado = f;
+    }
+
+    public Map<Integer, Tarefa> getTarefas() {
+        return tarefas;
     }
 
     public void setProjetos(Map<Integer, Projeto> proj) {
@@ -223,6 +238,16 @@ public class HabitatClass {
         projetos.put(id, p.clone());
         return 1;
     }
+    
+    public int addTarefa(Tarefa t, int id) {
+        for (Integer i : this.tarefas.keySet()) {
+            if (this.tarefas.get(i).equals(t)) {
+                return -1;
+            }
+        }
+        this.tarefas.put(id, t.clone());
+        return 1;
+    }
 
     public int remProjeto(Projeto p) {
         for (Integer i : projetos.keySet()) {
@@ -234,7 +259,15 @@ public class HabitatClass {
 
         return -1;
     }
-
+    
+    public int addMembro( Membro m, int id){
+        for(int i : this.membros.keySet())
+            if(this.membros.get(i).equals(m))
+                return -1;
+        this.membros.put(id, m.clone());
+        return 1;
+    }
+    
     public int addVoluntario(Voluntario v, int id) {
         for (int i : voluntarios.keySet()) {
             if (voluntarios.get(i).equals(v)) {
@@ -381,7 +414,7 @@ public class HabitatClass {
                 return -1;
             }
         }
-        eventos.put(id, e.clone());
+        this.eventos.put(id, e.clone());
         return 1;
     }
 

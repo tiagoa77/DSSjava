@@ -5,26 +5,27 @@
  */
 package GUI;
 
-import Classes.Familia;
 import Classes.HabitatClass;
 import Classes.Membro;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Patrícia
+ * @author Tiago
  */
-public class AdicionarMembro extends javax.swing.JFrame {
-
+public class AdicionarMembro extends javax.swing.JDialog {
+    private final HabitatClass habitat;
     /**
-     * Creates new form AdicionarMembro1
+     * Creates new form AdicionarMembro
      */
-    HabitatClass habitat;
-    Familia familia;
-    public AdicionarMembro(HabitatClass h, Familia f) {
+    public AdicionarMembro(HabitatClass h) {
+        this.habitat=h;
         initComponents();
-        this.habitat = h;
-        this.familia = f;
     }
 
     /**
@@ -52,7 +53,7 @@ public class AdicionarMembro extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -169,7 +170,7 @@ public class AdicionarMembro extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGap(0, 457, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -178,7 +179,7 @@ public class AdicionarMembro extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+            .addGap(0, 434, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -190,29 +191,32 @@ public class AdicionarMembro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String nome = jTextField1.getText();
-        String profissao = jTextField5.getText();
-        String bi = jTextField7.getText();
-        String nif = jTextField6.getText();
-        String data = jTextField2.getText();
-        Membro novo = new Membro(nome,bi,nif,profissao,data);
-        
-            if(this.familia.addMembro(novo)==1){
+        try {
+            int id = this.habitat.getMembros().size()+1;
+            
+            String nome = jTextField1.getText();
+            String profissao = jTextField5.getText();
+            String bi = jTextField7.getText();
+            String nif = jTextField6.getText();
+            
+            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            String data = jTextField2.getText();
+            Date date = df.parse(data);
+            
+            Membro novo = new Membro(id,nome,bi,nif,profissao,date);
+            
+            if(this.habitat.addMembro(novo,novo.getId())==1){
                 JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
                 this.setVisible(false);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Erro");
             }
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        } catch (ParseException ex) {
+            Logger.getLogger(AdicionarMembro.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-    /**
-     * @param args the command line arguments
-     */
-   
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

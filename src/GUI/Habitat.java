@@ -14,6 +14,7 @@ import Classes.Material;
 import Classes.Projeto;
 import Classes.Voluntario;
 import ClassesDAO.ConexaoBD;
+import java.awt.HeadlessException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +25,7 @@ import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -48,6 +50,8 @@ public final class Habitat extends javax.swing.JFrame {
         listaMateriais();
         listaEventos();
         listaDonativos();
+        
+        
         //Projetos
         this.jButton20.setVisible(true);
         this.jButton21.setVisible(false);
@@ -155,11 +159,29 @@ public final class Habitat extends javax.swing.JFrame {
         }
         return res;
     }
-
+    
+     
+    
     public Set<Integer> keysetDonativoMaterial() {
         Set<Integer> res = new TreeSet<>();
         try {
             String sql = "SELECT * FROM Donativo WHERE Tipo='Material';";
+            Statement stm = ConexaoBD.getConexao().createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+
+            while (rs.next()) {
+                res.add(rs.getInt(1));
+            }
+            ConexaoBD.fecharCursor(rs, stm);
+        } catch (SQLException e) {
+        }
+        return res;
+    }
+    
+    public Set<Integer> keysetDonativoEvento(int id) {
+        Set<Integer> res = new TreeSet<>();
+        try {
+            String sql = "SELECT * FROM Donativo WHERE Evento="+id;
             Statement stm = ConexaoBD.getConexao().createStatement();
             ResultSet rs = stm.executeQuery(sql);
 
@@ -355,7 +377,7 @@ public final class Habitat extends javax.swing.JFrame {
             str2.addElement(this.habitat.getEventos().get(i).getDescricao());
         }
         listaEventos.setModel(str2);
-        //listaEventos.setSelectedIndex(0);
+        listaEventos.setSelectedIndex(0);
     }
 
     public void listaDonativos() {
@@ -368,6 +390,17 @@ public final class Habitat extends javax.swing.JFrame {
         listaDonativos.setSelectedIndex(0);
     }
 
+    
+    public void listaDonativosEventos(int evento) {
+        Object[] columnNames = new String[] {"Donativo","Quantidade","Doador"};
+        Object[][] data = new Object[][] {};
+        DefaultTableModel x  = new DefaultTableModel(data, columnNames);
+        for (int i : this.keysetDonativoEvento(evento)) {
+            x.addRow(new Object[]{this.habitat.getDonativos().get(i).getId(),this.habitat.getDonativos().get(i).getQuantidade(),this.habitat.getDoadores().get(this.habitat.getDonativos().get(i).getId_doador()).getNome()});
+        }
+        jTable1.setModel(x);
+    }
+    
     public void listaMateriais() {
         DefaultListModel<String> str4 = new DefaultListModel<>();
         for (int i : this.habitat.getMateriais().keySet()) {
@@ -394,8 +427,8 @@ public final class Habitat extends javax.swing.JFrame {
         if (listaEventos.getSelectedIndex() != -1) {
             s = listaEventos.getSelectedValue().toString();
         }
-
-        //listaVoluntarios.clearSelection();
+        Evento e = this.habitat.getEvento(s);
+        listaDonativosEventos(e.getId());
         return s;
     }
 
@@ -459,7 +492,11 @@ public final class Habitat extends javax.swing.JFrame {
             stm.close();
         } catch (SQLException e) { }
     }
-
+    
+    private void familiaDoProjeto(int idProjeto){
+        
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1159,6 +1196,11 @@ public final class Habitat extends javax.swing.JFrame {
 
         jButton14.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jButton14.setText("Remover");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         jPanel13.setBackground(new java.awt.Color(0, 85, 150));
 
@@ -1170,6 +1212,7 @@ public final class Habitat extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
@@ -1851,7 +1894,8 @@ public final class Habitat extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new AdicionarProjeto(habitat).setVisible(true);
+        AdicionarProjeto a = new AdicionarProjeto(habitat);
+        a.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -2068,6 +2112,15 @@ public final class Habitat extends javax.swing.JFrame {
         this.tipoDoa.setText(null);
         this.DescricaoDon.setText(null);
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        String aux = seleccionaEvento();
+        int id = Integer.parseInt(aux);
+
+        this.habitat.getEventos().remove(id);
+        listaEventos.clearSelection();
+        listaEventos();
+    }//GEN-LAST:event_jButton14ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

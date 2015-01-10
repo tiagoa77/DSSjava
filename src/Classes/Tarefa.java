@@ -17,7 +17,8 @@ public class Tarefa {
         this.dataLimite = new Date();
         this.descricao = "";
     }
-
+    
+    
     public Tarefa(int id, double c, Date d, String desc) {
         this.id = id;
         this.custo = c;

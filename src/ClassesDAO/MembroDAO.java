@@ -37,7 +37,7 @@ public class MembroDAO implements Map<Integer,Membro>{
         int res = 0;
         try {
             Statement stm = ConexaoBD.getConexao().createStatement();
-            String sql = "SELECT * from test.Membro";
+            String sql = "SELECT * from Membro";
             ResultSet rs = stm.executeQuery(sql);
             while (rs.next()) {
                 res++;
@@ -123,7 +123,7 @@ public class MembroDAO implements Map<Integer,Membro>{
             pst = ConexaoBD.getConexao().prepareCall(sql);
             pst.setInt(1,id_membro);
             pst.setString(2, value.getNome());
-            pst.setString(3, value.getDataNascimento());
+            pst.setDate(3, (java.sql.Date) value.getDataNascimento());
             pst.setString(4, value.getProfissao());
             pst.setString(5, value.getNif());
             pst.setString(6, value.getBi());

@@ -8,37 +8,20 @@ package GUI;
 import Classes.Familia;
 import Classes.HabitatClass;
 import Classes.Membro;
-import java.util.ArrayList;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Patrícia
+ * @author Tiago
  */
-public class AdicionarFamilia extends javax.swing.JFrame {
-
+public class AdicionarFamilia extends javax.swing.JDialog {
+    private final HabitatClass habitat;
     /**
-     * Creates new form AdicionarFamilia1
+     * Creates new form AdicionarFamilia
      */
-    Familia f = new Familia();
-    DefaultListModel listModel = new DefaultListModel();
-    HabitatClass habitat;
-    
     public AdicionarFamilia(HabitatClass h) {
+        this.habitat=h;
         initComponents();
-        this.habitat = h;
-        
-        //povoa a combobox
-        for(Membro m : f.getMembros()){
-            jComboBox1.addItem(m.getNome().toString());
-        }
-        //povoa a lista
-        for(Membro m : f.getMembros()){
-            listModel.addElement(m.getNome().toString());
-        }
-        jList1 = new JList(listModel);
         
     }
 
@@ -72,7 +55,7 @@ public class AdicionarFamilia extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -252,7 +235,7 @@ public class AdicionarFamilia extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 585, Short.MAX_VALUE)
+            .addGap(0, 583, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -261,7 +244,7 @@ public class AdicionarFamilia extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 442, Short.MAX_VALUE)
+            .addGap(0, 429, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -284,26 +267,6 @@ public class AdicionarFamilia extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        Membro remover = new Membro();
-        
-            for(Membro m : f.getMembros()){
-                if(m.getNome().equals(jList1.getSelectedValue().toString()))
-                    remover = m;
-            }
-        if(f.remMembro(remover)==1)
-            JOptionPane.showMessageDialog(null, "Removido com Sucesso");
-        else
-            JOptionPane.showMessageDialog(null, "Erro");
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        new AdicionarMembro(habitat,f).setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Membro representante = new Membro();
@@ -313,25 +276,39 @@ public class AdicionarFamilia extends javax.swing.JFrame {
         String rua = jTextField3.getText();
         String codPostal = jTextField4.getText();
         Familia nova = new Familia(nome,f.getMembros(),representante,codPostal,localidade,rua);
-        
-        
-            for(Membro m : f.getMembros()){
-                if(nomeRepresentante.equals(m.getNome()))
-                    representante = m;
-            }
-        
-            if(habitat.addFamilia(nova)==1){
-                JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
-                this.setVisible(false);
-            }
-            else
-                JOptionPane.showMessageDialog(null, "Erro");
+
+        for(Membro m : f.getMembros()){
+            if(nomeRepresentante.equals(m.getNome()))
+            representante = m;
+        }
+
+        if(habitat.addFamilia(nova)==1){
+            JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");
+            this.setVisible(false);
+        }
+        else
+        JOptionPane.showMessageDialog(null, "Erro");
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new AdicionarMembro(habitat,f).setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Membro remover = new Membro();
+
+        for(Membro m : f.getMembros()){
+            if(m.getNome().equals(jList1.getSelectedValue().toString()))
+            remover = m;
+        }
+        if(f.remMembro(remover)==1)
+        JOptionPane.showMessageDialog(null, "Removido com Sucesso");
+        else
+        JOptionPane.showMessageDialog(null, "Erro");
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

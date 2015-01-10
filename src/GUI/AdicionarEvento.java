@@ -54,6 +54,7 @@ private HabitatClass habitat;
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setModal(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -197,7 +198,9 @@ private HabitatClass habitat;
             String data = jTextField3.getText();
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
             Date date = df.parse(data);
-            Evento novo = new Evento(habitat.getEventos().size()+2,date,local,desc);
+            int id = habitat.getEventos().size()+1;
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            Evento novo = new Evento(id,sqlDate,local,desc);
             
             if(habitat.addEvento(novo,novo.getId())==1){
                 JOptionPane.showMessageDialog(null, "Adicionado com Sucesso");

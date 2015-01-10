@@ -1,6 +1,7 @@
 package Classes;
 
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /*
@@ -14,13 +15,15 @@ import java.util.GregorianCalendar;
  * @author Patrícia
  */
 public class Membro {
+    private int id;
     private String nome;
-    private String dataNascimento;
+    private Date dataNascimento;
     private String profissao;
     private String nif;
     private String bi;
     
     public Membro(Membro m){
+        this.id=m.getId();
         this.nome = m.getNome();
         this.bi = m.getBi();
         this.dataNascimento = m.getDataNascimento();
@@ -28,19 +31,31 @@ public class Membro {
         this.profissao = m.getProfissao();
     }
     public Membro(){
+        this.id=0;
         this.nome = "";
         this.bi = "";
-        this.dataNascimento = "";
+        this.dataNascimento = new Date();
         this.nif = "";
         this.profissao = "";
     }
-    public Membro(String n, String b, String nif, String p, String d){
+    public Membro(int id,String n, String b, String nif, String p, Date d){
+        this.id=id;
         this.nome = n;
         this.bi = b;
         this.dataNascimento = d;
         this.nif = nif;
         this.profissao = p;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
     public void setNome(String n){
         this.nome = n;
     }
@@ -53,9 +68,10 @@ public class Membro {
     public void setProfissao(String p){
         this.profissao = p;
     }
-    public void setDataNascimento(String d){
+    public void setDataNascimento(Date d){
         this.dataNascimento = d;
     }
+    
     public String getNome(){
         return this.nome;
     }
@@ -68,7 +84,7 @@ public class Membro {
     public String getProfissao(){
         return this.nome;
     }
-    public String getDataNascimento(){
+    public Date getDataNascimento(){
         return this.dataNascimento;
     }
     
